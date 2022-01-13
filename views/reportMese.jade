@@ -1,0 +1,36 @@
+extends layout
+block content
+    script(src='/scripts/libraries/RGraph/RGraph.common.tooltips.js')
+    script(src='/scripts/jsMese.js')
+    tooltips
+    div.container
+     .page-header
+       h4 #{title}
+       small Welcome to  parametro di default : #{tempo}
+    .row 
+      .col-md-2
+       p(id="output") Somma ore per tipologia
+       .form-group
+        select(id="stype", name="type").form-control
+         option(value="?meseStart=04&meseEnd=06anno=2022") Q2 2021
+         option(value="?meseStart=07&meseEnd=09anno=2021") Q3 2021
+         option(value="?meseStart=10&meseEnd=12anno=2021") Q4 2021
+         option(value="?meseStart=01&meseEnd=03anno=2022") Q1 2022
+      .col-md-10
+      canvas(id="cvs", width="1000", height="600")
+     
+     ul(id="guide")
+           table(id="BuyOrders", class="table table-condensed table-hovered table-striped")
+            tr
+             th Tipologia
+             th Ore     
+             th anno
+             th mese   
+            - each item in result
+             tr
+             td #[a(href="http://3.138.103.144/issues/#{item['name']}") #{item['name']}]     
+             td #{item['sum_hour']}
+             td #{item['tyear']}
+             td #{item['tmonth']}
+             
+           

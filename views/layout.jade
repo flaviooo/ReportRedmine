@@ -1,0 +1,27 @@
+doctype html
+html
+	head
+		block head
+			block title
+				title RR - ReportRedMine Csea 
+			block meta
+				meta(name='description', content='')
+				meta(name='keywords', content='')
+			link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+			| <style>
+			| body { padding-top: 60px; }
+			| </style>
+			script(src='//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
+			script(src='/scripts/libraries/RGraph/RGraph.common.core.js')
+			script(src='/scripts/libraries/RGraph/RGraph.common.key.js')
+			script(src='/scripts/libraries/RGraph/RGraph.common.dynamic.js')
+			script(src='/scripts/libraries/RGraph/RGraph.common.tooltips.js')
+			script(src='/scripts/libraries/RGraph/RGraph.bar.js')
+			script(src='/scripts/libraries/RGraph/RGraph.line.js')
+			
+	body
+		include header
+
+		block content
+
+		include footer

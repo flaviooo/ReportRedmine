@@ -1,0 +1,25 @@
+extends layout
+block content
+    script(src='/scripts/jsTimeEntries.js')
+    div.container
+        h1 Totale Tempo Assegnato XML
+        +alert("info") 
+        div(align="center")
+           canvas(id="cvs", width="800", height="400")
+        .panel.panel-default
+        .panel-heading Fonte DB
+        .panel-body  
+           ul(id="guide")
+           table(id="BuyOrders", class="table table-condensed table-hovered table-striped")
+            tr
+             th id     
+             th Time     
+             th Iusses   
+             th Project
+             th Assegnato a
+ //- Alert mixin
+mixin alert(style)
+    div( class=["alert", "alert-dismissable", "alert-" + style] )
+    a( href="http://localhost/rgraphOfficial/timer_entries.xml" ) Fonte
+        button.close( type="button", data-dismiss="alert" ) 
+        block

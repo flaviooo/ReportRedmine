@@ -1,0 +1,88 @@
+extends layout
+block content
+    script(src='/scripts/libraries/RGraph/RGraph.pie.js')
+    script(src='/scripts/libraries/RGraph/RGraph.hbar.js')
+    script(src='/scripts/jsIndex.js')
+    .container 
+     .page-header
+      h4 #{title} 
+       small &nbsp;Parametro di default : #{tempo}  
+       small(id="paramID")
+     .row 
+      .col-md-2
+       .form-group
+        select(id="stype", name="type").form-control
+         option(value="?mese=08&anno=2021") Agosto
+         option(value="?mese=09&anno=2021") Settembre
+         option(value="?mese=10&anno=2021") Ottobre
+         option(value="?mese=11&anno=2021") Novembre
+         option(value="?mese=12&anno=2021") Dicembre
+         option(value="?mese=10&anno=2021") Q4
+      .col-md-10
+       canvas(id="cvs", width="1000", height="550")
+      // class=["selectpicker", "alert-dismissable"]
+      //input(type="text", name="X", placeholder="X", required).form-control
+      //input(type="checkbox", name="checkboxname", text="asdf").form-control
+       p 
+     .row 
+      .col-md-1
+      .col-md-11
+       canvas(id="cvs3", width="1000", height="600", margin="40")
+       p
+       p &nbsp;
+       canvas(id="cvs2", width="1000", height="400", margin="40")            
+        hr
+        
+ 
+    p &nbsp;
+    p &nbsp;
+    p &nbsp;
+    p &nbsp;
+    p &nbsp;
+    p &nbsp;
+    p &nbsp;
+
+    .jumbotron(margin-top="180px")
+       h1 City Router Hub
+       p
+        | Do you wanna get connected to internet securely on the go for no money..?, 
+        meaning always connected, even if you don't have any device...?, 
+        and wondering if this is ever possible. Well you are not alone, you are on the right spot.
+       p
+        a.btn.btn-primary.btn-lg(href='about') Learn More
+    .col-lg-4
+      .panel.panel-default
+        .panel-heading
+          h4  Join us. 
+        .panel-body
+          | Today if you make a choice,  you are going to get ever connected to 
+          |internet all the time through out your life, even if you go to villages, 
+          | subways, paths, metros, bus, Gym, anywhere it follows. Guys isn't that exciting?,
+          | do you wanna know how, take a minute and click on above Learn More link.
+    .col-lg-4
+      .panel.panel-default
+        .panel-heading
+          h4 Always Connected.
+        .panel-body
+          | You are absolutely free of money, credit cards, debit cards, paypal, 
+          coupon cards what so ever. This service is amazingly free and free only for you, 
+          you register today. Do you know how many people out there paying lot of money 
+          but not getting exciting service, they always had problems with speed, connectivity.
+    .col-lg-4
+      .panel.panel-default
+        .panel-heading
+          h4 Who are we? 
+        .panel-body
+          | We are top 10 listed Unfortune 500 companies, always wanted to give people 
+          service with no money. There are similar services who can offer like free wifis, 
+          metro wifi. Well their reach is limited. We are unlimited. Anywhere you go, 
+          our services will follow. We are on different world and different platforms, 
+          nobody can match us.  
+      +alert("info")
+
+ //- Alert mixin
+mixin alert(style)
+    div( class=["alert", "alert-dismissable", "alert-" + style] )
+     Fonte DB
+        button.close( type="button", data-dismiss="alert" ) 
+        block
