@@ -1,7 +1,7 @@
-Node.js Bootstrap Starter Template RedMine Report
+Node.js RedMine Report CSEA
 ===
 
-A quick and easy Node.js + Jade template project, using Twitter Bootstrap RedMine Report
+A quick and easy Node.js + Jade template project, using Bootstrap RedMine Report
 
 Also available for [Material](https://github.com/primaryobjects/Node.js-Material-Starter-Template) and [React 4](https://github.com/primaryobjects/Node.js-React-Starter-Template)
 
@@ -9,7 +9,7 @@ Also available for [Material](https://github.com/primaryobjects/Node.js-Material
 - Clone repository.
 - Open a command prompt, navigate to the folder, and enter: npm install
 - Next, run the app by entering: node app
-- Browse to http://localhost:3000
+- Browse to http://localhost:4001
 
 ## RedMine Report Dependencies
 -    npm install dotenv --save 
