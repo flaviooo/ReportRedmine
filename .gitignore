@@ -1,6 +1,6 @@
 # Ignore the node_modules directory
 node_modules/
-etc/key/*.*
+key/*.*
 test/
 dumpAWS/
 # Ignore Configuration
@@ -19,3 +19,5 @@ logs
 .idea/
 .vscode/
 *.sw*
+
+etc/key/
