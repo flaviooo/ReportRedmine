@@ -20,7 +20,8 @@ A quick and easy Node.js + Jade template project
     
 }
 module.exports = config_db;
--- Config DB/config_AWS'
+
+- Config DB/config_AWS.js'
 fs = require('fs')
 const confg_AWS = {
     host: 'xxx.xxx.xxx.xxx', //remote host ip 
