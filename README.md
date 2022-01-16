@@ -3,7 +3,7 @@ Node.js Bootstrap RedMine Report
 
 A quick and easy Node.js + Jade template project
 
-# Also available for [GIT URL](https://github.com/flaviooo/ReportRedmine)
+##### Also available for [GIT URL](https://github.com/flaviooo/ReportRedmine)
 
 ## Usage
 - Clone repository.
