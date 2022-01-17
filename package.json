@@ -25,7 +25,10 @@
     "validator": "^13.7.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test" : "node test/ConnectSQL",
+    "nodemon" : "nodemon app",
+    "debug": "node test/ConnectSQL",
+    "start": "node --inspect app.js"
   },
   "author": "Flavio <flaviooo@gmail.com> (https://it.linkedin.com/in/flavio-tuosto-597b9488)",
   "license": "MIT"
