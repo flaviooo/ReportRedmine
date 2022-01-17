@@ -1,5 +1,6 @@
 // AWS_SSH  Connetion param
 fs = require('fs')
+console.log(process.env.AWS_HOST)
 const confg_AWS = {
     host: process.env.AWS_HOST || "127.0.0.1", //'3.138.103.144', //remote host ip 
     port: process.env.AWS_PORT || 22,  //port used for scp 
