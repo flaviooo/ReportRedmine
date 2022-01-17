@@ -9,6 +9,7 @@ A quick and easy Node.js + Jade template project
 - Clone repository.
 - Open a command prompt, navigate to the folder, and enter: npm install
 - Config db/config_db.js
+```
   const config_db = {
 
     "dbdriver": "mysql",
@@ -20,8 +21,9 @@ A quick and easy Node.js + Jade template project
     
 }
 module.exports = config_db;
-
+```
 - Config DB/config_AWS.js'
+```
 fs = require('fs')
 const confg_AWS = {
     host: 'xxx.xxx.xxx.xxx', //remote host ip 
@@ -30,7 +32,7 @@ const confg_AWS = {
     privateKey: fs.readFileSync('./etc/key/AWS_music_chiave_Ori.pem')
   }
 module.exports = confg_AWS ;
-
+```
 - Config AWS params
 - Next, run the app by entering: node app
 - Browse to http://localhost:3000
