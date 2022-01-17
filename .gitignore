@@ -3,6 +3,7 @@ node_modules/
 key/*.*
 test/
 dumpAWS/
+db/*.txt
 # Ignore Configuration
 config_*.js
 # Ignore Logs
