@@ -14,7 +14,7 @@ A quick and easy Node.js + Jade template project
 
     "dbdriver": "mysql",
     "dbhost": "127.0.0.1",
-    "dbusername": "root",
+    "dbusername": "bitnami",
     "dbpassword": "password",
     "db": "bitnami_redmine",
     "dbport": 3307
@@ -29,7 +29,7 @@ const confg_AWS = {
     host: 'xxx.xxx.xxx.xxx', //remote host ip 
     port: 22, //port used for scp 
     username: 'bitnami', //username to authenticate
-    privateKey: fs.readFileSync('./etc/key/AWS_music_chiave_Ori.pem')
+    privateKey: fs.readFileSync('./etc/key/XXXX.pem')
   }
 module.exports = confg_AWS ;
 ```
@@ -38,6 +38,7 @@ module.exports = confg_AWS ;
 - Browse to http://localhost:3000
 
 ## RedMine Report Dependencies
+
 - npm install express --save
 - npm install dotenv --save 
 - npm install ssh2 --savejs
