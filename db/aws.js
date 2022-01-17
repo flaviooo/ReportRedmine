@@ -1,7 +1,5 @@
-console.log(require('dotenv').config());
 const config = require('./config_AWS')
   , extract = require('extract-zip')
-  , dotenv = require('dotenv').config({ path: __dirname + '/.env' })
   , path = require('path')
   , Client = require('ssh2').Client
   , { exec } = require('child_process')
@@ -14,6 +12,7 @@ let importTo = {
   fileDump: process.env.DUMPFILE_IMPORT,
   pathMySQLcmd: process.env.PATHMYSQLCMD_IMPORT
 }
+
 function importDump(moveTo) {
   importTo.fileDump = moveTo;
   console.log("File da importare: " + importTo.fileDump);
@@ -30,13 +29,14 @@ exports.dowloadDump = (req, res, next) => {
   var moveTo = "";
   var conn = new Client();
   var connSettings = {
-    port: 22,
+    port:config.port,
     host: config.host,
     username: config.username,
     privateKey: config.privateKey
   };
-  var remotePathToList = '/home/bitnami/dump/archivio';
-  var localPathToList = '/dumpAWS';
+
+  var remotePathToList = process.env.remotePathToList || '/home/bitnami/dump/archivio';
+  var localPathToList = process.env.localPathToList || '/dumpAWS';
   conn.on('ready', function () {
     conn.sftp(function (err, sftp) {
       if (err) throw err;

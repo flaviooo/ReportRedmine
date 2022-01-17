@@ -8,20 +8,7 @@ A quick and easy Node.js + Jade template project
 ## Usage
 - Clone repository.
 - Open a command prompt, navigate to the folder, and enter: npm install
-- Config db/config_db.js
-```
-  const config_db = {
-
-    "dbdriver": "mysql",
-    "dbhost": "127.0.0.1",
-    "dbusername": "bitnami",
-    "dbpassword": "password",
-    "db": "bitnami_redmine",
-    "dbport": 3307
-    
-}
-module.exports = config_db;
-```
+- Config .env variable
 - Config DB/config_AWS.js'
 ```
 fs = require('fs')
@@ -33,7 +20,6 @@ const confg_AWS = {
   }
 module.exports = confg_AWS ;
 ```
-- Config AWS params
 - Next, run the app by entering: node app
 - Browse to http://localhost:3000
 

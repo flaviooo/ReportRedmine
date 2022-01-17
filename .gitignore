@@ -1,11 +1,11 @@
 # Ignore the node_modules directory
 node_modules/
-etc/key/*.*
-test/
 dumpAWS/
-db/*.txt
 # Ignore Configuration
-config_*.js
+config/
+etc/key/*.*
+db/*.txt
+
 # Ignore Logs
 logs
 *.log
@@ -15,6 +15,9 @@ logs
 
 # The file containing environment variables 
 .env
+.env.js
+.env.json
+.env-cmdrc
 
 # Ignore IDE specific files
 .idea/
