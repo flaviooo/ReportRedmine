@@ -1,6 +1,6 @@
 # Ignore the node_modules directory
 node_modules/
-key/*.*
+etc/key/*.*
 test/
 dumpAWS/
 db/*.txt
@@ -20,5 +20,3 @@ logs
 .idea/
 .vscode/
 *.sw*
-
-etc/key/
