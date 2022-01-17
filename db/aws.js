@@ -1,7 +1,7 @@
-//require('dotenv').config();
+console.log(require('dotenv').config());
 const config = require('./config_AWS')
   , extract = require('extract-zip')
-  //, dotenv = require('dotenv').config({ path: __dirname + '/.env' })
+  , dotenv = require('dotenv').config({ path: __dirname + '/.env' })
   , path = require('path')
   , Client = require('ssh2').Client
   , { exec } = require('child_process')

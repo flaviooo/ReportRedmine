@@ -31,6 +31,7 @@ const confg_AWS = {
   }
 module.exports = confg_AWS ;
 
+- Config AWS params
 - Next, run the app by entering: node app
 - Browse to http://localhost:3000
 
