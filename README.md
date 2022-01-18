@@ -10,15 +10,11 @@ A quick and easy Node.js + Jade template project
 - Open a command prompt, navigate to the folder, and enter: npm install
 - Config .env variable
 - Config DB/config_AWS.js'
+- Database Migrate 
 ```
-fs = require('fs')
-const confg_AWS = {
-    host: 'xxx.xxx.xxx.xxx', //remote host ip 
-    port: 22, //port used for scp 
-    username: 'bitnami', //username to authenticate
-    privateKey: fs.readFileSync('./etc/key/XXXX.pem')
-  }
-module.exports = confg_AWS ;
+cd C:\Bitnami\redmine-4.2.3-1/apps/redmine\htdocs
+C:\Bitnami\redmine-4.2.3-1/ruby\bin\ruby.exe bin\rake db:migrate RAILS_ENV="production"
+
 ```
 - Next, run the app by entering: node app
 - Browse to http://localhost:3000

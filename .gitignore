@@ -1,6 +1,6 @@
 # Ignore the node_modules directory
 node_modules/
-dumpAWS/
+dumpAWS/*.zip
 # Ignore Configuration
 config/
 etc/key/*.*

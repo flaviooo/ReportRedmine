@@ -4,20 +4,18 @@ const config = require('./config_AWS')
   , Client = require('ssh2').Client
   , { exec } = require('child_process')
 
-let importTo = {
-  host: process.env.DUMPHOST_IMPORT,
-  user: process.env.DUMPUSER_IMPORT,
-  password: process.env.DUMPPASSWORD_IMPORT,
-  database: process.env.DUMPDATABASE_IMPORT,
-  fileDump: process.env.DUMPFILE_IMPORT,
-  pathMySQLcmd: process.env.PATHMYSQLCMD_IMPORT
-}
-
 function importDump(moveTo) {
-  importTo.fileDump = moveTo;
-  console.log("File da importare: " + importTo.fileDump);
-//  'set global innodb_large_prefix=on|set global innodb_file_format=Barracuda|set global innodb_file_per_table=true '+
-    let execution = `${importTo.pathMySQLcmd} --host=${importTo.host} --password=${importTo.password} --user=${importTo.user} --port=3306 --default-character-set=utf8 --comments  ${importTo.database} <`+ moveTo;
+
+  //  importTo.fileDump = moveTo;
+  //  console.log("File da importare: " + importTo.fileDump);
+  //  'set global innodb_large_prefix=on|set global innodb_file_format=Barracuda|set global innodb_file_per_table=true '+
+  let execution = process.env.PATHMYSQLCMD_IMPORT +
+    " --host=${process.env.DUMPHOST_IMPORT}  --password=${process.env.DUMPPASSWORD_IMPORT}" +
+    " --user=${process.env.DUMPUSER_IMPORT} --port=${process.env.DUMPPORT_IMPORT}" +
+    " --default-character-set=utf8 --comments  ${process.env.DUMPDATABASE_IMPORT} <" + moveTo;
+
+  execution = "C:\\Bitnami\\redmine-4.2.3-1\\mysql\\bin\\mysql.exe  --protocol=tcp --host=127.0.0.1 --user=root --password="+process.env.DUMPPASSWORD_IMPORT+" --port=3307 --default-character-set=utf8 --database=bitnami_redmine  < " + moveTo;
+
   console.log("execution: " + execution);
   exec(execution, (err, stdout, stderr) => {
     if (err) { console.error(`exec error: ${err}`); return; }
@@ -28,8 +26,9 @@ function importDump(moveTo) {
 exports.dowloadDump = (req, res, next) => {
   var moveTo = "";
   var conn = new Client();
+
   var connSettings = {
-    port:config.port,
+    port: config.port,
     host: config.host,
     username: config.username,
     privateKey: config.privateKey
@@ -40,8 +39,7 @@ exports.dowloadDump = (req, res, next) => {
   conn.on('ready', function () {
     conn.sftp(function (err, sftp) {
       if (err) throw err;
-      // you'll be able to use sftp here
-      // Use sftp to execute tasks like .unlink or chmod etc
+      // you'll be able to use sftp here. Use sftp to execute tasks like .unlink or chmod etc
       let ultimaModifica = 0;
       sftp.readdir(remotePathToList, function (err, list) {
         if (err) throw err;
@@ -63,6 +61,7 @@ exports.dowloadDump = (req, res, next) => {
 
         // var moveTo = localPathToList +'\\' + list[0].filename;
         moveTo = path.join(__dirname, localPathToList, filename)
+        moveToP = path.join(__dirname, localPathToList,remotePathToList, filename)
         console.dir("Local Folder: " + moveTo);
         console.log(ultimaModifica)
         sftp.fastGet(moveFrom, moveTo, (downloadError) => {
@@ -70,19 +69,20 @@ exports.dowloadDump = (req, res, next) => {
           if (downloadError) throw downloadError;
 
           console.log("Succesfully uploaded " + moveTo);
-          
+
           try {
-       
-          //  console.log("tttt "+ path.dirname(moveTo) + "+" + path.basename(importFileName+"sql"))
-          let importFileName = moveTo.substring(0, moveTo.length - 3);
-          console.log("test: " +moveTo.substring(0, moveTo.length - 3)+"sql")
-          importDump(importFileName + "sql");
-            console.log("EEE "+ path.basename(moveTo) + "+" + path.dirname(moveTo))
+
+            //  console.log("tttt "+ path.dirname(moveTo) + "+" + path.basename(importFileName+"sql"))
+            let importFileName = moveToP.substring(0, moveToP.length - 3);
+            console.log("test: " + moveTo.substring(0, moveTo.length - 3) + "sql")
+            let pathArchivio = "home\\bitnami\\dump\\archivio\\"
+            importDump(importFileName + "sql");
+            console.log("EEE " + path.basename(moveTo) + "+" + path.dirname(moveTo))
             console.log("XXX " + path.join(path.dirname(moveTo), path.basename(moveTo)))
-             extract("db\\dumpAWS\\"+path.basename(moveTo), { dir:path.dirname(moveTo) })
+            extract("db\\dumpAWS\\" + path.basename(moveTo), { dir: path.dirname(moveTo) })
             console.log('Extraction complete')
-           
-           
+
+
           } catch (err) {
             // handle any errors
             if (err) throw err;

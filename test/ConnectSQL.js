@@ -11,7 +11,7 @@ let connection = mysql.createConnection({
 });
 
 connection.connect(function (err) {
-  console.log("Connessione a "+connection.config.dbdb+"  " + connection.config.host+":"+connection.config.port)
+  console.log("Connessione a "+connection.config.database+"  " + connection.config.host+":"+connection.config.port)
   if (err) {
     return console.error('error: ' + err.message);
   }
