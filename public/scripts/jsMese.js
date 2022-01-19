@@ -61,7 +61,7 @@ function parser(data) {
         dataTemp.push(ob)
     });
     dataJson.push(dataTemp)
-    var labelkey = ["Problema tecnico (bug)","Funzionalità aggiuntiva","Richiesta di supporto","Attività di progetto","Licenze e scadenze","Attività generica"]
+    var labelkey = ["Problema tecnico bug)","Funzionalità aggiuntiva","Richiesta di supporto","Attività di progetto","Licenze/scadenze","Attività generica","Attività documentale"]
    
     var dataMonth = []
     $.each(dataJson, (index, element) => {
@@ -95,7 +95,10 @@ function parser(data) {
         console.log(dataMonth[i])
 //        dataMonth[i] = RGraph.log(dataMonth[i], 10);
     }
-       
+    console.log("RGraph.ObjectRegistry.list() "+ RGraph.ObjectRegistry.list());
+    RGraph.ObjectRegistry.clear($("cvs"));
+    RGraph.ObjectRegistry.remove($("cvs"));
+    RGraph.reset($("cvs"));       
     bar = new RGraph.Bar({
          id: 'cvs',
          data: dataMonth,

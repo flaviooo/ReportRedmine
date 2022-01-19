@@ -92,9 +92,7 @@ function drawReports(progetti, label) {
             exploded: 25,
             origin: 3.455751918948773
         }
-    }).on('click', function (e, shape) {
-        alert('The Line chart click event');
-    });
+    });//.on('click', function (e, shape) { alert('The Line chart click event'); });
 
     var report2 = new RGraph.Bar({
         id: 'cvs2',
@@ -143,7 +141,7 @@ function drawReports(progetti, label) {
             keyLabelsBold: true
         }
     });
-    report.grow({frames: 10});
+    report.grow({frames: 5});
     report2.grow({frames: 10});
    // report2.draw();
    // report3.grow({frames: 10});
