@@ -61,7 +61,7 @@ function parser(data) {
         dataTemp.push(ob)
     });
     dataJson.push(dataTemp)
-    var labelkey = ["Problema tecnico bug)","Funzionalità aggiuntiva","Richiesta di supporto","Attività di progetto","Licenze/scadenze","Attività generica","Attività documentale"]
+    var labelkey = ["Problema tecnico","Funzionalità aggiuntiva","Richiesta di supporto","Attività di progetto","Licenze/scadenze","Attività generica","Attività documentale"]
    
     var dataMonth = []
     $.each(dataJson, (index, element) => {
