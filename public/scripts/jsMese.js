@@ -1,6 +1,6 @@
 $(document).ready(function () {
     
-    _init("getTimeProj");
+    _init("tipologiaMeseParam");
     url = "tipologiaMeseParam" 
     $("#stype").on('change', function (event) {
         event.preventDefault();
@@ -14,7 +14,7 @@ $(document).ready(function () {
 });
 
 function _init(url){
-    let params = "?meseStart=07&meseEnd=09anno=2021"
+    let params = "?meseS=10&meseE=12&anno=2021"
     $("#paramID").html("<i>"+params+"</i>")
     callDraw(url + params)
 

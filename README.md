@@ -9,8 +9,7 @@ A quick and easy Node.js + Jade template project
 - Clone repository.
 - Open a command prompt, navigate to the folder, and enter: npm install
 - Config .env variable
-- Config DB/config_AWS.js'
-- Database Migrate 
+- Database Migrate (todo --> call CMD)
 ```
 cd C:\Bitnami\redmine-4.2.3-1/apps/redmine\htdocs
 C:\Bitnami\redmine-4.2.3-1/ruby\bin\ruby.exe bin\rake db:migrate RAILS_ENV="production"

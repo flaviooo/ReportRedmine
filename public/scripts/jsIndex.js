@@ -12,7 +12,7 @@ $(document).ready(function () {
 });
 
 function _init(url){
-    let params = "?mese=08&anno=2021"
+    let params = "?meseS=10&meseE=12&anno=2021"
     $("#paramID").html("<i>"+params+"</i>")
     callDraw(url + params)
 

@@ -12,17 +12,12 @@ block content
       .col-md-2
        .form-group
         select(id="stype", name="type").form-control
-         option(value="?mese=08&anno=2021") Agosto
-         option(value="?mese=09&anno=2021") Settembre
-         option(value="?mese=10&anno=2021") Ottobre
-         option(value="?mese=11&anno=2021") Novembre
-         option(value="?mese=12&anno=2021") Dicembre
-         option(value="?mese=10&anno=2021") Q4
+         option(value="?meseS=04&meseE=06&anno=2021") Q2 2021
+         option(value="?meseS=07&meseE=09&anno=2021") Q3 2021
+         option(value="?meseS=10&meseE=12&anno=2021") Q4 2021
+         option(value="?meseS=01&meseE=03&anno=2022") Q1 2022
       .col-md-10
-       canvas(id="cvs", width="1000", height="550")
-      // class=["selectpicker", "alert-dismissable"]
-      //input(type="text", name="X", placeholder="X", required).form-control
-      //input(type="checkbox", name="checkboxname", text="asdf").form-control
+       canvas(id="cvs", width="1000", height="600")
        p 
      .row 
       .col-md-1
@@ -30,18 +25,12 @@ block content
        canvas(id="cvs3", width="1000", height="600", margin="40")
        p
        p &nbsp;
-       canvas(id="cvs2", width="1000", height="400", margin="40")            
-        hr
-        
- 
+       canvas(id="cvs2", width="1000", height="600", margin="40")            
+        hr 
     p &nbsp;
     p &nbsp;
     p &nbsp;
     p &nbsp;
-    p &nbsp;
-    p &nbsp;
-    p &nbsp;
-
     .jumbotron(margin-top="180px")
        h1 City Router Hub
        p

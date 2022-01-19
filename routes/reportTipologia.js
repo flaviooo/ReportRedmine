@@ -8,7 +8,7 @@ const local_db = require('../db/db');
      "LEFT JOIN trackers  t ON t.id = i.tracker_id "+
      "left join projects p on p.id = i.project_id "+
      "where 1=1  "+
-     "group by tipologia  ";
+     "group by tipologia  having Aperte >=0  ";
       console.log("Query: "+ s);
        local_db.query(s, (err, result, fields) => {
             if(err){
@@ -34,7 +34,7 @@ exports.getTipologiaProgetti = (req, res) => {
   " LEFT JOIN trackers  t ON t.id = i.tracker_id "+
   " left join projects p on p.id = i.project_id "+
   " where 1=1 "+
-  " group by p.name ";
+  " group by p.name  having Aperte >=0 ";
     console.log("Query: "+ s);
      local_db.query(s, (err, result, fields) => {
           if(err){
@@ -59,7 +59,7 @@ exports.getTipologia = (req, res, next) => {
      "LEFT JOIN trackers  t ON t.id = i.tracker_id "+
      "left join projects p on p.id = i.project_id "+
      "where 1=1  "+
-     "group by tipologia  ";
+     "group by tipologia having Aperte >=0 ";
       console.log("Query: "+s);
         local_db.query(s, (err, result, fields) => {
             if(err){
