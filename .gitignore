@@ -1,29 +1,19 @@
-# Ignore the node_modules directory
-node_modules/
-dumpAWS/*.zip
-# Ignore Configuration
-config/
-etc/key/*.*
-db/*.txt
-
-# Ignore Logs
-logs
+*.csv
+*.dat
+*.iml
 *.log
-
-# Ignore the build directory
-/dist
-
-# The file containing environment variables 
-.env
-.env.js
-.env.json
-.env-cmdrc
-
-# Ignore IDE specific files
-.idea/
-.vscode/
-*.sw*
-
-db/dumpAWS/home/bitnami/dump/archivio/
-
-*.zip
+*.out
+*.pid
+*.seed
+*.sublime-*
+*.swo
+*.swp
+*.tgz
+*.xml
+.DS_Store
+.idea
+.project
+.strong-pm
+coverage
+node_modules
+npm-debug.log

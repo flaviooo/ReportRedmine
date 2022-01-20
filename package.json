@@ -1,7 +1,7 @@
 {
   "name": "redminereport",
   "version": "1.0.0",
-  "description": "Report by SQLQyery",
+  "description": "Report by SQLQuery",
   "main": "app.js",
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -28,8 +28,16 @@
     "test" : "node --inspect test/ConnectSQL",
     "nodemon" : "nodemon app",
     "debug": "nodemon app",
-    "start": "node --inspect app.js"
+    "start": "node app"
   },
+    "repository": {
+    "type": "git",
+    "url": "https://github.com/flaviooo/ReportRedmine.git"
+  },
+  "bugs": {
+    "url": "https://github.com/flaviooo/ReportRedmine/issues"
+  },
+  "homepage": "https://github.com/flaviooo/ReportRedmine",
   "author": "Flavio <flaviooo@gmail.com> (https://it.linkedin.com/in/flavio-tuosto-597b9488)",
   "license": "MIT"
 }
