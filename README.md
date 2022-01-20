@@ -4,6 +4,7 @@ Node.js Bootstrap RedMine Report
 A quick and easy Node.js + Jade template project
 
 ##### Also available for [GIT URL](https://github.com/flaviooo/ReportRedmine)
+_ Assuming you have already installed Node...
 
 ## Usage
 - Clone repository.
@@ -26,6 +27,12 @@ C:\Bitnami\redmine-4.2.3-1/ruby\bin\ruby.exe bin\rake db:migrate RAILS_ENV="prod
 - npm install extract-zip --save
 - npm i fs
 
+## PM (todo)
+npm install -g loopback-cli@latest
+npm install -g strongloop@latest
+npm install -g --unsafe-perm install strongloop@latest
+slc start
+slc arc
 
 ## Contents:
 
@@ -33,4 +40,3 @@ C:\Bitnami\redmine-4.2.3-1/ruby\bin\ruby.exe bin\rake db:migrate RAILS_ENV="prod
 - header.jade
 - footer.jade
 - index.jade
-
