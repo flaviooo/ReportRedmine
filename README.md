@@ -5,7 +5,7 @@ A quick and easy Node.js + Jade template project
 
 ##### Also available for [GIT URL](https://github.com/flaviooo/ReportRedmine)
 _ Assuming you have already installed Node...
-
+-dev
 ## Usage
 - Clone repository.
 - Open a command prompt, navigate to the folder, and enter: npm install
@@ -40,3 +40,7 @@ slc arc
 - header.jade
 - footer.jade
 - index.jade
+
+## dev
+
+npm install eslint --save-dev

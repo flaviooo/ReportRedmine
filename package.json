@@ -25,12 +25,12 @@
     "validator": "^13.7.0"
   },
   "scripts": {
-    "test" : "node --inspect test/ConnectSQL",
-    "nodemon" : "nodemon app",
-    "debug": "nodemon app",
+    "test": "node --inspect test/ConnectSQL",
+    "nodemon": "nodemon app",
+    "debug": "nodemon --inspect app",
     "start": "node app"
   },
-    "repository": {
+  "repository": {
     "type": "git",
     "url": "https://github.com/flaviooo/ReportRedmine.git"
   },
@@ -39,5 +39,8 @@
   },
   "homepage": "https://github.com/flaviooo/ReportRedmine",
   "author": "Flavio <flaviooo@gmail.com> (https://it.linkedin.com/in/flavio-tuosto-597b9488)",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.7.0"
+  }
 }
