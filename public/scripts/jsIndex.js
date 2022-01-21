@@ -50,7 +50,7 @@ function paser(response) {
 }
 function drawReports(progetti, label) {
 
-    RGraph.reset($("cvs"));
+//    RGraph.reset($("cvs"));
    // RGraph.reset($("cvs3"));
    // RGraph.reset($("cvs2"));
 
@@ -117,32 +117,8 @@ function drawReports(progetti, label) {
         }
     });
 
-    var report3 = new RGraph.HBar({
-        id: 'cvs3',
-        data: progetti,
-        options: {
-            yaxisLabels: label,
-            marginLeftAuto: true,
-            marginInner: 10,
-            backgroundGridHlines: false,
-            backgroundGridBorder: false,
-            backgroundGridVlinesCount: 13,
-            xaxis: false,
-            yaxis: false,
-            colors: ['#7CB5EC', '#B03060'],
-            xaxisLabelsCount: 13,
-            xaxisScaleMax: 120.0,
-            xaxisScaleDecimals: 1,
-            xaxisTitle: 'Tempo Impiegato / ore (h)',
-            xaxisTitleY: 910,
-            xaxisTitleColor: '#aaa',
-            key: ['Tempo Totale Impiegato', ''],
-            keyPosition: 'margin',
-            keyLabelsBold: true
-        }
-    });
+ 
     report.grow({frames: 5});
-    report2.grow({frames: 10});
+   // report2.grow({frames: 10});
    // report2.draw();
-   // report3.grow({frames: 10});
 }
