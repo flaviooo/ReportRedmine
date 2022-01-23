@@ -33,9 +33,9 @@ function callDraw(url) {
             alert('Failed - ' + textStatus);
         },
         done: function (data) { console.log('data ' + data); }
-    }).done(function (data) {
+    })//.done(function (data) {
         //   console.log( 'data '+ data )
-    });
+   // });
 }
 function paser(response) {
     var progetti = [];
@@ -49,8 +49,7 @@ function paser(response) {
     drawReports(progetti, label)
 }
 function drawReports(progetti, label) {
-
-//    RGraph.reset($("cvs"));
+   //    RGraph.reset($("cvs"));
    // RGraph.reset($("cvs3"));
    // RGraph.reset($("cvs2"));
 
@@ -116,9 +115,6 @@ function drawReports(progetti, label) {
             keyPosition: 'margin'
         }
     });
-
- 
     report.grow({frames: 5});
-   // report2.grow({frames: 10});
-   // report2.draw();
-}
+    report2.grow({frames: 10});
+   }
