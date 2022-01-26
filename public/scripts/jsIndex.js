@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  //  _init("getTimeProj");    
+    _init("getTimeProj");    
     $("#stype").on('change', function (event) {
         event.preventDefault();
         console.log(event);
@@ -49,9 +49,9 @@ function paser(response) {
     drawReports(progetti, label)
 }
 function drawReports(progetti, label) {
-   //    RGraph.reset($("cvs"));
+       RGraph.reset($("cvs"));
    // RGraph.reset($("cvs3"));
-   // RGraph.reset($("cvs2"));
+    RGraph.reset($("cvs2"));
 
     var report = new RGraph.Pie({
         id: 'cvs',
