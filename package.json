@@ -1,46 +1,80 @@
 {
-  "name": "redminereport",
-  "version": "1.0.0",
-  "description": "Report by SQLQuery",
-  "main": "app.js",
-  "dependencies": {
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
-    "dotenv": "^10.0.0",
-    "express": "^4.17.2",
-    "extract-zip": "^2.0.1",
-    "fs": "^0.0.1-security",
-    "jade": "*",
-    "method-override": "*",
-    "morgan": "*",
-    "mysql": "*",
-    "node-gyp": "^8.4.0",
-    "node-scp": "^0.0.16",
-    "nodemon": "^2.0.15",
-    "scp": "^0.0.3",
-    "scp2": "^0.5.0",
-    "serve-favicon": "*",
-    "ssh2": "^1.5.0",
-    "stylus": "*",
-    "validator": "^13.7.0"
-  },
-  "scripts": {
-    "test": "node --inspect test/ConnectSQL",
-    "nodemon": "nodemon app",
-    "debug": "nodemon --inspect app",
-    "start": "node app"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/flaviooo/ReportRedmine.git"
-  },
-  "bugs": {
-    "url": "https://github.com/flaviooo/ReportRedmine/issues"
-  },
-  "homepage": "https://github.com/flaviooo/ReportRedmine",
-  "author": "Flavio <flaviooo@gmail.com> (https://it.linkedin.com/in/flavio-tuosto-597b9488)",
-  "license": "MIT",
-  "devDependencies": {
-    "eslint": "^8.7.0"
-  }
+    "name": "report-redmine",
+    "version": "1.0.0",
+    "description": "Report by SQLQuery",
+    "main": "app.js",
+    "homepage": "https://github.com/flaviooo/ReportRedmine",
+    "author": "Flavio <flaviooo@gmail.com> (https://it.linkedin.com/in/flavio-tuosto-597b9488)",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/flaviooo/ReportRedmine.git"
+    },
+    "bugs": {
+        "url": "https://github.com/flaviooo/ReportRedmine/issues"
+    },
+
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "chai": "^4.3.4",
+        "cors": "^2.8.5",
+        "dotenv": "^14.2.0",
+        "express": "^4.17.2",
+        "extract-zip": "^2.0.1",
+        "fs": "^0.0.1-security",
+        "jade": "^1.11.0",
+        "method-override": "*",
+        "mocha": "^9.1.4",
+        "mockery": "^2.1.0",
+        "morgan": "^1.10.0",
+        "mysql": "^2.18.1",
+        "node-gyp": "^8.4.0",
+        "node-scp": "^0.0.16",
+        "nodemon": "^2.0.15",
+        "save-dev": "^0.0.1-security",
+        "scp": "^0.0.3",
+        "scp2": "^0.5.0",
+        "serve-favicon": "^2.5.0",
+        "ssh2": "^1.5.0",
+        "stylus": "^0.56.0",
+        "validator": "^13.7.0"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.16.8",
+        "@babel/core": "^7.16.12",
+        "@babel/node": "^7.16.8",
+        "@babel/plugin-proposal-class-properties": "^7.16.7",
+        "@babel/plugin-transform-runtime": "^7.16.10",
+        "@babel/preset-env": "^7.16.11",
+        "eslint": "^8.7.0"
+    },
+    "scripts": {
+        "test": "mocha test/ConnectSQL",
+        "testMocha": "nodemon --exec 'mocha test/ConnectSQL'",
+        "testMochaENVDev": "export NODE_ENV=development && nodemon --exec 'mocha test/ConnectSQL'",
+        "nodemon": "nodemon app",
+        "debug": "nodemon --inspect app",
+        "start": "node app",
+        "devBabel": "npx nodemon --exec \"babel-node\" app",
+        "devBabel2": "npx nodemon --exec ./node_modules/.bin/babel-node --presets env app",
+        "buildBabel": "babel src -d dist",
+        "prodBabel": "node ./dist/index.js"
+    },
+    "babel": {
+
+        "presets": [
+            "@babel/preset-env"
+        ],
+        "plugins": [
+            [
+                "@babel/plugin-proposal-class-properties"
+            ],
+            [
+                "@babel/plugin-transform-runtime",
+                {
+                    "regenerator": true
+                }
+            ]
+        ]
+    }
 }

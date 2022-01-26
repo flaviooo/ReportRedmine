@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    _init("getTimeProj");    
+  //  _init("getTimeProj");    
     $("#stype").on('change', function (event) {
         event.preventDefault();
         console.log(event);
