@@ -67,11 +67,8 @@ exports.dowloadDump = (req, res, next) => {
         sftp.fastGet(moveFrom, moveTo, (downloadError) => {
           if (downloadError) console.log("err: " + downloadError);
           if (downloadError) throw downloadError;
-
           console.log("Succesfully uploaded " + moveTo);
-
           try {
-
             //  console.log("tttt "+ path.dirname(moveTo) + "+" + path.basename(importFileName+"sql"))
             let importFileName = moveToP.substring(0, moveToP.length - 3);
             console.log("test: " + moveTo.substring(0, moveTo.length - 3) + "sql")

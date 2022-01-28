@@ -15,7 +15,7 @@ var express = require('express')
 //const  cors = require('cors');
 var app = express();
 //app.use(cors());
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 4000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(favicon(__dirname + '/public/images/favicon.png'));
