@@ -17,7 +17,7 @@ C:\Bitnami\redmine-4.2.3-1/ruby\bin\ruby.exe bin\rake db:migrate RAILS_ENV="prod
 
 ```
 - Next, run the app by entering: node app
-- Browse to http://localhost:3000
+- Browse to http://localhost:4000
 
 ## RedMine Report Dependencies
 
