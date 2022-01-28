@@ -6,6 +6,7 @@ config/
 etc/key/*.*
 db/*.txt
 
+
 # Ignore Logs
 logs
 *.log
