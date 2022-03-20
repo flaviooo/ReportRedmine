@@ -4,7 +4,7 @@ let logoImg = "csea_2.png";
 const Gmail_Config = {
 //module.exports = {
     googleSetting: {
-        from: process.env.GMAIL_USER || 'flaviooo@gmail.com',
+        from: process.env.GMAIL_USER || '',
         to: 'flaviooo@gmail.com',
   /*      attachments: [
             {
