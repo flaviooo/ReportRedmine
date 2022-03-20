@@ -1,0 +1,41 @@
+extends layout
+block content
+    script(src='/scripts/libraries/RGraph/RGraph.common.tooltips.js')
+    tooltips
+    div.container
+     .page-header
+       h4 #{title}
+       small &nbsp;Parametro di default : #{tempo}  
+       small(id="paramID")
+    .row 
+      .col-md-2
+       p(id="output") Somma ore per tipologia
+       .form-group
+        select(id="stype", name="type").form-control
+         option(value="?meseS=04&meseE=06&anno=2021") Q2 2021
+         option(value="?meseS=07&meseE=09&anno=2021") Q3 2021
+         option(value="?meseS=10&meseE=12&anno=2021") Q4 2021
+         option(value="?meseS=01&meseE=03&anno=2022") Q1 2022
+      .col-md-10
+          div.container
+           p Verifica richieste
+      ul(id="guide")
+           table(id="BuyOrders", class="table table-condensed table-hovered table-striped")
+            tr
+             th id
+             th Autore    
+             th Assegnato
+             th GiorniTrascorsi
+             th Ult.Aggior
+             th Tipologia
+             th subject   
+            - each item in result
+             tr
+             td #[a(href="http://3.138.103.144/issues/#{item['name']}") #{item['id']}]     
+             td #{item['Autore']}
+             td #{item['Assegnato']}
+             td #{item['GiorniTrascorsi']}
+             td #{item['updated_on']}
+             td #{item['name']}
+             td #{item['subject']}
+     

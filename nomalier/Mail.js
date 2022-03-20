@@ -1,6 +1,7 @@
 const nodemailer = require('nodemailer');
 const gmail_config = require('./../nomalier/configMail');
 const path = require('path');
+const jadeCompiler = require('./../nomalier/lib/jadeCompiler');
 //const { text } = require('body-parser');
 
 let logoImg = "csea_2.png";
@@ -21,6 +22,9 @@ class Mail {
           self.options.subject = subject;
           self.options.html = gmail_config.templateCSEA.header+text+gmail_config.templateCSEA.footer;
           self.options.text = '';
+          self.options.title = subject;
+          //self.options.rightColumnList = ['item #1', 'item #2', 'item #3', 'item #4'];
+          //self.options.firstName = "PrimoNome";
           self.options.attachments= [
             {
                 filename: img,
@@ -33,14 +37,24 @@ class Mail {
                 cid: 'logo_colori'//my mistake was putting "cid:logo@cid" here! 
          }
             ];
-
+          //  self.options.service = 'Gmail'; 
+         //   self.options.auth = gmail_config.googleSetting.auth;
+        
         const transporter = nodemailer.createTransport({ service: 'Gmail', auth: gmail_config.googleSetting.auth});
      
         if(transporter !== null) {
             return new Promise((resolve, reject) => {
             //  console.log(self.options);
-                    transporter.sendMail(self.options, (error, info) => {
-              //  transporter.sendMail(gmail_config.googleSetting, (error, info) => {
+
+            let RELATIVE_TEMPLATE_PATH = 'C:\\wrkRedmineCsea\\ReportRedmine\\views\\email\\emailReportImg';
+            console.log( RELATIVE_TEMPLATE_PATH);
+           jadeCompiler.compile(RELATIVE_TEMPLATE_PATH, self.options, function(err, html){
+                if(err){
+                  throw new Error('Problem compiling template(double check relative path): ' + RELATIVE_TEMPLATE_PATH);
+                }
+                self.options.html = html;
+            transporter.sendMail(self.options, (error, info) => {
+             //  transporter.sendMail(gmail_config.googleSetting, (error, info) => {
                         if(error) {
                             console.log(error);
                          //   reject(Error('Failed'));
@@ -50,6 +64,7 @@ class Mail {
                         }
                     });
                 });
+           });
             }else{
                 console.log(error);
             }
