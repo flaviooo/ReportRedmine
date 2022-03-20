@@ -9,11 +9,10 @@ _ Assuming you have already installed Node...
 ## Usage
 - Clone repository.
 - Open a command prompt, navigate to the folder, and enter: npm install
+- npm install nodemon --save-dev
 - Config .env variable
-- Database Migrate (todo --> call CMD)
+
 ```
-cd C:\Bitnami\redmine-4.2.3-1/apps/redmine\htdocs
-C:\Bitnami\redmine-4.2.3-1/ruby\bin\ruby.exe bin\rake db:migrate RAILS_ENV="production"
 
 ```
 - Next, run the app by entering: node app
@@ -25,10 +24,11 @@ C:\Bitnami\redmine-4.2.3-1/ruby\bin\ruby.exe bin\rake db:migrate RAILS_ENV="prod
 - npm install dotenv --save 
 - npm install ssh2 --savejs
 - npm install extract-zip --save
+- npm install nodemailer@2.7.2
 - npm i fs
 
 ## RedMine Report Dependencies DEV
-- npm install nodemon -save-dev
+- npm install nodemon --save-dev
 - npm install eslint --save-dev
 - npm i mocha supertest chai --save-dev
 

@@ -1,6 +1,6 @@
 const local_db = require('../db/db')
     , path = require('path')
-const validator = require('validator')
+    , validator = require('validator')
 
 exports.getAllMonth = (req, res, next) => {
     console.log("res query "+ req.query)
@@ -16,7 +16,7 @@ exports.getAllMonth = (req, res, next) => {
         " WHERE (projects.status <> 9 AND EXISTS (SELECT 1 AS one FROM enabled_modules em WHERE em.project_id = projects.id AND em.name='time_tracking'))    " +
         "   	AND ((time_entries.project_id IS NULL OR time_entries.project_id NOT IN ('181','201')))    " +
         " GROUP BY `trackers`.`name` , `time_entries`.`tyear` , `time_entries`.`tmonth`,`trackers`.`name` " ;
-        console.log("getAllMonth "+ s);
+//console.log("getAllMonth "+ s);
         local_db.query(s, (err, result, fields) => {
             if (err) {
                 res.send('Query error: ' + err.sqlMessage);

@@ -2,7 +2,7 @@ const config = require('./config_AWS')
   , extract = require('extract-zip')
   , path = require('path')
   , Client = require('ssh2').Client
-  , { exec } = require('child_process')
+  , { exec } = require('child_process');
 
 function importDump(moveTo) {
 
@@ -14,12 +14,24 @@ function importDump(moveTo) {
     " --user=${process.env.DUMPUSER_IMPORT} --port=${process.env.DUMPPORT_IMPORT}" +
     " --default-character-set=utf8 --comments  ${process.env.DUMPDATABASE_IMPORT} <" + moveTo;
 
+ let executionDrop = "drop schema bitnami_redmine; create schema bitnami_redmine & ";
+
   execution = "C:\\Bitnami\\redmine-4.2.3-1\\mysql\\bin\\mysql.exe  --protocol=tcp --host=127.0.0.1 --user=root --password="+process.env.DUMPPASSWORD_IMPORT+" --port=3307 --default-character-set=utf8 --database=bitnami_redmine  < " + moveTo;
 
   console.log("execution: " + execution);
   exec(execution, (err, stdout, stderr) => {
     if (err) { console.error(`exec error: ${err}`); return; }
     console.log("Succesfully imported");
+    migrateDump();
+  });
+}
+function migrateDump() {
+let execution = "cd C:\\Bitnami\\redmine-4.2.3-1\\apps\\redmine\\htdocs & C:\\Bitnami\\redmine-4.2.3-1\\ruby\\bin\\ruby.exe bin\\rake redmine:plugins:migrate RAILS_ENV=\"production\"  & C:\\Bitnami\\redmine-4.2.3-1\\ruby\\bin\\ruby.exe bin\\rake db:migrate RAILS_ENV=\"production\" ";
+
+console.log("Migrate Execution: " + execution);
+exec(execution, (err, stdout, stderr) => {
+    if (err) { console.error(`exec error: ${err}`); return; }
+    console.log("Succesfully Migrate");
   });
 }
 
@@ -44,13 +56,13 @@ exports.dowloadDump = (req, res, next) => {
       sftp.readdir(remotePathToList, function (err, list) {
         if (err) throw err;
         let filename = "";
-        let temp = 0
+        let temp = 0;
         list.forEach(it => {
-          let mtime = it.attrs.mtime
+          let mtime = it.attrs.mtime;
           // temp = (mtime > temp) ? mtime : temp
           if (temp < mtime) {
-            temp = mtime
-            filename = it.filename
+            temp = mtime;
+            filename = it.filename;
           }
         });
         console.dir("Ultimo last BackUp: " + filename);
@@ -60,10 +72,10 @@ exports.dowloadDump = (req, res, next) => {
         console.dir("Remote Folder: " + moveFrom);
 
         // var moveTo = localPathToList +'\\' + list[0].filename;
-        moveTo = path.join(__dirname, localPathToList, filename)
-        moveToP = path.join(__dirname, localPathToList,remotePathToList, filename)
+        moveTo = path.join(__dirname, localPathToList, filename);
+        moveToP = path.join(__dirname, localPathToList,remotePathToList, filename);
         console.dir("Local Folder: " + moveTo);
-        console.log(ultimaModifica)
+        console.log(ultimaModifica);
         sftp.fastGet(moveFrom, moveTo, (downloadError) => {
           if (downloadError) console.log("err: " + downloadError);
           if (downloadError) throw downloadError;
@@ -71,13 +83,13 @@ exports.dowloadDump = (req, res, next) => {
           try {
             //  console.log("tttt "+ path.dirname(moveTo) + "+" + path.basename(importFileName+"sql"))
             let importFileName = moveToP.substring(0, moveToP.length - 3);
-            console.log("test: " + moveTo.substring(0, moveTo.length - 3) + "sql")
-            let pathArchivio = "home\\bitnami\\dump\\archivio\\"
+            console.log("test: " + moveTo.substring(0, moveTo.length - 3) + "sql");
+            let pathArchivio = "home\\bitnami\\dump\\archivio\\";
             importDump(importFileName + "sql");
-            console.log("EEE " + path.basename(moveTo) + "+" + path.dirname(moveTo))
-            console.log("XXX " + path.join(path.dirname(moveTo), path.basename(moveTo)))
-            extract("db\\dumpAWS\\" + path.basename(moveTo), { dir: path.dirname(moveTo) })
-            console.log('Extraction complete')
+            console.log("EEE " + path.basename(moveTo) + "+" + path.dirname(moveTo));
+            console.log("XXX " + path.join(path.dirname(moveTo), path.basename(moveTo)));
+            extract("db\\dumpAWS\\" + path.basename(moveTo), { dir: path.dirname(moveTo) });
+            console.log('Extraction complete');
 
 
           } catch (err) {
@@ -100,5 +112,5 @@ exports.dowloadDump = (req, res, next) => {
     throw err;
   });
   conn.connect(connSettings);
-  return moveTo
+  return moveTo;
 };
