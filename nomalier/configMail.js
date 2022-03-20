@@ -1,12 +1,14 @@
-require('dotenv').config();
 const path = require('path');
+require('dotenv').config({path:__dirname+'./../.env'});
+
+
 let logoImg = "csea_2.png";
 const Gmail_Config = {
 //module.exports = {
     googleSetting: {
         from: process.env.GMAIL_USER || '',
         to: 'flaviooo@gmail.com',
-  /*      attachments: [
+      /*      attachments: [
             {
                    filename: logoImg,
                    path: path.join(__dirname, '../public/images/'+logoImg),

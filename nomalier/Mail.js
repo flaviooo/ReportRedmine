@@ -45,16 +45,14 @@ class Mail {
         if(transporter !== null) {
             return new Promise((resolve, reject) => {
             //  console.log(self.options);
-
-            let RELATIVE_TEMPLATE_PATH = 'C:\\wrkRedmineCsea\\ReportRedmine\\views\\email\\emailReportImg';
-            console.log( RELATIVE_TEMPLATE_PATH);
-           jadeCompiler.compile(RELATIVE_TEMPLATE_PATH, self.options, function(err, html){
+            let pathRoot = path.resolve(__dirname, '../');
+            //console.log("F "+ path.join(pathRoot  ,'/views/email/emailReportImg'));
+            jadeCompiler.compile(path.join(pathRoot  ,'/views/email/emailReportImg'), self.options, function(err, html){
                 if(err){
                   throw new Error('Problem compiling template(double check relative path): ' + RELATIVE_TEMPLATE_PATH);
                 }
-                self.options.html = html;
+            self.options.html = html;
             transporter.sendMail(self.options, (error, info) => {
-             //  transporter.sendMail(gmail_config.googleSetting, (error, info) => {
                         if(error) {
                             console.log(error);
                          //   reject(Error('Failed'));
