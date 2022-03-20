@@ -14,8 +14,8 @@ const Gmail_Config = {
             }
          ],*/         
         auth: {
-            user: process.env.GMAIL_USER || 'flaviooo@gmail.com',
-            pass: process.env.GMAIL_TOKEN ||'bzbdjwqapisrftsd'
+            user: process.env.GMAIL_USER || '',
+            pass: process.env.GMAIL_TOKEN ||''
         }
     },
     templateCSEA: {
