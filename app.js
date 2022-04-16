@@ -16,14 +16,12 @@ var express = require('express')
 //const  cors = require('cors');
 var app = express();
 //app.use(cors());
-console.log(process.env.DB_HOST);
+
 app.set('port', process.env.PORT || 4000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(favicon(__dirname + '/public/images/favicon.png'));
 app.use(logger('dev'));
-express.json();
-express.urlencoded({ extended: false });
 app.use(methodOverride('_method'));
 app.use(require('stylus').middleware(__dirname + '/public'));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -48,6 +46,24 @@ app.get('/time_entries', time_entries.time_entries);
 
 app.get('/getVerificaIssues', verifica.getIssuesVerificaCollaudo);
 
+
+//express.json();
+//express.urlencoded({ extended: false });
+// configure the app to use bodyParser()
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
+
+app.post('/post-test', (req, res) => {
+    console.log('Got body:', req.body);
+    res.sendStatus(200);
+});
+
+app.post("/invioMail", verifica.invioMailVerificaCollaudo);
+
 http.createServer(app).listen(app.get('port'), function(){
-  console.log("Express server listening on port " + app.get('port'));
+
+  console.log('Version: ' + process.version);
+  console.log(process.platform+" \nExpress server "+process.env.DB_HOST+" listening on port " + app.get('port'));
 });

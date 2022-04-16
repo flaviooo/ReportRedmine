@@ -8,13 +8,6 @@ const Gmail_Config = {
     googleSetting: {
         from: process.env.GMAIL_USER || '',
         to: 'flaviooo@gmail.com',
-      /*      attachments: [
-            {
-                   filename: logoImg,
-                   path: path.join(__dirname, '../public/images/'+logoImg),
-                   cid: 'logo_colori'//my mistake was putting "cid:logo@cid" here! 
-            }
-         ],*/         
         auth: {
             user: process.env.GMAIL_USER || '',
             pass: process.env.GMAIL_TOKEN ||''

@@ -31,7 +31,6 @@
         "node-gyp": "^8.4.1",
         "node-scp": "^0.0.16",
         "nodemailer": "^2.7.2",
-        "nodemon": "^2.0.15",
         "save-dev": "^0.0.1-security",
         "scp": "^0.0.3",
         "scp2": "^0.5.0",
@@ -47,13 +46,14 @@
         "@babel/plugin-proposal-class-properties": "^7.16.7",
         "@babel/plugin-transform-runtime": "^7.16.10",
         "@babel/preset-env": "^7.16.11",
-        "eslint": "^8.7.0"
+        "eslint": "^8.7.0",
+        "nodemon": "^2.0.15"
     },
     "scripts": {
         "test": "mocha test/ConnectSQL",
         "testMocha": "nodemon --exec 'mocha test/ConnectSQL'",
         "testMochaENVDev": "export NODE_ENV=development && nodemon --exec 'mocha test/ConnectSQL'",
-        "nodemon": "nodemon app",
+        "nodemonRR": " run node_modules\\.bin\\nodemon app.js",
         "debug": "nodemon --inspect app",
         "start": "node app",
         "devBabel": "npx nodemon --exec \"babel-node\" app",

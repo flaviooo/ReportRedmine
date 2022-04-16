@@ -30,6 +30,7 @@ _ Assuming you have already installed Node...
 ## RedMine Report Dependencies DEV
 - npm install nodemon --save-dev
 - npm install eslint --save-dev
+- npm install -g jshint-esnext
 - npm i mocha supertest chai --save-dev
 
 

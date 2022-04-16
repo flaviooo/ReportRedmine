@@ -1,8 +1,9 @@
 doctype html
-html(lang="en")
+html(lang="it")
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     meta(http-equiv="content-type", content="text/html; charset=UTF-8")
-    body(bgcolor="#ededed" style="background-color: #ededed; padding: 20px;")
+    include cssMail2.styl
+    body
         div(style="background-color: #ffffff; padding: 20px; border-radius: 4px;")
             h1 Welcome
             p Hello #{dato.autore}, welcome to My Site. This is just a test email to let you know that we're signed you up.
@@ -11,7 +12,7 @@ html(lang="en")
              tr
               th Issue
               th Giorni     
-              th Oggetto  
+              th Oggetto
              - var itemO = dato.oggettiIssues
              - var itemG = dato.giorniTrascorsi
              - each itemI,i  in dato.issues
@@ -24,3 +25,4 @@ html(lang="en")
             img( style="width:80px;" src="cid:logo_colori")
             p 
             b CSEA - Area Sistemi Informativi
+                

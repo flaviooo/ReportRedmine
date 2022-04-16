@@ -64,10 +64,8 @@ $.each(xml, function(index, element) {
    
     etichette.push(element.name);
     var ob = []
-    var obCvs3 =[]
+   // var obCvs3 =[]
     dataCVS3[index] = [element.Aperte, element.Chiuse ];
- 
-
     ob.push(element.Aperte);
     ob.push(element.Chiuse);
     ob.push(element.totale);

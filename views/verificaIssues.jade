@@ -1,6 +1,7 @@
 extends layout
 block content
     script(src='/scripts/libraries/RGraph/RGraph.common.tooltips.js')
+    script(src='/scripts/verificaIssues.js')
     tooltips
     div.container
      .page-header
@@ -17,25 +18,35 @@ block content
          option(value="?meseS=10&meseE=12&anno=2021") Q4 2021
          option(value="?meseS=01&meseE=03&anno=2022") Q1 2022
       .col-md-10
-          div.container
-           p Verifica richieste
-      ul(id="guide")
-           table(id="BuyOrders", class="table table-condensed table-hovered table-striped")
+        div.container
+          p Verifica richieste
+    ul(id="guide")
+     table(id="BuyOrders", class="table table-condensed table-hovered table-striped")
+           tr
+            th id
+            th Autore    
+            th Assegnato
+            th GiorniTrascorsi
+            th Ult.Aggior
+            th Tipologia
+            th subject
+            th Mail   
+           - each item in result
             tr
-             th id
-             th Autore    
-             th Assegnato
-             th GiorniTrascorsi
-             th Ult.Aggior
-             th Tipologia
-             th subject   
-            - each item in result
-             tr
-             td #[a(href="http://3.138.103.144/issues/#{item['name']}") #{item['id']}]     
-             td #{item['Autore']}
-             td #{item['Assegnato']}
-             td #{item['GiorniTrascorsi']}
-             td #{item['updated_on']}
-             td #{item['name']}
-             td #{item['subject']}
-     
+            td #[a(href="http://3.138.103.144/issues/#{item['name']}") #{item['id']}]     
+            td #{item['Autore']}
+            td #{item['Assegnato']}
+            td #{item['GiorniTrascorsi']}
+            td #{item['updated_on']}
+            td #{item['name']}
+            td #{item['subject']}
+            td 
+             label.form-checkbox
+              span.fa.fa-check #{item['id']}
+              input#remember(type='checkbox', name=item['Autore'])
+        button(type='button', id='send_by_button', data-dismiss="alert") Invia   
+          
+mixin boxCheck(item)
+    input#item.id(type='checkbox', name=item.id)
+    span #{item['id']}
+        block

@@ -1,8 +1,9 @@
 const local_db = require('../db/db');
+const Mail = require('./../nomalier/Mail');
 
 exports.getIssuesVerificaCollaudo = (req, res, next) => {
-    console.log("res query "+ req.query);
-    let s = " SELECT  `issues`.`id`,  au.`login` as Autore, ass.`login`as Assegnato,timestampdiff(DAY, `issues`.`updated_on`, now()) as GiorniTrascorsi, " +
+  console.log("res query " + req.query);
+  let s = " SELECT  `issues`.`id`,  au.`login` as Autore, ass.`login`as Assegnato,timestampdiff(DAY, `issues`.`updated_on`, now()) as GiorniTrascorsi, " +
     " DATE_FORMAT(`issues`.`updated_on`, '%d/%m/%Y') as updated_on,`projects`.`name`, `trackers`.`name` ,`issues`.`subject` " +
     " FROM `issues` " +
     " INNER JOIN `projects` ON `projects`.`id` = `issues`.`project_id`  " +
@@ -13,19 +14,82 @@ exports.getIssuesVerificaCollaudo = (req, res, next) => {
     " LEFT OUTER JOIN enumerations ON enumerations.id = issues.priority_id  " +
     " WHERE (projects.status <> 9 AND EXISTS (SELECT 1 AS one FROM enabled_modules em WHERE em.project_id = projects.id AND em.name='issue_tracking')) " +
     " AND ((issues.status_id IN ('11')) )  and `issues`.`is_private` = 0  " +
-    " ORDER BY au.`login` ASC, enumerations.position DESC, issues.updated_on DESC, issues.id DESC  " ;
-    console.log("Richieste da chiudere "+ s);
-        local_db.query(s, (err, result, fields) => {
-            if (err) {
-                res.send('Query error: ' + err.sqlMessage);
-            } else {
-                //res.json(rows);
-                rows = result;
-                console.log(rows);
+    " ORDER BY au.`login` ASC, enumerations.position DESC, issues.updated_on DESC, issues.id DESC  ";
+  //  console.log("Richieste da chiudere "+ s);
+  local_db.query(s, (err, result, fields) => {
+    if (err) {
+      res.send('Query error: ' + err.sqlMessage);
+    } else {
+      //res.json(rows);
+      rows = result;
+      // console.log(rows);
+      // console.log(rows.sum_hour)
+      res.render('verificaIssues', { title: "Verifica Richieste da chiudere", result: rows });
+    }
+  });
+},
+  exports.invioMailVerificaCollaudo = (req, res) => {
+    console.log(" req query " + req.query);
+   // console.log(req.body);    //  console.log(req.route);    //  console.log("params1: " + req.param.params);
+   
+   if(!req.body.dati){
+      return res.send(422, 'Missing fields! Please be sure to fill out all form data.');
+    }
+   // var dati = JSON.parse(JSON.stringify(req.body.dati));
+    var dati = JSON.parse(JSON.stringify(req.body.dati));
+    const timeElapsed = Date.now();
+    const today = new Date(timeElapsed);
+    let img = "2022_01_26_18_02_48_RR_ReportRedMine.png";
+    const mail = new Mail();
+    for (let a in dati) {
+      console.log(a + ": "+ dati[a]);
+      let obj = {
+        options : {
+          dato : {}
+        }
+      };
+      obj.options.dato =dati[a];
+      let subject = "Non dimenticarti di noi - "+ new Date().toISOString().slice(0,10) ;
+      let to = 'flaviooo@gmail.com';
+      let text = ""; //getBobyMail(obj);
+      console.log("subject: " + subject); console.log("to: " + to); console.log("text: "+text);  
+      console.log(obj);
+     
+      try {
+        //   await mail.send({ to, subject,text, img});
+        mail.send({ to, subject, text, obj, img});
+      } catch (err) {
+        console.log(err);
+      }  
+    }
+    // res.setHeader('Content-Type', 'application/json');
+    // var result = JSON.stringify(some_json);
+    //content got 'client.jade'
+    res.send(dati);
+    
+  };
 
-                // console.log(rows.sum_hour)
-                 res.render('verificaIssues', { title: "Verifica Richieste da chiudere",  result: rows });
-            }
-        });
-
-};
+  function getBobyMail(dato){
+  let datoo = dato;
+  let giorniTrascorsi = dato.giorniTrascorsi;
+  let issues = dato.issues;
+  let oggettiIssues = dato.oggettiIssues;
+  let autore = dato.autore;
+  let htmlTR = "<table border=\"1\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\"><tr>"+
+  "<td>Issues</td><td>Giorni Trascorsi<td></td><td>Oggetti Issues</td></tr>";
+  for(let i in issues){
+    console.log(oggettiIssues[i].length);
+    if(oggettiIssues[i].length>50){
+      oggettiIssues[i] = oggettiIssues[i].substring(0, 50)+"...";
+    }
+    htmlTR+= "<tr><td>"+issues[i]+"</td><td>"+giorniTrascorsi[i]+"<td></td><td>"+oggettiIssues[i]+"</td></tr>";
+  }
+  htmlTR+="</table>";
+ // console.log(htmlTR);
+  let text = '<h3>Le tue segnalazioni</h3>' +
+      ' <p>Caro '+autore+',</br> abbiamo un conto in sopeso</p>' +
+     // ' e logo <img src=\"cid:imgBody_0\"/> ' +
+      htmlTR+
+      '<p>Grazie per l\'attenzione</p>';
+      return text;
+    }
