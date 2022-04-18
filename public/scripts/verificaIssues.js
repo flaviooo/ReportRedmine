@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    $("#flash").hide();
     let queryForm = "invioMail";
     $('#send_by_button').click(function (e) {
         e.preventDefault();
@@ -52,8 +53,6 @@ $(document).ready(function () {
         console.log("data: "+ dataStruct);
         data = JSON.parse(JSON.stringify(dataStruct));
         console.log("data: "+data);
-        
-        //multiArray.push([project, ob.push($hoursSum)]);
         var postData = {
             dati: data
         };
@@ -78,6 +77,10 @@ $(document).ready(function () {
                 if (data != null) {
                     //  document.getElementById("modify").innerHTML = "JSON changed!\n" + jsonstr;
                     console.log("Risposta" + jsonobj)
+                    $("#flash span").text("Invio effettuato: "+ jsonobj).show().parent().fadeIn()
+                    .delay(2000).fadeOut('slow', function() { 
+                        $("#flash span").text('');
+                    });
                 };
             },
             error: function (jqXhr, textStatus, errorThrown) {

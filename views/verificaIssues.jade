@@ -45,7 +45,12 @@ block content
               span.fa.fa-check #{item['id']}
               input#remember(type='checkbox', name=item['Autore'])
         button(type='button', id='send_by_button', data-dismiss="alert") Invia   
-          
+
+        
+    div(id="flash", class="alert alert-success")
+      button(type="button" class="close" data-dismiss="alert")&times;
+      span
+
 mixin boxCheck(item)
     input#item.id(type='checkbox', name=item.id)
     span #{item['id']}

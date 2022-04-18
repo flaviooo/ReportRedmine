@@ -3,7 +3,6 @@ const gmail_config = require('./../nomalier/configMail');
 const path = require('path');
 const jadeCompiler = require('./../nomalier/lib/jadeCompiler');
 const { text } = require('body-parser');
-//const { text } = require('body-parser');
 
 let logoImg = "csea_2.png";
 class Mail {
@@ -21,7 +20,7 @@ class Mail {
     send({to, subject, text, obj, img }) {
         if(nodemailer && this.options) {
           let self = this;
-          self.options.to = to;
+         self.options.to = to;
           self.options.subject = subject;
          // self.options.html = gmail_config.templateCSEA.header+html+gmail_config.templateCSEA.footer;
           self.options.text = text;
@@ -41,9 +40,6 @@ class Mail {
                 cid: 'logo_colori'//my mistake was putting "cid:logo@cid" here! 
          }
             ];
-          //  self.options.service = 'Gmail'; 
-         //   self.options.auth = gmail_config.googleSetting.auth;
-        
         const transporter = nodemailer.createTransport({ service: 'Gmail', auth: gmail_config.googleSetting.auth});
          if(transporter !== null) {
             return new Promise((resolve, reject) => {
@@ -51,7 +47,6 @@ class Mail {
             let pathRoot = path.resolve(__dirname, '../');
             //console.log("F "+ path.join(pathRoot  ,'/views/email/emailReportImg'));
             jadeCompiler.compile(path.join(pathRoot  ,'/views/email/emailReportImg'), self.options, function(err, html){
-          //  jadeCompiler.compile(path.join(pathRoot  ,'/views/email/test'), self.options, function(err, html){    
                 if(err){
                   throw new Error('Problem compiling template(double check relative path): ' + RELATIVE_TEMPLATE_PATH);
                 }

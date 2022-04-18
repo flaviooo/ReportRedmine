@@ -28,68 +28,41 @@ exports.getIssuesVerificaCollaudo = (req, res, next) => {
     }
   });
 },
-  exports.invioMailVerificaCollaudo = (req, res) => {
+  exports.invioMailVerificaCollaudo = (req, res, next) => {
     console.log(" req query " + req.query);
-   // console.log(req.body);    //  console.log(req.route);    //  console.log("params1: " + req.param.params);
-   
-   if(!req.body.dati){
+    // console.log(req.body);    //  console.log(req.route);    //  console.log("params1: " + req.param.params);
+    if (!req.body.dati)
       return res.send(422, 'Missing fields! Please be sure to fill out all form data.');
-    }
-   // var dati = JSON.parse(JSON.stringify(req.body.dati));
+    let notificaInviati = [];
     var dati = JSON.parse(JSON.stringify(req.body.dati));
-    const timeElapsed = Date.now();
-    const today = new Date(timeElapsed);
     let img = "2022_01_26_18_02_48_RR_ReportRedMine.png";
     const mail = new Mail();
     for (let a in dati) {
-      console.log(a + ": "+ dati[a]);
+      //      console.log(a + ": "+ dati[a]);
       let obj = {
-        options : {
-          dato : {}
+        options: {
+          dato: {}
         }
       };
-      obj.options.dato =dati[a];
-      let subject = "Non dimenticarti di noi - "+ new Date().toISOString().slice(0,10) ;
+      obj.options.dato = dati[a];
+      let subject = "Non dimenticarti di noi - " + new Date().toISOString().slice(0, 10);
       let to = 'flaviooo@gmail.com';
-      let text = ""; //getBobyMail(obj);
-      console.log("subject: " + subject); console.log("to: " + to); console.log("text: "+text);  
+      let text = ""; 
+      console.log("subject: " + subject); console.log("to: " + to); console.log("text: " + text);
       console.log(obj);
-     
+
       try {
         //   await mail.send({ to, subject,text, img});
-        mail.send({ to, subject, text, obj, img});
+        mail.send({ to, subject, text, obj, img });
+        notificaInviati.push(to);
       } catch (err) {
         console.log(err);
-      }  
+        res.send(err);
+      }
     }
     // res.setHeader('Content-Type', 'application/json');
     // var result = JSON.stringify(some_json);
-    //content got 'client.jade'
-    res.send(dati);
-    
-  };
+    //res.json(rows);
+    res.send(notificaInviati);
 
-  function getBobyMail(dato){
-  let datoo = dato;
-  let giorniTrascorsi = dato.giorniTrascorsi;
-  let issues = dato.issues;
-  let oggettiIssues = dato.oggettiIssues;
-  let autore = dato.autore;
-  let htmlTR = "<table border=\"1\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\"><tr>"+
-  "<td>Issues</td><td>Giorni Trascorsi<td></td><td>Oggetti Issues</td></tr>";
-  for(let i in issues){
-    console.log(oggettiIssues[i].length);
-    if(oggettiIssues[i].length>50){
-      oggettiIssues[i] = oggettiIssues[i].substring(0, 50)+"...";
-    }
-    htmlTR+= "<tr><td>"+issues[i]+"</td><td>"+giorniTrascorsi[i]+"<td></td><td>"+oggettiIssues[i]+"</td></tr>";
-  }
-  htmlTR+="</table>";
- // console.log(htmlTR);
-  let text = '<h3>Le tue segnalazioni</h3>' +
-      ' <p>Caro '+autore+',</br> abbiamo un conto in sopeso</p>' +
-     // ' e logo <img src=\"cid:imgBody_0\"/> ' +
-      htmlTR+
-      '<p>Grazie per l\'attenzione</p>';
-      return text;
-    }
+  };
