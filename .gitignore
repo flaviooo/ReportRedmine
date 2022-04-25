@@ -84,3 +84,5 @@ mocha.cmd
 *.lock
 
 package-lock.json
+
+build/config.gypi
