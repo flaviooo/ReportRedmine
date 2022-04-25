@@ -26,7 +26,7 @@ exports.getTimeProj= (req, res) => {
 "  AND ((time_entries.spent_on > '"+spent_start+"'   AND time_entries.spent_on <= '"+spent_end+"') "+
 "  AND ((time_entries.project_id IS NULL OR time_entries.project_id  NOT IN ('181','201'))))"+
 " GROUP BY time_entries.project_id";
-   console.info("Query ultimi 6 mesi - getTimeProj: "+ s);
+   console.info("Query index: "+ s);
   local_db.query(s, (err, result, fields) => {
     if(err){
       console.log(err)
@@ -40,4 +40,4 @@ exports.getTimeProj= (req, res) => {
             res.json(result);
          }
    });
-}
+};

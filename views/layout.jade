@@ -7,18 +7,24 @@ html
 			block meta
 				meta(name='description', content='')
 				meta(name='keywords', content='')
+			link(rel='stylesheet', href='/css/style.css')
+			link(rel="stylesheet", type="text/css", href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css")
 			link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
 			| <style>
-			| body { padding-top: 60px; }
+			| body { padding-top: 60px; padding-right: 20px; }
 			| </style>
+
 			script(src='//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
+			script(type="text/javascript", language="javascript", src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js")
+			script(type="text/javascript", language="javascript", src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js")
 			script(src='/scripts/libraries/RGraph/RGraph.common.core.js')
 			script(src='/scripts/libraries/RGraph/RGraph.common.key.js')
 			script(src='/scripts/libraries/RGraph/RGraph.common.dynamic.js')
 			script(src='/scripts/libraries/RGraph/RGraph.common.tooltips.js')
 			script(src='/scripts/libraries/RGraph/RGraph.bar.js')
 			script(src='/scripts/libraries/RGraph/RGraph.line.js')
-			
+			script(src='/scripts/bootstrap.min.js')
+						
 	body
 		include header
 

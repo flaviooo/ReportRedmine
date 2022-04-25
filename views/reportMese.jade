@@ -13,11 +13,8 @@ block content
        p(id="output") Somma ore per tipologia
        .form-group
         select(id="stype", name="type").form-control
-         option(value="?meseS=04&meseE=06&anno=2021") Q2 2021
-         option(value="?meseS=07&meseE=09&anno=2021") Q3 2021
-         option(value="?meseS=10&meseE=12&anno=2021") Q4 2021
-         option(value="?meseS=01&meseE=03&anno=2022") Q1 2022
-         option(value="?meseS=04&meseE=06&anno=2022") Q1 2022
+         option(value="?meseS=01&meseE=12&anno=2021") Anno 2021
+         option(value="?meseS=01&meseE=12&anno=2022") Anno 2022
       .col-md-10
       canvas(id="cvs", width="1000", height="600")
      
@@ -30,7 +27,7 @@ block content
              th mese   
             - each item in result
              tr
-              td #[a(href="http://3.138.103.144/issues/#{item['name']}") #{item['name']}]     
+              td #[a(href="https://gestioneprogetti.csea.it/issues/#{item['name']}") #{item['name']}]     
               td #{item['sum_hour']}
               td #{item['tyear']}
               td #{item['tmonth']}

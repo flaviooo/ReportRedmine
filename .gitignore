@@ -82,3 +82,5 @@ mocha
 mocha.cmd
 
 *.lock
+
+package-lock.json

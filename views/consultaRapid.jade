@@ -1,6 +1,6 @@
 extends layout
 block content
-    script(src='/scripts/verificaIssues.js')
+    script(src='/scripts/consultaRapid.js')
     div.container
      .page-header
        h4 #{title}
@@ -11,11 +11,12 @@ block content
        p(id="output") output
       .col-md-10
         div.container
-          p Verifica richieste in "attesa di verifica"
+          p Consulta
      ul(id="guide")
      .row 
       .col-md-2
-        p Comandi: 
+        .form-group
+         select(id="getTipologie", name="type").form-control
        .col-md-10
           p 
            a.btn.btn-primary(id='checkAll') Seleziona Tutti 
@@ -45,12 +46,11 @@ block content
               label.form-checkbox
                span.fa.fa-check #{item['id']}
                input#remember(type='checkbox', name=item['Autore'])
-        a.btn.btn-primary(id='send_by_button') Invia   
- 
-        
+        a.btn.btn-primary(id='send_by_button') Invia      
+    
     div(id="flash", class="alert alert-success")
-       button(type="button" class="close" data-dismiss="alert")&times;
-       span
+     button(type="button" class="close" data-dismiss="alert") &times;
+     span
 
 mixin boxCheck(item)
     input#item.id(type='checkbox', name=item.id)

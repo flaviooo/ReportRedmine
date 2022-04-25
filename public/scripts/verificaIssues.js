@@ -1,11 +1,22 @@
 $(document).ready(function () {
-    $("#flash").hide();
+  
+    init();
     let queryForm = "invioMail";
+    $("#getTipologie").on('change', function (event) {
+        event.preventDefault();
+        console.log(event);
+        let queryForm = "getTimeProj" + this.value
+        console.log(queryForm);
+        //RGraph.reset($("cvs"));
+        $("#paramID").html("<i>"+queryForm+"</i>")
+       // callDraw(queryForm)
+    });
+
     $('#send_by_button').click(function (e) {
         e.preventDefault();
         let data = "";
         var listaAutori = [];
-        var $item = $('#BuyOrders tr input:checked');
+        var $item = $('#idTabella tr input:checked');
         $item.each(function (e) {
             $autore = $(this).attr('name');
             if ($.inArray($autore, listaAutori) === -1)
@@ -13,17 +24,16 @@ $(document).ready(function () {
         });
         console.log("listaAutori " + listaAutori);
         //const uniqueAutori = [...new Set(listaAutori)]
-
         /* una volta selezionati gli autori della segnalazione 
         ** raggruppo tutte le segnalazioni per autore 
         */
         var dataStruct = [];      
         $(listaAutori).each((i, autore) => {
-            var $selezionati = $('#BuyOrders tr').find(':checked').parents("tr");
+            var $selezionati = $('#idTabella tr').find(':checked').parents("tr");
             var issuesSelected = [];
             var oggettiIssues = [];
             var giorniTrascorsi = [];
-            var obj = new Object();
+            var obj = {};
             $.each($selezionati, (i, e) => {
                 var autoreA = $(e).find('td:eq(1)').text();
                 obj.autore = autore;
@@ -52,7 +62,6 @@ $(document).ready(function () {
 
         console.log("data: "+ dataStruct);
         data = JSON.parse(JSON.stringify(dataStruct));
-        console.log("data: "+data);
         var postData = {
             dati: data
         };
@@ -76,12 +85,16 @@ $(document).ready(function () {
                 //if the 'nick' member of the JSON does not equal to the predeclared string (as it was initialized), then the backend script was executed, meaning that communication has been established
                 if (data != null) {
                     //  document.getElementById("modify").innerHTML = "JSON changed!\n" + jsonstr;
-                    console.log("Risposta" + jsonobj)
-                    $("#flash span").text("Invio effettuato: "+ jsonobj).show().parent().fadeIn()
-                    .delay(2000).fadeOut('slow', function() { 
-                        $("#flash span").text('');
-                    });
-                };
+                    console.log("Risposta" + jsonobj);
+                    $("#flash").text("Invio effettuato: "+ jsonobj.join(", "))
+                     .show()
+                   //  .parent()
+                     .fadeIn()
+                     .delay(2000)
+                     .fadeOut('slow', function() { 
+                         $("#flash").text('');
+                     });
+                    };
             },
             error: function (jqXhr, textStatus, errorThrown) {
                 console.log(errorThrown);
@@ -89,3 +102,31 @@ $(document).ready(function () {
         });
     }
 });
+function init(){
+    console.log("INIT");
+    $("#flash").hide();
+    $("#deCheckAll").hide();
+    $("#checkAll").click(function(){
+
+        $("table tr :checkbox").prop("checked", true);
+        $("#checkAll").hide();
+        $("#deCheckAll").show();
+
+    });
+    $("#deCheckAll").click(function(){
+
+        $("table tr :checkbox").prop("checked", false);
+        $("#checkAll").show();
+        $("#deCheckAll").hide();
+
+    });
+  
+    $('#idTabella').DataTable({
+
+        "language": {
+              "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Italian.json"
+        },
+        "lengthMenu": [ 50, 100, 150, 200, 300 ]
+    });
+  
+}

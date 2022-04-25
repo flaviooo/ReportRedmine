@@ -3,8 +3,7 @@ const config = require('./config_AWS')
   , path = require('path')
   , Client = require('ssh2').Client
   , { exec } = require('child_process');
-
-function importDump(moveTo) {
+  exports.importDump = (moveTo) => {
 
   //  importTo.fileDump = moveTo;
   //  console.log("File da importare: " + importTo.fileDump);
@@ -13,30 +12,27 @@ function importDump(moveTo) {
     " --host=${process.env.DUMPHOST_IMPORT}  --password=${process.env.DUMPPASSWORD_IMPORT}" +
     " --user=${process.env.DUMPUSER_IMPORT} --port=${process.env.DUMPPORT_IMPORT}" +
     " --default-character-set=utf8 --comments  ${process.env.DUMPDATABASE_IMPORT} <" + moveTo;
-
- let executionDrop = "drop schema bitnami_redmine; create schema bitnami_redmine & ";
-
+ 
   execution = "C:\\Bitnami\\redmine-4.2.3-1\\mysql\\bin\\mysql.exe  --protocol=tcp --host=127.0.0.1 --user=root --password="+process.env.DUMPPASSWORD_IMPORT+" --port=3307 --default-character-set=utf8 --database=bitnami_redmine  < " + moveTo;
 
   console.log("execution: " + execution);
   exec(execution, (err, stdout, stderr) => {
     if (err) { console.error(`exec error: ${err}`); return; }
     console.log("Succesfully imported");
-    migrateDump();
   });
-}
-function migrateDump() {
-let execution = "cd C:\\Bitnami\\redmine-4.2.3-1\\apps\\redmine\\htdocs & C:\\Bitnami\\redmine-4.2.3-1\\ruby\\bin\\ruby.exe bin\\rake redmine:plugins:migrate RAILS_ENV=\"production\"  & C:\\Bitnami\\redmine-4.2.3-1\\ruby\\bin\\ruby.exe bin\\rake db:migrate RAILS_ENV=\"production\" ";
+};
 
+exports.migrateDump = () => {
+let execution = "cd C:\\Bitnami\\redmine-4.2.3-1\\apps\\redmine\\htdocs & C:\\Bitnami\\redmine-4.2.3-1\\ruby\\bin\\ruby.exe bin\\rake redmine:plugins:migrate RAILS_ENV=\"production\"  & C:\\Bitnami\\redmine-4.2.3-1\\ruby\\bin\\ruby.exe bin\\rake db:migrate RAILS_ENV=\"production\" ";
 console.log("Migrate Execution: " + execution);
 exec(execution, (err, stdout, stderr) => {
     if (err) { console.error(`exec error: ${err}`); return; }
     console.log("Succesfully Migrate");
   });
-}
+};
 
 exports.dowloadDump = (req, res, next) => {
-  var moveTo = "";
+  var moveToP = "";
   var conn = new Client();
 
   var connSettings = {
@@ -68,11 +64,10 @@ exports.dowloadDump = (req, res, next) => {
         console.dir("Ultimo last BackUp: " + filename);
 
         var moveFrom = remotePathToList + '/' + filename;
-        //  moveFrom = '/home/bitnami/dump/archivio/backup_16-11-2021.zip'
         console.dir("Remote Folder: " + moveFrom);
 
         // var moveTo = localPathToList +'\\' + list[0].filename;
-        moveTo = path.join(__dirname, localPathToList, filename);
+        let moveTo = path.join(__dirname, localPathToList, filename);
         moveToP = path.join(__dirname, localPathToList,remotePathToList, filename);
         console.dir("Local Folder: " + moveTo);
         console.log(ultimaModifica);
@@ -81,16 +76,14 @@ exports.dowloadDump = (req, res, next) => {
           if (downloadError) throw downloadError;
           console.log("Succesfully uploaded " + moveTo);
           try {
-            //  console.log("tttt "+ path.dirname(moveTo) + "+" + path.basename(importFileName+"sql"))
             let importFileName = moveToP.substring(0, moveToP.length - 3);
             console.log("test: " + moveTo.substring(0, moveTo.length - 3) + "sql");
-            let pathArchivio = "home\\bitnami\\dump\\archivio\\";
-            importDump(importFileName + "sql");
+
+            module.exports.importDump(importFileName + "sql");
             console.log("EEE " + path.basename(moveTo) + "+" + path.dirname(moveTo));
             console.log("XXX " + path.join(path.dirname(moveTo), path.basename(moveTo)));
             extract("db\\dumpAWS\\" + path.basename(moveTo), { dir: path.dirname(moveTo) });
             console.log('Extraction complete');
-
 
           } catch (err) {
             // handle any errors
@@ -104,7 +97,6 @@ exports.dowloadDump = (req, res, next) => {
           conn.end();
         }
       });
-
     });
   });
   conn.on('error', (err) => {
@@ -112,5 +104,6 @@ exports.dowloadDump = (req, res, next) => {
     throw err;
   });
   conn.connect(connSettings);
-  return moveTo;
+  return moveToP;
+  
 };

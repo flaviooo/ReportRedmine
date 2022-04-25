@@ -98,10 +98,8 @@ function parser4Month(results) {
                 return accumulator
         }, 0).toFixed(2);
         let percent = ((element.sum_hour / sommaMeseSelezionato) * 100).toFixed(2)
-       // console.log(element.tmonth + " " + sommaMeseSelezionato + " " + element.sum_hour + " " + percent + " % " + element.name)
         var ob = []
         ob.push(element.tmonth,element.tyear, element.id, element.name, percent, sommaMeseSelezionato)
-        // var mesiSelezionato = results.filter(i => (i === element.tmonth))
         array.push(ob);
     });
     return array

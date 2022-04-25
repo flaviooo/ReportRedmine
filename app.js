@@ -4,8 +4,10 @@ var express = require('express')
   , ticketProrita = require('./routes/ticketProrita')
   , reportMese = require('./routes/reportMese')
   , verifica = require('./routes/verificaIssues')
+  , util = require('./routes/util')
+  , consulaRapid = require('./routes/consultaRapid')
   , reportTipologia = require('./routes/reportTipologia')
-  , test_aws = require('./routes/test_aws')
+  , dump_aws = require('./routes/dump_aws')
   , http = require('http')
   , path = require('path')
   , bodyParser = require('body-parser')
@@ -34,18 +36,20 @@ app.get('/', routes.index);
 app.get('/getTimeProj', routes.getTimeProj);
 
 app.get('/ticketProrita', ticketProrita.getProve);
-app.get('/tipologia', reportTipologia.getTipologia);
 
 app.get('/tipologiaMese', reportMese.getAllMonth);
 app.get('/tipologiaMeseParam', reportMese.getMonthByParam);
 
+app.get('/tipologia', reportTipologia.getTipologia);
 app.get('/tipologiaRgraph', reportTipologia.getTipologiaRgraph);
 app.get('/getTipologiaProgetti', reportTipologia.getTipologiaProgetti);
-app.get('/test', test_aws.updataSource);
+app.get('/dump', dump_aws.updataSource);
 app.get('/time_entries', time_entries.time_entries);
 
 app.get('/getVerificaIssues', verifica.getIssuesVerificaCollaudo);
+app.get('/getTipologie', util.getIssuesTipologie);
 
+app.get('/consultaRapid', consulaRapid.view);
 
 //express.json();
 //express.urlencoded({ extended: false });
@@ -54,11 +58,6 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json());
-
-app.post('/post-test', (req, res) => {
-    console.log('Got body:', req.body);
-    res.sendStatus(200);
-});
 
 app.post("/invioMail", verifica.invioMailVerificaCollaudo);
 
