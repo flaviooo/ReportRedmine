@@ -47,7 +47,7 @@ app.get('/dump', dump_aws.updataSource);
 app.get('/time_entries', time_entries.time_entries);
 
 app.get('/getVerificaIssues', verifica.getIssuesVerificaCollaudo);
-app.get('/getTipologie', util.getIssuesTipologie);
+app.get('/getTipologiche', util.getIssuesTipologie);
 
 app.get('/consultaRapid', consulaRapid.view);
 
