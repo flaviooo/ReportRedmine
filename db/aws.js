@@ -1,21 +1,13 @@
-const config = require('./config_AWS')
+const config_AWS = require('./config_AWS')
   , extract = require('extract-zip')
   , path = require('path')
   , Client = require('ssh2').Client
   , { exec } = require('child_process');
-  exports.importDump = (moveTo) => {
+  exports.importDump = (DIR , moveTo) => {
 
-  //  importTo.fileDump = moveTo;
-  //  console.log("File da importare: " + importTo.fileDump);
-  //  'set global innodb_large_prefix=on|set global innodb_file_format=Barracuda|set global innodb_file_per_table=true '+
-  let execution = process.env.PATHMYSQLCMD_IMPORT +
-    " --host=${process.env.DUMPHOST_IMPORT}  --password=${process.env.DUMPPASSWORD_IMPORT}" +
-    " --user=${process.env.DUMPUSER_IMPORT} --port=${process.env.DUMPPORT_IMPORT}" +
-    " --default-character-set=utf8 --comments  ${process.env.DUMPDATABASE_IMPORT} <" + moveTo;
- 
-  execution = "C:\\Bitnami\\redmine-4.2.3-1\\mysql\\bin\\mysql.exe  --protocol=tcp --host=127.0.0.1 --user=root --password="+process.env.DUMPPASSWORD_IMPORT+" --port=3307 --default-character-set=utf8 --database=bitnami_redmine  < " + moveTo;
-
-  console.log("execution: " + execution);
+let pathImport = path.normalize( DIR + process.env.DUMP_AWS_REMOTE_PATH + path.sep + moveTo);
+let  execution = process.env.DUMP_EXEC + pathImport;
+console.log("execution: " + execution);
   exec(execution, (err, stdout, stderr) => {
     if (err) { console.error(`exec error: ${err}`); return; }
     console.log("Succesfully imported");
@@ -23,67 +15,54 @@ const config = require('./config_AWS')
 };
 
 exports.migrateDump = () => {
-let execution = "cd C:\\Bitnami\\redmine-4.2.3-1\\apps\\redmine\\htdocs & C:\\Bitnami\\redmine-4.2.3-1\\ruby\\bin\\ruby.exe bin\\rake redmine:plugins:migrate RAILS_ENV=\"production\"  & C:\\Bitnami\\redmine-4.2.3-1\\ruby\\bin\\ruby.exe bin\\rake db:migrate RAILS_ENV=\"production\" ";
-console.log("Migrate Execution: " + execution);
-exec(execution, (err, stdout, stderr) => {
+  let execution = process.env.DUMP_MIGRATE_DB;
+  console.log("Migrate Execution: " + execution);
+  exec(execution, (err, stdout, stderr) => {
     if (err) { console.error(`exec error: ${err}`); return; }
-    console.log("Succesfully Migrate");
+    console.log("Succesfully Migrate DB");
   });
 };
 
 exports.dowloadDump = (req, res, next) => {
-  var moveToP = "";
   var conn = new Client();
-
-  var connSettings = {
-    port: config.port,
-    host: config.host,
-    username: config.username,
-    privateKey: config.privateKey
-  };
-
   var remotePathToList = process.env.DUMP_AWS_REMOTE_PATH || '/home/bitnami/dump/archivio';
-  var localPathToList = process.env.localPathToList || '/dumpAWS';
+  var localPathToList = process.env.DUMP_LOCAL_PATH || '/dumpAWS';
   conn.on('ready', function () {
     conn.sftp(function (err, sftp) {
       if (err) throw err;
       // you'll be able to use sftp here. Use sftp to execute tasks like .unlink or chmod etc
-      let ultimaModifica = 0;
       sftp.readdir(remotePathToList, function (err, list) {
         if (err) throw err;
         let filename = "";
         let temp = 0;
         list.forEach(it => {
           let mtime = it.attrs.mtime;
-          // temp = (mtime > temp) ? mtime : temp
           if (temp < mtime) {
             temp = mtime;
             filename = it.filename;
           }
         });
         console.dir("Ultimo last BackUp: " + filename);
-
         var moveFrom = remotePathToList + '/' + filename;
         console.dir("Remote Folder: " + moveFrom);
-
-        // var moveTo = localPathToList +'\\' + list[0].filename;
-        let moveTo = path.join(__dirname, localPathToList, filename);
-        moveToP = path.join(__dirname, localPathToList,remotePathToList, filename);
+        let moveTo =  path.join(localPathToList, filename);
         console.dir("Local Folder: " + moveTo);
-        console.log(ultimaModifica);
+      
         sftp.fastGet(moveFrom, moveTo, (downloadError) => {
           if (downloadError) console.log("err: " + downloadError);
           if (downloadError) throw downloadError;
           console.log("Succesfully uploaded " + moveTo);
           try {
-            let importFileName = moveToP.substring(0, moveToP.length - 3);
-            console.log("test: " + moveTo.substring(0, moveTo.length - 3) + "sql");
+          
+          //  console.log("EEE " + localPathToList  + path.basename(moveTo));
+          //  console.log("VVV" + path.dirname(moveTo));
+          //  console.log("XXX " + path.join(path.dirname(moveTo), path.basename(moveTo)));
+            extract(path.join(path.dirname(moveTo), path.basename(moveTo)), { dir: localPathToList });
 
-            module.exports.importDump(importFileName + "sql");
-            console.log("EEE " + path.basename(moveTo) + "+" + path.dirname(moveTo));
-            console.log("XXX " + path.join(path.dirname(moveTo), path.basename(moveTo)));
-            extract("db\\dumpAWS\\" + path.basename(moveTo), { dir: path.dirname(moveTo) });
             console.log('Extraction complete');
+            let importFileName = moveTo.substring(0, moveTo.length - 3) + "sql";
+            console.log("test: " + importFileName); 
+           module.exports.importDump(localPathToList ,  path.basename(importFileName));
 
           } catch (err) {
             // handle any errors
@@ -103,7 +82,7 @@ exports.dowloadDump = (req, res, next) => {
     console.error('SSH connection stream problem');
     throw err;
   });
-  conn.connect(connSettings);
-  return moveToP;
+  conn.connect(config_AWS.connSettings);
+  return localPathToList;
   
 };

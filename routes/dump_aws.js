@@ -8,6 +8,7 @@ exports.updataSource = (req, res, next) => {
     
     console.log("3 - Migration DUMP ");
     aws_db.migrateDump();
+    
     console.log("FINE");
     res.render('dump');
 };
