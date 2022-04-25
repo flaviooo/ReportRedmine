@@ -1,14 +1,14 @@
 $(document).ready(function () {
 
+    var nome ="";
     $("#getTipologie").on('change', function (event) {
         event.preventDefault();
         console.log(event);
-        var nome = $(this).children("option:selected").text();
+        nome = $(this).children("option:selected").text();
         //value =  $("#getTipologie option:selected");
-        //RGraph.reset($("cvs")); 
-        updateTipoligia(this.value, nome);
+        updateTipologica(this.value, nome);
+        $("#paramID").html("<i>" + nome + "</i>").show().fadeIn().delay(2000);
     });
-
 
     $('#idTabella').DataTable({
         "language": {
@@ -29,8 +29,19 @@ $(document).ready(function () {
         $("#checkAll").show();
         $("#deCheckAll").hide();
     });
-    let queryForm = "consultaRapid";
-    let queryGetTipologie = "getTipologie";
+  
+    function init(initQuery) {
+        console.log("INIT");
+        
+        //  updateTipoligia(this.value, nome); 
+    }
+
+});
+
+getTipologiche("getTipologiche");
+            
+function getTipologiche(queryGetTipologie){
+    
     $.ajax({
         type: 'get',
         url: queryGetTipologie,
@@ -45,9 +56,12 @@ $(document).ready(function () {
                     $option.val(value.id).text(value.name);
                     $select.append($option);
                 });
-                let optSelezionata = $("#getTipologie option:selected").text();
-                  $("#paramID").html("<i>"+optSelezionata+"</i>").show().fadeIn().delay(2000);
+               
+            }else{
+                console.log("No data");
             }
+            let optSelezionata = $("#getTipologie option:selected").text();
+            $("#paramID").html("<i>"+optSelezionata+"</i>").show().fadeIn().delay(2000);
         },
         error: function (jqXhr, textStatus, errorThrown) {
             console.log(errorThrown);
@@ -55,8 +69,10 @@ $(document).ready(function () {
 
     });
 
-    function updateTipoligia(idTipologia, nome) {
+}
+    function updateTipologica(idTipologia, nome) {
         console.log("idTipologia: " + idTipologia);
+        
         $.ajax({
             type: 'GET',
             // data: data,
@@ -75,6 +91,7 @@ $(document).ready(function () {
                  newDoc.close();
                 $("#paramID").html("<i>" + nome + "</i>").show().fadeIn().delay(2000);
                 //    console.log("Risposta" + jsonobj);
+                
             },
             error: function (jqXhr, textStatus, errorThrown) {
                 console.log(errorThrown);
@@ -95,14 +112,10 @@ $(document).ready(function () {
             success: function (data) {
                 var jsonstr = JSON.stringify(data);
                 var jsonobj = JSON.parse(jsonstr);
-
                 if (data != null) {
                     console.log("Risposta" + jsonobj);
-                    $("#flash").text("Invio effettuato: " + jsonobj.join(", "))
-                        .show()
-                        //  .parent()
-                        .fadeIn()
-                        .delay(2000)
+                    $("#flash").text("Invio effettuato: " + jsonobj.join(", ")).show() //  .parent()
+                        .fadeIn().delay(2000)
                         .fadeOut('slow', function () {
                             $("#flash").text('');
                         });
@@ -113,11 +126,3 @@ $(document).ready(function () {
             }
         });
     }
-    function init(initQuery) {
-        console.log("INIT");
-
-        //  updateTipoligia(this.value, nome); 
-
-    }
-
-});

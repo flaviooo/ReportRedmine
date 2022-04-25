@@ -1,22 +1,22 @@
 const path = require('path');
 require('dotenv').config({path:__dirname+'./../.env'});
 
-
-let logoImg = "csea_2.png";
-const Gmail_Config = {
+const Mail_Config = {
 //module.exports = {
     googleSetting: {
-        from: process.env.GMAIL_USER || '',
+        from: process.env.MAIL_GMAIL_USER || '',
         to: 'flaviooo@gmail.com',
         auth: {
-            user: process.env.GMAIL_USER || '',
-            pass: process.env.GMAIL_TOKEN ||''
+            user: process.env.MAIL_GMAIL_USER || '',
+            pass: process.env.MAIL_GMAIL_TOKEN ||''
         }
     },
     templateCSEA: {
         header: "<style> h2 {color: #cccccc; } </style>",
         footer: "<img style=\"width:80px;\" src=\"cid:logo_colori\"/></br>"+
-        "<p><b>CSEA - Area Sistemi Informativi</b></p>"
+        "<p><b>CSEA - Area Sistemi Informativi</b></p>",
+        logoImg : process.env.MAIL_LOGO,
+        path_template : process.env.MAIL_PATH_TEMPLATE
     }
 };
-module.exports = Gmail_Config ;
+module.exports = Mail_Config;

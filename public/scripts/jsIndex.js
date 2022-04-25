@@ -12,7 +12,7 @@ $(document).ready(function () {
 });
 
 function _init(url){
-    let params = "?meseS=10&meseE=12&anno=2021"
+    let params = "?meseS=01&meseE=12&anno=2022"
     $("#paramID").html("<i>"+params+"</i>")
     callDraw(url + params)
 
@@ -46,7 +46,7 @@ function paser(response) {
         label.push(element.name);
         progetti.push(element.sum_hours);
     });
-    drawReports(progetti, label)
+    drawReports(progetti, label);
 }
 function drawReports(progetti, label) {
        RGraph.reset($("cvs"));

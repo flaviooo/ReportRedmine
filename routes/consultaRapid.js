@@ -18,7 +18,7 @@ exports.view = (req, res, next) => {
     " WHERE (projects.status <> 9 AND EXISTS (SELECT 1 AS one FROM enabled_modules em WHERE em.project_id = projects.id AND em.name='issue_tracking')) " +
     " AND ((issues.status_id IN ('"+idTipologia+"')) )  and `issues`.`is_private` = 0  " +
     " ORDER BY au.`login` ASC, enumerations.position DESC, issues.updated_on DESC, issues.id DESC  ";
-    console.log("Richieste da chiudere "+ s);
+  //  console.log("Richieste da chiudere "+ s);
   local_db.query(s, (err, result, fields) => {
     if (err) {
       res.send('Query error: ' + err.sqlMessage);
@@ -60,7 +60,6 @@ exports.invioMailVerificaCollaudo = (req, res, next) => {
       let text = ""; 
       console.log("subject: " + subject); console.log("to: " + to); console.log("text: " + text);
       console.log(obj);
-
       try {
         //   await mail.send({ to, subject,text, img});
         mail.send({ to, subject, text, obj, img });

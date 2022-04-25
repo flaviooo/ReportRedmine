@@ -42,7 +42,7 @@ exports.dowloadDump = (req, res, next) => {
     privateKey: config.privateKey
   };
 
-  var remotePathToList = process.env.remotePathToList || '/home/bitnami/dump/archivio';
+  var remotePathToList = process.env.DUMP_AWS_REMOTE_PATH || '/home/bitnami/dump/archivio';
   var localPathToList = process.env.localPathToList || '/dumpAWS';
   conn.on('ready', function () {
     conn.sftp(function (err, sftp) {
