@@ -22,11 +22,18 @@ var app = express();
 app.set('port', process.env.PORT || 4000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
+console.log(app.locals);
 app.use(favicon(__dirname + '/public/images/favicon.png'));
 app.use(logger('dev'));
 app.use(methodOverride('_method'));
-app.use(require('stylus').middleware(__dirname + '/public'));
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(require('stylus').middleware(__dirname + '/public'));
+
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
 
 if (app.get('env') == 'development') {
 	app.locals.pretty = true;
@@ -51,16 +58,26 @@ app.get('/getTipologiche', util.getIssuesTipologie);
 
 app.get('/consultaRapid', consulaRapid.view);
 
-//express.json();
-//express.urlencoded({ extended: false });
-// configure the app to use bodyParser()
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-app.use(bodyParser.json());
-
 app.post("/invioMail", verifica.invioMailVerificaCollaudo);
 
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+
+  //pass error to the next matching route.
+  next(err);
+});
+
+// handle error, print stacktrace
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500);
+
+  res.render('error', {
+      message: err.message,
+      error: err
+  });
+});
 http.createServer(app).listen(app.get('port'), function(){
 
   console.log('Version: ' + process.version);
