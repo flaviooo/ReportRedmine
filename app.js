@@ -1,6 +1,7 @@
 var express = require('express')
   , routes = require('./routes')
   , time_entries = require('./routes/time_entries')  
+  , reportSAL = require('./routes/reportSAL')
   , ticketProrita = require('./routes/ticketProrita')
   , reportMese = require('./routes/reportMese')
   , verifica = require('./routes/verificaIssues')
@@ -52,6 +53,10 @@ app.get('/tipologiaRgraph', reportTipologia.getTipologiaRgraph);
 app.get('/getTipologiaProgetti', reportTipologia.getTipologiaProgetti);
 app.get('/dump', dump_aws.updataSource);
 app.get('/time_entries', time_entries.time_entries);
+
+app.get('/test', util.test);
+app.get('/reportSAL', reportSAL.getPageSal);
+app.get('/reportSALline', reportSAL.getData);
 
 app.get('/getVerificaIssues', verifica.getIssuesVerificaCollaudo);
 app.get('/getTipologiche', util.getIssuesTipologie);

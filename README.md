@@ -10,7 +10,7 @@ _ Assuming you have already installed Node...
 - Clone repository.
 - Open a command prompt, navigate to the folder, and enter: npm install
 - npm install nodemon --save-dev
-- Config .env variable
+- Config .env variable (es. Sample.env)
 
 ```
 

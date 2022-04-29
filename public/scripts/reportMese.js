@@ -14,8 +14,6 @@ $(document).ready(function () {
             type: "GET",
             url: url,
             crossDomain: true,
-           // dataType: 'text',
-           // dataCharset: 'xml',
             success: parser,
             error: function (responseData, textStatus, errorThrown) {
                 console.warn(responseData, textStatus, errorThrown);
@@ -26,7 +24,6 @@ $(document).ready(function () {
                 } 
        }).done( function( data ) { 
         //   console.log( 'data 1: '+ data )
-           
         });
      });
 

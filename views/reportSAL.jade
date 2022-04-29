@@ -1,0 +1,43 @@
+extends layout
+block content
+    script(src='/scripts/libraries/RGraph/RGraph.common.tooltips.js')
+    script(src='/scripts/jsSAL.js')
+    script(src='/scripts/drawGraph/drawSAL.js')
+    script(src='/scripts/utils/utilsDataConvert.js')
+    tooltips
+    div.container
+     .page-header
+       h4 #{title}
+       small &nbsp;Parametro di default : #{tempo}  
+       small(id="paramID")
+      .row 
+       .col-md-2
+        p(id="output") Fornitore 
+        .form-group
+         select(id="stype", name="type").form-control
+          option(value="?fornitore=25") Exprivia
+          option(value="?fornitore=12") Deda
+          option(value="?fornitore=13") ASI
+          option(value="?fornitore=13") Altro - non a time and material
+        .form-group
+         select(id="stype2", name="type").form-control
+          option(value="?fornitore=25") Exprivia
+          option(value="?fornitore=12") Deda
+          option(value="?fornitore=13") ASI
+          option(value="?fornitore=13") Altro - non a time and material
+       .col-md-10
+        p Per Selezionare il fornitore in TimeEntry: 
+         small "SELECT `custom_field_enumerations`.* FROM `custom_field_enumerations` WHERE `custom_field_enumerations`.`custom_field_id` = 4 AND `custom_field_enumerations`.`active` = TRUE ORDER BY `custom_field_enumerations`.`position` ASC"
+        p &nbsp;
+        canvas(id="cvs", width="1000", height="200" style="border-radius: 7px; box-shadow: 2px 2px 3px gray")
+        p &nbsp;
+        p &nbsp;
+        canvas(id="cvs_1" width="1000" height="200" style="border-radius: 7px; box-shadow: 2px 2px 3px gray")
+      
+     - each item in result
+      - each i in item
+       small &nbsp; #{i}
+      hr   
+       
+     
+             

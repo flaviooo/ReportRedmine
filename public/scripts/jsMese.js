@@ -107,7 +107,8 @@ function parser(data) {
             marginInner: .5,
             xaxisLabelsOffsety: 10,
             //xaxisLabels: listaMesiPresenti,
-            xaxisLabels: getMeseAarry(listaMesiPresenti),
+            //xaxisLabels: getMeseAarry(listaMesiPresenti),
+            xaxisLabels: new Date().getMeseNameArr(listaMesiPresenti),
             linewidth: 2,
             //colorsStroke: 'white',
             // colors: ['#aaf', 'rgba(96,128,96,0.5)', '#faa','#afa'],
@@ -190,13 +191,4 @@ function parser(data) {
 function getDataTracker(index, group, seq) {
     var labelkey = ["Problema tecnico (bug)", "Funzionalità aggiuntiva", "Richiesta di supporto", "Attività di progetto", "Licenze e scadenze", "Attività generica"]
     return labelkey[index] + " (indexes: index=" + index + ", group=" + group + ", seq=" + seq + ")";
-}
-function getMeseAarry(numMesi) {
-    let mesi = [];
-    var labelkey = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"]
-   
-    $.each(numMesi, (m,e) =>{
-        mesi.push(labelkey[e-1]);
-    })
-    return mesi
 }

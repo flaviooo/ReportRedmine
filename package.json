@@ -40,12 +40,6 @@
         "validator": "^13.7.0"
     },
     "devDependencies": {
-        "@babel/cli": "^7.16.8",
-        "@babel/core": "^7.16.12",
-        "@babel/node": "^7.16.8",
-        "@babel/plugin-proposal-class-properties": "^7.16.7",
-        "@babel/plugin-transform-runtime": "^7.16.10",
-        "@babel/preset-env": "^7.16.11",
         "eslint": "^8.7.0",
         "nodemon": "^2.0.15"
     },
@@ -60,21 +54,5 @@
         "devBabel2": "npx nodemon --exec ./node_modules/.bin/babel-node --presets env app",
         "buildBabel": "babel src -d dist",
         "prodBabel": "node ./dist/index.js"
-    },
-    "babel": {
-        "presets": [
-            "@babel/preset-env"
-        ],
-        "plugins": [
-            [
-                "@babel/plugin-proposal-class-properties"
-            ],
-            [
-                "@babel/plugin-transform-runtime",
-                {
-                    "regenerator": true
-                }
-            ]
-        ]
     }
 }
