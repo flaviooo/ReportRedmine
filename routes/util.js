@@ -17,4 +17,7 @@ local_db.query(s, (err, result, fields) => {
   }
 });
 
+},
+exports.test = (req, res, next) => {
+  res.render('test');
 }
