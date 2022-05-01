@@ -2,26 +2,39 @@ extends layout
 block content
     script(src='/scripts/verificaIssues.js')
     div.container
-     .page-header
-       h4 #{title}
-       small &nbsp;Parametro di default : #{tempo}  
-       small(id="paramID")
-     .row 
-      .col-md-2
-       p(id="output") output
-      .col-md-10
-        div.container
-          p Verifica richieste in "attesa di verifica"
-     ul(id="guide")
-     .row 
-      .col-md-2
-        p Comandi: 
-       .col-md-10
-          p 
-           a.btn.btn-primary(id='checkAll') Seleziona Tutti 
-           a.btn.btn-primary(id='deCheckAll') Deseleziona Tutti  
-      table(id="idTabella", class="table table-condensed table-hovered table-striped")
+    .page-header
+     h4 #{title}
+     p La funzionalità ha l'obiettivo di inviare notifiche agli utenti aggregando le informazioni
+     small &nbsp;Parametro di default : #{tempo}  
+     small(id="paramID")
+    .row 
+     .col-md-2
+      p(id="output") output
+     .col-md-10
+       div.container
+         p Invia le segnalazioni che l'utente CSEA deve verificare
+         p ToDo - Aggiungere "richieste altre informazioni"
+    .row 
+       .col-md-2
+         p Comandi: 
+        .col-md-10
+           p 
+            a.btn.btn-primary(id='checkAll') Seleziona Tutti 
+            a.btn.btn-primary(id='deCheckAll') Deseleziona Tutti  
+      
+    ul(id="guide")  
+    table(id="idTabella", class="table table-condensed table-hovered table-striped")
           thead 
+           tr
+            th id
+            th Autore    
+            th Assegnato
+            th GiorniTrascorsi
+            th Ult.Aggior
+            th Tipologia
+            th subject
+            th Mail
+          tfoot
            tr
             th id
             th Autore    

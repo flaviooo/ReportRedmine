@@ -2,26 +2,26 @@ extends layout
 block content
     script(src='/scripts/consultaRapid.js')
     div.container
-     .page-header
-       h4 #{title}
-       small &nbsp;Parametro di default : #{tempo}  
-       small(id="paramID")
-     .row 
-      .col-md-2
-       p(id="output") output
+    .page-header
+      h4 #{title}
+      small &nbsp;Parametro di default : #{tempo}  
+      small(id="paramID")
+    .row 
+     .col-md-2
+      p(id="output") output
+     .col-md-10
+       div.container
+         p Consulta
+    ul(id="guide")
+    .row 
+     .col-md-2
+       .form-group
+        select(id="getTipologie", name="type").form-control
       .col-md-10
-        div.container
-          p Consulta
-     ul(id="guide")
-     .row 
-      .col-md-2
-        .form-group
-         select(id="getTipologie", name="type").form-control
-       .col-md-10
-          p 
-           a.btn.btn-primary(id='checkAll') Seleziona Tutti 
-           a.btn.btn-primary(id='deCheckAll') Deseleziona Tutti  
-      table(id="idTabella", class="table table-condensed table-hovered table-striped")
+         p 
+          a.btn.btn-primary(id='checkAll') Seleziona Tutti 
+          a.btn.btn-primary(id='deCheckAll') Deseleziona Tutti  
+    table(id="idTabella", class="table table-condensed table-hovered table-striped")
           thead 
            tr
             th id

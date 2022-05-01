@@ -1,16 +1,16 @@
 extends layout
 block content
-    script(src='/scripts/libraries/RGraph/RGraph.common.tooltips.js')
-    script(src='/scripts/jsSAL.js')
-    script(src='/scripts/drawGraph/drawSAL.js')
-    script(src='/scripts/utils/utilsDataConvert.js')
-    tooltips
-    div.container
-     .page-header
-       h4 #{title}
-       small &nbsp;Parametro di default : #{tempo}  
-       small(id="paramID")
-      .row 
+  script(src='/scripts/libraries/RGraph/RGraph.common.tooltips.js')
+  script(src='/scripts/jsSAL.js')
+  script(src='/scripts/drawGraph/drawSAL.js')
+  script(src='/scripts/utils/utilsDataConvert.js')
+  div.container
+  .page-header
+    h4 #{title}
+    p  Tempo Consumato
+    small &nbsp;Parametro di default : #{tempo}  
+    small(id="paramID")
+  .row 
        .col-md-2
         p(id="output") Fornitore 
         .form-group

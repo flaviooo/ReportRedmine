@@ -3,8 +3,8 @@ block content
     script(src='/scripts/libraries/RGraph/RGraph.hbar.js')
     script(src='/scripts/reportTipologia.js')
     div.container
-        h1 Report redmine
-        p Hello World dd
+        h1 Report Redmine
+        p  Aperte e Chiuse
            ul(id="guide")
            table(id="Tipologie", class="table table-condensed table-hovered table-striped")
             tr
@@ -19,11 +19,8 @@ block content
               td #{item['Chiuse']}
               td #{item['Aperte']}
         
-        div(align="center")
-           a.btn.btn-primary( id="tipologiaRgraph" ) All Project
-           canvas(id="cvs", width="1000", height="400")
-           a.btn.btn-primary( id="getTipologiaProgetti" ) All Project Name
-           canvas(id="cvs2", width="1200", height="1600")
-           p &nbsp;
-           canvas(id="cvs3", width="1000", height="1000")
+    div(align="center")
+        canvas(id="cvs", width="1000", height="300")
+        p &nbsp;
+        canvas(id="cvs3", width="1000", height="1000")
        

@@ -120,13 +120,26 @@ function init(){
         $("#deCheckAll").hide();
 
     });
-  
-    $('#idTabella').DataTable({
 
+    var campoSearch = $('#idTabella thead tr').children('th').eq(1);
+        var title = $('#example thead th').eq( $(campoSearch).index() ).text();
+        $(campoSearch).html( '<input type="text" placeholder="Search '+title+'" />' );
+    
+   var table = $('#idTabella').DataTable({
+        
         "language": {
               "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Italian.json"
         },
-        "lengthMenu": [ 50, 100, 150, 200, 300 ]
+        "lengthMenu": [ 50, 100, 150, 200, 300 ],
     });
-  
+    table.columns(1).every( function () {
+        var that = this;
+ 
+        $( 'input', this.footer() ).on( 'keyup change', function () {
+            that
+                .search( this.value )
+                .draw();
+        } );
+    } );
+  //  table.columns(2).search(  ).draw(); 
 }

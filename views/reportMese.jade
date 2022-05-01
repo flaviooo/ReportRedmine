@@ -3,19 +3,20 @@ block content
     script(src='/scripts/libraries/RGraph/RGraph.common.tooltips.js')
     script(src='/scripts/jsMese.js')
     script(src='/scripts/utils/utilsDataConvert.js')
-    tooltips
+    
     div.container
-     .page-header
+    .page-header
        h4 #{title}
-       small &nbsp;Parametro di default : #{tempo}  
+       p  Tempo Consumato
+       small  &nbsp;Parametro di default : #{tempo}  
        small(id="paramID")
     .row 
       .col-md-2
        p(id="output") Somma ore per tipologia
        .form-group
         select(id="stype", name="type").form-control
-         option(value="?meseS=01&meseE=12&anno=2021") Anno 2021
          option(value="?meseS=01&meseE=12&anno=2022") Anno 2022
+         option(value="?meseS=01&meseE=12&anno=2021") Anno 2021
       .col-md-10
       canvas(id="cvs", width="1000", height="600")
      

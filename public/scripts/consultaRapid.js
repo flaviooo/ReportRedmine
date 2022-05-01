@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+    init();
     var nome ="";
     $("#getTipologie").on('change', function (event) {
         event.preventDefault();
@@ -8,13 +8,6 @@ $(document).ready(function () {
         //value =  $("#getTipologie option:selected");
         updateTipologica(this.value, nome);
         $("#paramID").html("<i>" + nome + "</i>").show().fadeIn().delay(2000);
-    });
-
-    $('#idTabella').DataTable({
-        "language": {
-            "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Italian.json"
-        },
-        "lengthMenu": [10, 50, 100, 150, 200, 300]
     });
 
 //    $("#flash").hide();
@@ -32,11 +25,33 @@ $(document).ready(function () {
   
     function init(initQuery) {
         console.log("INIT");
-        
+        initTable();
         //  updateTipoligia(this.value, nome); 
     }
 
 });
+///////
+function initTable(){    
+    var campoSearch = $('#idTabella thead tr').children('th').eq(1);
+    var title = $('#example thead th').eq( $(campoSearch).index() ).text();
+    $(campoSearch).html( '<input type="text" placeholder="Search '+title+'" />' );
+
+  var table =  $('#idTabella').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Italian.json"
+        },
+        "lengthMenu": [10, 50, 100, 150, 200, 300]
+    });
+    table.columns(1).every( function () {
+        var that = this;
+ 
+        $( 'input', this.footer() ).on( 'keyup change', function () {
+            that
+                .search( this.value )
+                .draw();
+        } );
+    } );
+}
 
 getTipologiche("getTipologiche");
             
