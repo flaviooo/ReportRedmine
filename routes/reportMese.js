@@ -37,8 +37,7 @@ exports.getMonthByParam = (req, res, next) => {
     let spent_end = "";
     let anno = "";
     console.log("res query "+ req.query)
-    let value = Object.keys(req.query).length === 0
-    console.log("value "+ !value)
+
     if(Object.keys(req.query).length === 0){
         spent_start = "2021-04-30";
         spent_end = "now()";

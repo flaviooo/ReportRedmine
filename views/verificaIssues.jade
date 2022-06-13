@@ -1,27 +1,36 @@
 extends layout
 block content
+    script(src='/scripts/libraries/RGraph/RGraph.hbar.js')
+    script.
+      var sorted = '#{tab}'
+
     script(src='/scripts/verificaIssues.js')
     div.container
     .page-header
      h4 #{title}
-     p La funzionalità ha l'obiettivo di inviare notifiche agli utenti aggregando le informazioni
+     p La funzionalità ha l obiettivo di inviare notifiche agli utenti aggregando le informazioni
      small &nbsp;Parametro di default : #{tempo}  
      small(id="paramID")
     .row 
      .col-md-2
       p(id="output") output
      .col-md-10
-       div.container
-         p Invia le segnalazioni che l'utente CSEA deve verificare
-         p ToDo - Aggiungere "richieste altre informazioni"
+      div.container
+       p Invia le segnalazioni che l'utente CSEA deve verificare
+       p ToDo - Aggiungere "richieste altre informazioni"
     .row 
-       .col-md-2
-         p Comandi: 
-        .col-md-10
-           p 
-            a.btn.btn-primary(id='checkAll') Seleziona Tutti 
-            a.btn.btn-primary(id='deCheckAll') Deseleziona Tutti  
-      
+     .col-md-2
+      p Comandi: 
+     .col-md-10
+      div.container
+       p 
+        a.btn.btn-primary(id='checkAll') Seleziona Tutti 
+        a.btn.btn-primary(id='deCheckAll') Deseleziona Tutti  
+        p
+         a.btn.btn-primary(id='viewGraphOccorenzeUser') Occorenze
+         a.btn.btn-primary(id='noviewGraphOccorenzeUser') Nascondi Occorenze
+    div(id="occ")
+     canvas(id="cvs2", width="1200", height="800" style="border-radius: 7px; box-shadow: 2px 2px 3px gray")
     ul(id="guide")  
     table(id="idTabella", class="table table-condensed table-hovered table-striped")
           thead 
@@ -59,12 +68,17 @@ block content
                span.fa.fa-check #{item['id']}
                input#remember(type='checkbox', name=item['Autore'])
         a.btn.btn-primary(id='send_by_button') Invia   
- 
         
-    div(id="flash", class="alert alert-success")
-       button(type="button" class="close" data-dismiss="alert")&times;
-       span
-
+    
+//    div(id="flash", class="alert alert-success")
+//     button(type="button" class="close" data-dismiss="alert") &times;
+//     span span
+    
+//    p Occorenze:
+//       - each val, index in tab
+//        small  #{val}
+    
+    
 mixin boxCheck(item)
     input#item.id(type='checkbox', name=item.id)
     span #{item['id']}

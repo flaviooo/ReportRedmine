@@ -1,15 +1,17 @@
 $(document).ready(function () {
+
+    //  console.log(sorted);
+    initTable();
+    gestioneOccorenze();
   
-    init();
     let queryForm = "invioMail";
     $("#getTipologie").on('change', function (event) {
         event.preventDefault();
         console.log(event);
         let queryForm = "getTimeProj" + this.value
         console.log(queryForm);
-        //RGraph.reset($("cvs"));
-        $("#paramID").html("<i>"+queryForm+"</i>")
-       // callDraw(queryForm)
+        $("#paramID").html("<i>" + queryForm + "</i>")
+        // callDraw(queryForm)
     });
 
     $('#send_by_button').click(function (e) {
@@ -27,7 +29,7 @@ $(document).ready(function () {
         /* una volta selezionati gli autori della segnalazione 
         ** raggruppo tutte le segnalazioni per autore 
         */
-        var dataStruct = [];      
+        var dataStruct = [];
         $(listaAutori).each((i, autore) => {
             var $selezionati = $('#idTabella tr').find(':checked').parents("tr");
             var issuesSelected = [];
@@ -38,10 +40,10 @@ $(document).ready(function () {
                 var autoreA = $(e).find('td:eq(1)').text();
                 obj.autore = autore;
                 if (autoreA == autore) {
-                    
+
                     var issues = $(e).find('td:eq(0)').text();
                     issuesSelected.push(issues);
-                    
+
                     var oggettoIssues = $(e).find('td:eq(6)').text();
                     oggettiIssues.push(oggettoIssues);
 
@@ -53,14 +55,11 @@ $(document).ready(function () {
             obj.issues = issuesSelected;
             obj.oggettiIssues = oggettiIssues;
             obj.giorniTrascorsi = giorniTrascorsi;
-           // console.log(obj);
-           // console.log(JSON.stringify(obj));
-           // console.log(JSON.parse(JSON.stringify(obj)));
             dataStruct.push(obj);
             // cambia autore
         });
 
-        console.log("data: "+ dataStruct);
+        console.log("data: " + dataStruct);
         data = JSON.parse(JSON.stringify(dataStruct));
         var postData = {
             dati: data
@@ -69,8 +68,8 @@ $(document).ready(function () {
     });
 
     function inviaMail(queryForm, data) {
-//        console.log(queryForm);
-       console.log(data);
+        //        console.log(queryForm);
+        console.log(data);
 
         $.ajax({
             type: 'POST',
@@ -86,15 +85,15 @@ $(document).ready(function () {
                 if (data != null) {
                     //  document.getElementById("modify").innerHTML = "JSON changed!\n" + jsonstr;
                     console.log("Risposta" + jsonobj);
-                    $("#flash").text("Invio effettuato: "+ jsonobj.join(", "))
-                     .show()
-                   //  .parent()
-                     .fadeIn()
-                     .delay(2000)
-                     .fadeOut('slow', function() { 
-                         $("#flash").text('');
-                     });
-                    };
+                    $("#flash").text("Invio effettuato: " + jsonobj.join(", "))
+                        .show()
+                        //  .parent()
+                        .fadeIn()
+                        .delay(2000)
+                        .fadeOut('slow', function () {
+                            $("#flash").text('');
+                        });
+                };
             },
             error: function (jqXhr, textStatus, errorThrown) {
                 console.log(errorThrown);
@@ -102,18 +101,37 @@ $(document).ready(function () {
         });
     }
 });
-function init(){
+function gestioneOccorenze(){
+    $('#occ').hide();
+    $('#noviewGraphOccorenzeUser').hide();
+
+    $('#viewGraphOccorenzeUser').click(function (e) {
+        $('#noviewGraphOccorenzeUser').show();
+        $('#viewGraphOccorenzeUser').hide();     
+        $('#occ').show();
+        viewGraphOccorenzeUtente(sorted);	    
+    });
+    $('#noviewGraphOccorenzeUser').click(function (e) {
+        $('#occ').hide();  
+        
+        $('#noviewGraphOccorenzeUser').hide();
+        $('#viewGraphOccorenzeUser').show();     	    
+    });
+
+}
+
+function initTable() {
     console.log("INIT");
-    $("#flash").hide();
+   // $("#flash").hide();
     $("#deCheckAll").hide();
-    $("#checkAll").click(function(){
+    $("#checkAll").click(function () {
 
         $("table tr :checkbox").prop("checked", true);
         $("#checkAll").hide();
         $("#deCheckAll").show();
 
     });
-    $("#deCheckAll").click(function(){
+    $("#deCheckAll").click(function () {
 
         $("table tr :checkbox").prop("checked", false);
         $("#checkAll").show();
@@ -122,24 +140,53 @@ function init(){
     });
 
     var campoSearch = $('#idTabella thead tr').children('th').eq(1);
-        var title = $('#example thead th').eq( $(campoSearch).index() ).text();
-        $(campoSearch).html( '<input type="text" placeholder="Search '+title+'" />' );
-    
-   var table = $('#idTabella').DataTable({
-        
+    var title = $('#example thead th').eq($(campoSearch).index()).text();
+    $(campoSearch).html('<input type="text" placeholder="Search ' + title + '" />');
+
+    var table = $('#idTabella').DataTable({
+
         "language": {
-              "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Italian.json"
+            "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Italian.json"
         },
-        "lengthMenu": [ 50, 100, 150, 200, 300 ],
+        "lengthMenu": [50, 100, 150, 200, 300],
     });
-    table.columns(1).every( function () {
+
+    table.columns(1).every(function () {
         var that = this;
- 
-        $( 'input', this.footer() ).on( 'keyup change', function () {
-            that
-                .search( this.value )
-                .draw();
-        } );
-    } );
-  //  table.columns(2).search(  ).draw(); 
+        $('input', this.footer()).on('keyup change', function () {
+            that.search(this.value).draw();
+        });
+    });
+    //  table.columns(2).search(  ).draw();
+
+}
+
+function viewGraphOccorenzeUtente(sorted) {
+ //   let sortParseData = JSON.parse(JSON.stringify(sorted));
+//    console.log(sortParseData);
+    let etichette = [];
+    let datiCVS = [];
+    var datiSplit = sorted.split(",");
+    $.each(datiSplit, function (indice, valore) {
+        // console.log(indice + ': ' + valore);
+        var nameSurmane = valore.split("@");
+        (indice % 2 == 1) ? datiCVS.push(valore) : etichette.push(nameSurmane[0]);
+    });
+
+    RGraph.reset($("cvs"));
+    new RGraph.HBar({
+        id: 'cvs2',
+        data: datiCVS,
+        adjustable: true,
+        options: {
+            colorsSequential: true,
+            // marginLeft: 100,
+            marginInner: 5,
+            textAccessiblePointerevents: true,
+            labelsAbove: true,
+            yaxisLabels: etichette,
+            textSize: 12,
+            xaxis: false
+        }
+    }).grow();
 }

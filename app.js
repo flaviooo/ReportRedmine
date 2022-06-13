@@ -61,12 +61,13 @@ app.get('/reportSALline', reportSAL.getData);
 app.get('/getVerificaIssues', verifica.getIssuesVerificaCollaudo);
 app.get('/getTipologiche', util.getIssuesTipologie);
 
-app.get('/consultaRapid', consulaRapid.view);
+app.get('/consultaRapid', consulaRapid.call);
+app.get('/consultaRapidJson', consulaRapid.view);
 
 app.post("/invioMail", verifica.invioMailVerificaCollaudo);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+/* app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
 
@@ -83,7 +84,7 @@ app.use(function(err, req, res, next) {
       error: err
   });
 });
-http.createServer(app).listen(app.get('port'), function(){
+ */http.createServer(app).listen(app.get('port'), function(){
 
   console.log('Version: ' + process.version);
   console.log(process.platform+" \nExpress server "+process.env.DB_HOST+" listening on port " + app.get('port'));

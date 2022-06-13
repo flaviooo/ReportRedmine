@@ -1,76 +1,63 @@
 extends layout
 block content
-    script(src='/scripts/libraries/RGraph/RGraph.pie.js')
-    script(src='/scripts/libraries/RGraph/RGraph.hbar.js')
-    script(src='/scripts/test.js')
-    .container 
-     .page-header
+    script(src='/scripts/consultaRapid.js')
+    - var j = 'var result = '+JSON.stringify(result)
+      script !{j}
+    script.
+     var result = !{JSON.stringify(result)};
+    div.container
+    .page-header
       h4 #{title} 
-       small &nbsp;Parametro di default : #{tempo}  
-       small(id="paramID")
-     .row 
-      .col-md-2
+      small &nbsp;Parametro di default : #{tempo}  
+      small(id="paramID")
+    .row 
+     .col-md-2
+      p(id="output") output
+     .col-md-10
+       div.container
+         p Consulta
+    ul(id="guide")
+    .row 
+     .col-md-2
        .form-group
-        select(id="stype", name="type").form-control
-         option(value="?meseS=04&meseE=06&anno=2021") Q2 2021
-         option(value="?meseS=07&meseE=09&anno=2021") Q3 2021
-         option(value="?meseS=10&meseE=12&anno=2021") Q4 2021
-         option(value="?meseS=01&meseE=03&anno=2022") Q1 2022
-         option(value="?meseS=04&meseE=06&anno=2022" selected) Q2 2022
+        select(id="getTipologie", name="type").form-control
       .col-md-10
-       canvas(id="cvs", width="1000", height="600")
-       p 
-     .row 
-      .col-md-1
-      .col-md-11
-       p &nbsp;
-       canvas(id="cvs2", width="1000", height="500", margin="20")            
-        hr 
-    p &nbsp;
-    p &nbsp;
-    p &nbsp;
-    p &nbsp;
-    .jumbotron(margin-top="180px")
-       h1 City Router Hub
-       p
-        | Do you wanna get connected to internet securely on the go for no money..?, 
-        meaning always connected, even if you don't have any device...?, 
-        and wondering if this is ever possible. Well you are not alone, you are on the right spot.
-       p
-        a.btn.btn-primary.btn-lg(href='about') Learn More
-    .col-lg-4
-      .panel.panel-default
-        .panel-heading
-          h4  Join us. 
-        .panel-body
-          | Today if you make a choice,  you are going to get ever connected to 
-          |internet all the time through out your life, even if you go to villages, 
-          | subways, paths, metros, bus, Gym, anywhere it follows. Guys isn't that exciting?,
-          | do you wanna know how, take a minute and click on above Learn More link.
-    .col-lg-4
-      .panel.panel-default
-        .panel-heading
-          h4 Always Connected.
-        .panel-body
-          | You are absolutely free of money, credit cards, debit cards, paypal, 
-          coupon cards what so ever. This service is amazingly free and free only for you, 
-          you register today. Do you know how many people out there paying lot of money 
-          but not getting exciting service, they always had problems with speed, connectivity.
-    .col-lg-4
-      .panel.panel-default
-        .panel-heading
-          h4 Who are we? 
-        .panel-body
-          | We are top 10 listed Unfortune 500 companies, always wanted to give people 
-          service with no money. There are similar services who can offer like free wifis, 
-          metro wifi. Well their reach is limited. We are unlimited. Anywhere you go, 
-          our services will follow. We are on different world and different platforms, 
-          nobody can match us.  
-      +alert("info")
+         p 
+          a.btn.btn-primary(id='checkAll') Seleziona Tutti 
+          a.btn.btn-primary(id='deCheckAll') Deseleziona Tutti
+            
+    table(id="idTabella", class="table table-condensed table-hovered table-striped")
+          thead 
+           tr
+            th id
+            th Autore    
+            th Assegnato
+            th GiorniTrascorsi
+            th Ult.Aggior
+            th Tipologia
+            th subject
+            th Mail
+          tbody   
+           - each item in result
+            tr
+             td #[a(href="https://gestioneprogetti.csea.it/issues/#{item['id']}") #{item['id']}]     
+             td #{item['Autore']}
+             td #{item['Assegnato']}
+             td #{item['GiorniTrascorsi']}
+             td #{item['updated_on']}
+             td #{item['name']}
+             td #{item['subject']}
+             td 
+              label.form-checkbox
+               span.fa.fa-check #{item['id']}
+               input#remember(type='checkbox', name=item['Autore'])
+        a.btn.btn-primary(id='send_by_button') Invia      
+    
+    div(id="flash", class="alert alert-success")
+     button(type="button" class="close" data-dismiss="alert") &times;
+     span
 
- //- Alert mixin
-mixin alert(style)
-    div( class=["alert", "alert-dismissable", "alert-" + style] )
-     Fonte DB
-        button.close( type="button", data-dismiss="alert" ) 
+mixin boxCheck(item)
+    input#item.id(type='checkbox', name=item.id)
+    span #{item['id']}
         block

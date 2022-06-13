@@ -22,9 +22,9 @@ exports.getIssuesVerificaCollaudo = (req, res, next) => {
     } else {
       //res.json(rows);
       rows = result;
-      // console.log(rows);
-      // console.log(rows.sum_hour)
-      res.render('verificaIssues', { title: "Verifica Richieste da chiudere", result: rows });
+     let sorted = parser4Occorrenze(rows);
+    console.log(sorted);
+      res.render('verificaIssues', { title: "Verifica Richieste da chiudere", result: rows , tab : sorted});
     }
   });
 },
@@ -66,3 +66,12 @@ exports.getIssuesVerificaCollaudo = (req, res, next) => {
     res.send(notificaInviati);
 
   };
+  function parser4Occorrenze(arr) {
+    var occurrences = arr.reduce(function(obj, item) {
+      obj[item['Autore']] = (obj[item['Autore']] || 0) + 1;
+       return obj;
+     }, {});
+
+  // console.log(occurrences);
+  return Object.entries(occurrences).sort((a,b) => b[1] - a[1]);
+ }

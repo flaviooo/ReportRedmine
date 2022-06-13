@@ -6,7 +6,7 @@ $(document).ready(function () {
         console.log(event);
         nome = $(this).children("option:selected").text();
         //value =  $("#getTipologie option:selected");
-        updateTipologica(this.value, nome);
+        updateDataTable(this.value, nome);
         $("#paramID").html("<i>" + nome + "</i>").show().fadeIn().delay(2000);
     });
 
@@ -22,14 +22,22 @@ $(document).ready(function () {
         $("#checkAll").show();
         $("#deCheckAll").hide();
     });
+    $("#sendJson").click(function () {
+        updateDataTable(22, "nome"); 
+
+
+    });
   
     function init(initQuery) {
         console.log("INIT");
-        initTable();
-        //  updateTipoligia(this.value, nome); 
-    }
+       // updateDataTable(22, "nome"); 
 
+        initTable();
+    }
+    getTipologiche("getTipologiche");
+  //  updateTipologica(idTipologia, nome);
 });
+
 ///////
 function initTable(){    
     var campoSearch = $('#idTabella thead tr').children('th').eq(1);
@@ -53,7 +61,7 @@ function initTable(){
     } );
 }
 
-getTipologiche("getTipologiche");
+
             
 function getTipologiche(queryGetTipologie){
     
@@ -85,27 +93,32 @@ function getTipologiche(queryGetTipologie){
     });
 
 }
-    function updateTipologica(idTipologia, nome) {
+    function updateDataTable(idTipologia, nome) {
         console.log("idTipologia: " + idTipologia);
-        
         $.ajax({
             type: 'GET',
             // data: data,
             // contentType: 'application/json',
-            url: "consultaRapid?idTipologia=" + idTipologia,
+            url: "consultaRapidJson?idTipologia=" + idTipologia,
             //on success, received data is used as 'data' function input
             success: function (data) {
-                //      var jsonstr = JSON.stringify(data);
-                //     var jsonobj = JSON.parse(jsonstr);
-                //   if (data != null) {
-                //     $("#paramID").html("<i>"+nome+"</i>");
-               // $('body').html(data);
-              // $('body').replaceWith(data);
-               var newDoc = document.open("text/html", "replace");
-                  newDoc.write(data);
-                 newDoc.close();
-                $("#paramID").html("<i>" + nome + "</i>").show().fadeIn().delay(2000);
-                //    console.log("Risposta" + jsonobj);
+                     var jsonstr = JSON.stringify(data);
+                    var jsonobj = JSON.parse(jsonstr);
+                 /*   
+                    $.each(jsonobj, function (key, value) {
+                        var $tr = $('<tr>');
+                        $tr.val(value.id).text(value.name);
+                        $('#idTabella tbody tr').append($tr);
+                    }); */
+                    //   if (data != null) {
+                    //     $("#paramID").html("<i>"+nome+"</i>");
+                       $('body').html(data);
+                    // $('body').replaceWith(data);
+                    //  var newDoc = document.open("text/html", "replace");
+                    //   newDoc.write(data);
+                    // newDoc.close();
+                    //    $("#paramID").html("<i>" + nome + "</i>").show().fadeIn().delay(2000);
+                  console.log("Risposta" + jsonobj);
                 
             },
             error: function (jqXhr, textStatus, errorThrown) {

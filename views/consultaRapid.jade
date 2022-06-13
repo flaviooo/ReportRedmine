@@ -8,7 +8,7 @@ block content
       small(id="paramID")
     .row 
      .col-md-2
-      p(id="output") output
+      p(id="output") ecco: #{result}
      .col-md-10
        div.container
          p Consulta
@@ -20,39 +20,46 @@ block content
       .col-md-10
          p 
           a.btn.btn-primary(id='checkAll') Seleziona Tutti 
-          a.btn.btn-primary(id='deCheckAll') Deseleziona Tutti  
-    table(id="idTabella", class="table table-condensed table-hovered table-striped")
-          thead 
-           tr
-            th id
-            th Autore    
-            th Assegnato
-            th GiorniTrascorsi
-            th Ult.Aggior
-            th Tipologia
-            th subject
-            th Mail
-          tbody   
-           - each item in result
-            tr
-             td #[a(href="https://gestioneprogetti.csea.it/issues/#{item['id']}") #{item['id']}]     
-             td #{item['Autore']}
-             td #{item['Assegnato']}
-             td #{item['GiorniTrascorsi']}
-             td #{item['updated_on']}
-             td #{item['name']}
-             td #{item['subject']}
-             td 
-              label.form-checkbox
-               span.fa.fa-check #{item['id']}
-               input#remember(type='checkbox', name=item['Autore'])
-        a.btn.btn-primary(id='send_by_button') Invia      
+          a.btn.btn-primary(id='deCheckAll') Deseleziona Tutti 
     
-    div(id="flash", class="alert alert-success")
-     button(type="button" class="close" data-dismiss="alert") &times;
-     span
+    table(id="idTabella", class="table table-condensed table-hovered table-striped")
+      thead 
+        tr
+          th id
+          th Autore    
+          th Assegnato
+          th GiorniTrascorsi
+          th Ult.Aggior
+          th Tipologia
+          th subject
+          th Mail
+      tbody   
+       - each item in results
+         tr
+           td #[a(href="https://gestioneprogetti.csea.it/issues/#{item['id']}") #{item['id']}]     
+           td #{item['Autore']}
+           td #{item['Assegnato']}
+           td #{item['GiorniTrascorsi']}
+           td #{item['updated_on']}
+           td #{item['name']}
+           td #{item['subject']}
+           td 
+             label.form-checkbox
+             span.fa.fa-check #{item['id']}
+             input#remember(type='checkbox', name=item['Autore'])
+    a.btn.btn-primary(id='send_by_button') Invia      
+      
+    a.btn.btn-primary(id='sendJson') bottoneJson  
 
-mixin boxCheck(item)
-    input#item.id(type='checkbox', name=item.id)
-    span #{item['id']}
-        block
+    div(id="flash", class="alert alert-success")
+      button(type="button" class="close" data-dismiss="alert") &times;
+      span s 
+
+    div(id="flash2", class="alert alert-success")
+      button(type="button" class="close" data-dismiss="alert") &times;
+      span f
+
+  mixin boxCheck(item)
+      input#item.id(type='checkbox', name=item.id)
+      span #{item['id']}
+          block

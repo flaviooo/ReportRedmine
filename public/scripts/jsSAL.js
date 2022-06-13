@@ -1,24 +1,26 @@
 $(document).ready(function () {
 
-    let url = "reportSALline";
-    $.ajax({
-        type: "GET",
-        url: url,
-        crossDomain: true,
-        success: function (dati) {
-            parser(dati);
-        },
-        error: function (responseData, textStatus, errorThrown) {
-            console.warn(responseData, textStatus, errorThrown);
-            alert('Failed - ' + textStatus);
-        },
-        done: function (data) {
-            //console.log( 'data 0: '+ data ); 
-        }
-    }).done(function (data) {
-        //   console.log( 'data 1: '+ data )
-    });
-
+    let url = "reportSALline?fornitore=25";
+    callDati(url);
+    function callDati(url) {
+        $.ajax({
+            type: "GET",
+            url: url,
+            crossDomain: true,
+            success: function (dati) {
+                parser(dati);
+            },
+            error: function (responseData, textStatus, errorThrown) {
+                console.warn(responseData, textStatus, errorThrown);
+                alert('Failed - ' + textStatus);
+            },
+            done: function (data) {
+                //console.log( 'data 0: '+ data ); 
+            }
+        }).done(function (data) {
+            //   console.log( 'data 1: '+ data )
+        });
+    }
     function parser(dati) {
         // dati 0:ore, 1:sommaore, 2:week, 3:mese, 4:anno
         var dataLogarit = [];
@@ -33,5 +35,14 @@ $(document).ready(function () {
         drawGraphLines(dati);
         
     }
-
+    $("#stype").on('change', function (event) {
+        event.preventDefault();
+        console.log(event);
+        let queryForm = "reportSALline" + this.value
+        //queryForm = "reportSAL" + this.value
+        console.log(queryForm);
+        //RGraph.reset($("cvs"));
+        $("#paramID").html("<i>"+queryForm+"</i>")
+        callDati(queryForm);
+    });
 });
