@@ -45,9 +45,9 @@
         "nodemon": "^2.0.15"
     },
     "scripts": {
-        "test": "mocha test/ConnectSQL",
-        "testMocha": "node_modules\\.bin\\nodemon --exec 'mocha test/ConnectSQL'",
-        "testMochaENVDev": "export NODE_ENV=development && nodemon --exec 'mocha test/ConnectSQL'",
+        "test": "mocha test/startStopServer.test -R nyan",
+        "testMocha": "node_modules\\.bin\\nodemon --exec 'mocha test/startStopServer.test -R nyan'",
+        "start2": "set NODE_ENV=development && node_modules\\.bin\\nodemon --inspect app",
         "nodemonRR": "node_modules\\.bin\\nodemon app.js",
         "debug": "node_modules\\.bin\\nodemon --inspect app",
         "start": "node app",

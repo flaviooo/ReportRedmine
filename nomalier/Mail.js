@@ -1,5 +1,6 @@
 const nodemailer = require('nodemailer');
-const Mail_Config = require('./../nomalier/configMail');
+//const Mail_Config = require('./../nomalier/configMail');
+const Mail_Config = require('./config/config');
 const path = require('path');
 const jadeCompiler = require('./../nomalier/lib/jadeCompiler');
 

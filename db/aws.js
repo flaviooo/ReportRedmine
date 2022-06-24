@@ -1,9 +1,9 @@
-const config_AWS = require('./config_AWS')
+const config_AWS = require('../config/config_AWS')
   , extract = require('extract-zip')
   , path = require('path')
   , Client = require('ssh2').Client
   , { exec } = require('child_process');
-  exports.importDump = (DIR , moveTo) => {
+ exports.importDump = (DIR , moveTo) => {
 
 let pathImport = path.normalize( DIR + process.env.DUMP_AWS_REMOTE_PATH + path.sep + moveTo);
 let  execution = process.env.DUMP_EXEC + pathImport;

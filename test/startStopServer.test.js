@@ -28,8 +28,8 @@ describe("Test Template", function () {
         chai.request(app)
             .get('/?meseS=01&meseE=12&anno=2022')
             .end((err, res) => {
-                console.log("Error: " + err)
-                console.log("Boby " + JSON.stringify(res))
+               // console.log("Error: " + err)
+               // console.log("Boby " + JSON.stringify(res))
               //  console.log("Boby " + JSON.stringify(res.body))
                 //res.should.have.status(200);
                 //          res.status.should.equal(200);

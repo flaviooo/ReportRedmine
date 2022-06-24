@@ -1,5 +1,5 @@
 const expect = require('chai').expect
-const config_db = require('./../db/config_db');
+const config_db = require('./../config/config');
 let mysql = require('mysql');
 
 describe("Connessione DB", () => {

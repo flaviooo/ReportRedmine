@@ -1,7 +1,6 @@
 const local_db = require('../db/db');
 
 exports.index = function(req, res){
-  console.log(res)
   res.render('index', { title: "Tempo Totale Impiegato/Progetti"})
   //res.render('index');
 };
@@ -13,7 +12,7 @@ exports.getTimeProj= (req, res) => {
   let spent_start =anno+"-"+meseS+"-01";
   var spent_end =anno+"-"+meseE+"-30";
 
-  console.log("mesi selezioniti: " + spent_end)
+  //console.log("mesi selezioniti: " + spent_end)
 
   let s =  " SELECT `projects`.`name` , ROUND(SUM(`time_entries`.`hours`),2) AS sum_hours"+
 " FROM `time_entries` "+
