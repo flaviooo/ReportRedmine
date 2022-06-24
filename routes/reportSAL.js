@@ -53,7 +53,7 @@ exports.getData = (req, res, next) => {
             if (err) {
                 res.send('Query error: ' + err.sqlMessage);
             } else { 
-                console.log(result);              
+            //    console.log(result);              
                 rows = parserSAL(result);
 //                 console.log(rows)
                  res.json(rows);

@@ -11,7 +11,7 @@ $(document).ready(function () {
                 parser(dati);
             },
             error: function (responseData, textStatus, errorThrown) {
-                console.warn(responseData, textStatus, errorThrown);
+               // console.warn(responseData, textStatus, errorThrown);
                 alert('Failed - ' + textStatus);
             },
             done: function (data) {
@@ -23,10 +23,10 @@ $(document).ready(function () {
     }
     function parser(dati) {
         // dati 0:ore, 1:sommaore, 2:week, 3:mese, 4:anno
-        var dataLogarit = [];
-        for (var i = 0; i < dati[0].length; ++i) {
-            dataLogarit[i] = RGraph.log(dati[0][i], 10); // This function is in RGraph.common.core.js
-        }      
+        // var dataLogarit = [];
+        // for (var i = 0; i < dati[0].length; ++i) {
+        //     dataLogarit[i] = RGraph.log(dati[0][i], 10); // This function is in RGraph.common.core.js
+        // }      
        // console.log(dataLogarit);
         //console.log('data 2' + dati[0])
         let infoTimeLabel = getInfoTimeLabel(dati);
@@ -41,7 +41,8 @@ $(document).ready(function () {
         let queryForm = "reportSALline" + this.value
         //queryForm = "reportSAL" + this.value
         console.log(queryForm);
-        //RGraph.reset($("cvs"));
+        RGraph.reset($("cvs"));
+        RGraph.reset($("cvs_1"));
         $("#paramID").html("<i>"+queryForm+"</i>")
         callDati(queryForm);
     });

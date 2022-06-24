@@ -21,7 +21,8 @@ class Mail {
             ]
             };
     }
-    send({to, subject, text, obj, img }) {
+         
+    send({to, subject, text, obj, img, path_template }) {
         if(nodemailer && this.options) {
           let self = this;
           self.options.to = to;
@@ -39,9 +40,10 @@ class Mail {
         const transporter = nodemailer.createTransport({ service: 'Gmail', auth: Mail_Config.googleSetting.auth});
          if(transporter !== null) {
             return new Promise((resolve, reject) => {
-            //  console.log(self.options);
-           jadeCompiler.compile(path.dirname(__dirname) + Mail_Config.templateCSEA.path_template, self.options, function(err, html){
-                if(err){
+           // console.log(path.dirname(__dirname) + Mail_Config.templateCSEA.path_template);
+           jadeCompiler.compile(path.dirname(__dirname) + path_template, self.options, function(err, html){
+
+            if(err){
                   throw new Error('Problem compiling template(double check relative path): ' + RELATIVE_TEMPLATE_PATH);
                 }
                 

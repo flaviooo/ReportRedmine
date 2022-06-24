@@ -17,6 +17,7 @@ function _init(url){
     callDraw(url + params)
 
 }
+
 function callDraw(url) {
 
     $.ajax({

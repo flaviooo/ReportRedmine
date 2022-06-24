@@ -2,7 +2,7 @@
     "name": "report-redmine",
     "version": "1.0.0",
     "description": "Report by SQLQuery",
-    "main": "app.js",
+    "main": "app",
     "homepage": "https://github.com/flaviooo/ReportRedmine",
     "author": "Flavio <flaviooo@gmail.com> (https://it.linkedin.com/in/flavio-tuosto-597b9488)",
     "license": "MIT",
@@ -15,16 +15,15 @@
     },
     "dependencies": {
         "body-parser": "^1.19.0",
-        "chai": "^4.3.4",
         "cors": "^2.8.5",
         "dotenv": "^14.3.2",
         "express": "^4.17.2",
         "extract-zip": "^2.0.1",
         "fs": "^0.0.1-security",
+        "g": "^2.0.1",
         "global": "^4.4.0",
         "jade": "^1.11.0",
         "method-override": "*",
-        "mocha": "^9.1.4",
         "mockery": "^2.1.0",
         "morgan": "^1.10.0",
         "mysql": "^2.18.1",
@@ -33,28 +32,30 @@
         "nodemailer": "^2.7.2",
         "save-dev": "^0.0.1-security",
         "scp": "^0.0.3",
-        "scp2": "^0.5.0",
         "serve-favicon": "^2.5.0",
         "ssh2": "^1.5.0",
         "stylus": "^0.56.0",
         "validator": "^13.7.0"
     },
     "devDependencies": {
+        "chai": "^3.5.0",
+        "chai-http": "^2.0.1",
         "eslint": "^8.7.0",
+        "mocha": "^2.4.5",
         "nodemon": "^2.0.15"
     },
     "scripts": {
         "test": "mocha test/ConnectSQL",
-        "testMocha": "nodemon --exec 'mocha test/ConnectSQL'",
+        "testMocha": "node_modules\\.bin\\nodemon --exec 'mocha test/ConnectSQL'",
         "testMochaENVDev": "export NODE_ENV=development && nodemon --exec 'mocha test/ConnectSQL'",
         "nodemonRR": "node_modules\\.bin\\nodemon app.js",
-        "debug": "nodemon --inspect app",
+        "debug": "node_modules\\.bin\\nodemon --inspect app",
         "start": "node app",
         "devBabel": "npx nodemon --exec \"babel-node\" app",
         "devBabel2": "npx nodemon --exec ./node_modules/.bin/babel-node --presets env app",
         "buildBabel": "babel src -d dist",
         "prodBabel": "node ./dist/index.js",
-        "forever" : "node_modules\\retry\\test\\integration\\forever start app.js",
-        "forever2" : "C:\\Users\\fl\\AppData\\Roaming\\npm\\forever start app.js"
+        "forever": "node_modules\\retry\\test\\integration\\forever start app.js",
+        "forever2": "C:\\Users\\fl\\AppData\\Roaming\\npm\\forever start app.js"
     }
 }

@@ -15,6 +15,8 @@ describe("Connessione DB", () => {
     });
 
     let myConn = connection.connect(done)
+    console.log(myConn)
     expect(myConn)
+
   })
 })

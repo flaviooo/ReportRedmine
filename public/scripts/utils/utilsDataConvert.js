@@ -1,5 +1,5 @@
 
-function caricaTipologica(){}
+//function caricaTipologica(){}
 
 Date.prototype.getDateOfISOWeek = function(w, y){
     var simple = new Date(y, 0, 1 + (w - 1) * 7);

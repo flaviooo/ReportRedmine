@@ -3,12 +3,12 @@ function getInfoLCmpl(infoTimeLabel) {
 //(nWeek, anno[i], dataWeekStart,dataWeekEnd
 let labelCmpl = [];
     $(infoTimeLabel).each((i, info) => {
-        console.log("---------------------------------");
+//        console.log("---------------------------------");
 //tempo inizliare settimana
             let start = formatTime(info[2]);
             let end = formatTime(info[3]);
 
-        console.log(start+" \n "+ end);
+      //  console.log(start+" \n "+ end);
        labelCmpl.push( start+" \n "+ end);
     });
     return labelCmpl;
@@ -33,13 +33,14 @@ function getInfoTimeLabel(dati) {
 function formatTime(info){
     const d = new Date(info);
     const date = d.getDate() // 23
-    const year = d.getFullYear() // 2019
+    let year = d.getFullYear().toString().substring(2); 
     const dayIndex = d.getDay();
-    let nameDay = d.getDayName(dayIndex);
+    //let nameDay = d.getDayName(dayIndex);
     const monthIndex = d.getMonth();
-    let meseName = d.getMeseName(monthIndex + 1);
+   // let meseName = d.getMeseName(monthIndex + 1);
     //const formatted = `${nameDay} ${date} ${meseName} ${year}`;
-    const formatted = `${date}-${monthIndex+1}-${year}`;
+   // const formatted = `${date}-${monthIndex+1}-${year}`;
+   const formatted = `${date}-${monthIndex+1}`;
     return formatted;
 }
 
@@ -48,7 +49,7 @@ function drawGraphLines(dati) {
         id: 'cvs_1',
         data: dati[0],
         options: {
-            yaxisScaleMax: 100,
+           // yaxisScaleMax: 100,
             backgroundGridVlines: true,
             backgroundGridBorder: false,
             backgroundGridColor: '#999',
@@ -60,7 +61,7 @@ function drawGraphLines(dati) {
             textColor: '#ccc',
             xaxisTickmarksCount: 0,
             xaxis: false,
-            yaxis: false,
+            //yaxis: false,
             shadowColor: 'black',
             shadowOffsetx: 0,
             shadowOffsety: 0,
@@ -153,7 +154,7 @@ function drawGraphLines(dati) {
             trendlineDashed: true,
 
         }
-    }).trace();
+    }).draw();
     xaxis = new RGraph.Drawing.XAxis({
         id: 'cvs',
         y: myLine.canvas.height - 10,

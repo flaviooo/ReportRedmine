@@ -59,6 +59,7 @@ app.get('/reportSAL', reportSAL.getPageSal);
 app.get('/reportSALline', reportSAL.getData);
 
 app.get('/getVerificaIssues', verifica.getIssuesVerificaCollaudo);
+app.get('/getRichiesteInfoIssues', verifica.getRichiesteInfoIssues);
 app.get('/getTipologiche', util.getIssuesTipologie);
 
 app.get('/consultaRapid', consulaRapid.call);
@@ -84,8 +85,61 @@ app.use(function(err, req, res, next) {
       error: err
   });
 });
- */http.createServer(app).listen(app.get('port'), function(){
+ */
+const server = http.createServer(app);
 
+const boot = ()=>{
+server.listen(app.get('port'), function(){
   console.log('Version: ' + process.version);
   console.log(process.platform+" \nExpress server "+process.env.DB_HOST+" listening on port " + app.get('port'));
 });
+};
+const shutdown = ()=>{
+  console.log("Shutting down");
+  server.close(() => {
+        console.log("HTTP server closed.");
+       // When server has stopped accepting 
+        // connections exit the process with
+        // exit status 0        
+        process.exit(0); 
+    });
+};
+
+process.on("SIGTERM", shutdown);
+
+
+if (require.main===module){
+  boot();// node app.js 
+}else{
+ console.log("Running as module, Port: "+ app.get('port'))
+ exports.boot = boot
+ exports.shutdown = shutdown
+ exports.port = app.get('port')
+ module.exports = app
+ /* exports.app = (app)=>{
+ var app = express();
+//app.use(cors());
+
+app.set('port', process.env.PORT || 4000);
+app.set('views', __dirname + '/views');
+app.set('view engine', 'jade');
+console.log(app.locals);
+app.use(favicon(__dirname + '/public/images/favicon.png'));
+app.use(logger('dev'));
+app.use(methodOverride('_method'));
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(require('stylus').middleware(__dirname + '/public'));
+
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
+
+if (app.get('env') == 'development') {
+	app.locals.pretty = true;
+}
+  
+   return app
+ } */
+}

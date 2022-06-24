@@ -25,6 +25,7 @@ _ Assuming you have already installed Node...
 - npm install ssh2 --savejs
 - npm install extract-zip --save
 - npm install nodemailer@2.7.2
+- npm i -g forever
 - npm i fs
 
 ## RedMine Report Dependencies DEV
