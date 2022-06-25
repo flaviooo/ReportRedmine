@@ -1,4 +1,3 @@
-//const config_db = require('./config_db');
 const config_db = require('../config/config');
 const mysql = require('mysql');
 

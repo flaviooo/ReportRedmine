@@ -3,18 +3,19 @@ const config_AWS = require('../config/config_AWS')
   , path = require('path')
   , Client = require('ssh2').Client
   , { exec } = require('child_process');
- exports.importDump = (DIR , moveTo) => {
 
-let pathImport = path.normalize( DIR + process.env.DUMP_AWS_REMOTE_PATH + path.sep + moveTo);
-let  execution = process.env.DUMP_EXEC + pathImport;
-console.log("execution: " + execution);
+exports.importDump = (DIR, moveTo) => {
+
+  let pathImport = path.normalize(DIR + process.env.DUMP_AWS_REMOTE_PATH + path.sep + moveTo);
+  let execution = process.env.DUMP_EXEC + pathImport;
+  console.log("execution: " + execution);
   exec(execution, (err, stdout, stderr) => {
     if (err) { console.error(`exec error: ${err}`); return; }
     console.log("Succesfully imported");
   });
 };
 
-exports.migrateDump = () => {
+exports.migrateDump = (next) => {
   let execution = process.env.DUMP_MIGRATE_DB;
   console.log("Migrate Execution: " + execution);
   exec(execution, (err, stdout, stderr) => {
@@ -25,11 +26,11 @@ exports.migrateDump = () => {
 exports.enabledPlugins = () => {
 
   // TODO 
-  let execution = " -- 84 = dataEntry "+
-  " INSERT INTO `enabled_modules` (`project_id`, `name`) VALUES (84, 'custom_reports') "+
-  " INSERT INTO `enabled_modules` (`project_id`, `name`) VALUES (84, 'agile') "+
-  " INSERT INTO `enabled_modules` (`project_id`, `name`) VALUES (84, 'Issuevm') "+
-  " INSERT INTO `enabled_modules` (`project_id`, `name`) VALUES (84, 'monitoring_controlling_project') ";
+  let execution = " -- 84 = dataEntry " +
+    " INSERT INTO `enabled_modules` (`project_id`, `name`) VALUES (84, 'custom_reports') " +
+    " INSERT INTO `enabled_modules` (`project_id`, `name`) VALUES (84, 'agile') " +
+    " INSERT INTO `enabled_modules` (`project_id`, `name`) VALUES (84, 'Issuevm') " +
+    " INSERT INTO `enabled_modules` (`project_id`, `name`) VALUES (84, 'monitoring_controlling_project') ";
   console.log(" Execution: " + execution);
   exec(execution, (err, stdout, stderr) => {
     if (err) { console.error(`exec error: ${err}`); return; }
@@ -59,24 +60,24 @@ exports.dowloadDump = (req, res, next) => {
         console.dir("Ultimo last BackUp: " + filename);
         var moveFrom = remotePathToList + '/' + filename;
         console.dir("Remote Folder: " + moveFrom);
-        let moveTo =  path.join(localPathToList, filename);
+        let moveTo = path.join(localPathToList, filename);
         console.dir("Local Folder: " + moveTo);
-      
+
         sftp.fastGet(moveFrom, moveTo, (downloadError) => {
           if (downloadError) console.log("err: " + downloadError);
           if (downloadError) throw downloadError;
           console.log("Succesfully uploaded " + moveTo);
           try {
-          
-          //  console.log("EEE " + localPathToList  + path.basename(moveTo));
-          //  console.log("VVV" + path.dirname(moveTo));
-          //  console.log("XXX " + path.join(path.dirname(moveTo), path.basename(moveTo)));
+
+            //  console.log("EEE " + localPathToList  + path.basename(moveTo));
+            //  console.log("VVV" + path.dirname(moveTo));
+            //  console.log("XXX " + path.join(path.dirname(moveTo), path.basename(moveTo)));
             extract(path.join(path.dirname(moveTo), path.basename(moveTo)), { dir: localPathToList });
 
             console.log('Extraction complete');
             let importFileName = moveTo.substring(0, moveTo.length - 3) + "sql";
-            console.log("test: " + importFileName); 
-           module.exports.importDump(localPathToList ,  path.basename(importFileName));
+            console.log("test: " + importFileName);
+            module.exports.importDump(localPathToList, path.basename(importFileName));
 
           } catch (err) {
             // handle any errors
@@ -98,5 +99,5 @@ exports.dowloadDump = (req, res, next) => {
   });
   conn.connect(config_AWS.connSettings);
   return localPathToList;
-  
+
 };
