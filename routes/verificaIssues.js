@@ -1,5 +1,6 @@
 const local_db = require('../db/db');
 const Mail = require('./../nomalier/Mail');
+
 exports.getRichiesteInfoIssues = (req, res, next) => {
   console.log("res query " + req.query);
   let s = " SELECT  `issues`.`id`,  au.`login` as Autore, ass.`login`as Assegnato,timestampdiff(DAY, `issues`.`updated_on`, now()) as GiorniTrascorsi, " +

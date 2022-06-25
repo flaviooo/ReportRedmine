@@ -1,13 +1,13 @@
 const nodemailer = require('nodemailer');
-//const Mail_Config = require('./../nomalier/configMail');
-const Mail_Config = require('./config/config');
+//const config_mail = require('./../nomalier/configMail');
+const config = require('./../config/config');
 const path = require('path');
 const jadeCompiler = require('./../nomalier/lib/jadeCompiler');
 
 class Mail {
     constructor() {
         this.options = { 
-            from: Mail_Config.googleSetting.from, 
+            from: config.config_mail.googleSetting.from, 
             to: '', 
             subject: '',  
             html: '',
@@ -15,8 +15,8 @@ class Mail {
             dato: {},
             attachments: [
                 {
-                    filename: Mail_Config.templateCSEA.img,
-                    path: path.dirname(__dirname, '/public/images/'+Mail_Config.templateCSEA.img),
+                    filename: config.config_mail.templateCSEA.img,
+                    path: path.dirname(__dirname, '/public/images/'+config.config_mail.templateCSEA.img),
                     cid: 'logo_colori'//my mistake was putting "cid:logo@cid" here! 
              }
             ]
@@ -28,7 +28,7 @@ class Mail {
           let self = this;
           self.options.to = to;
           self.options.subject = subject;
-         // self.options.html = gmail_config.templateCSEA.header+html+gmail_config.templateCSEA.footer;
+         // self.options.html = gconfig_mail.templateCSEA.header+html+gconfig_mail.templateCSEA.footer;
           self.options.text = text;
           self.options.dato = obj.options.dato;
           self.options.title = subject;
@@ -38,10 +38,10 @@ class Mail {
                 cid: 'imgBody_0'
             }];
 
-        const transporter = nodemailer.createTransport({ service: 'Gmail', auth: Mail_Config.googleSetting.auth});
+        const transporter = nodemailer.createTransport({ service: 'Gmail', auth: config.config_mail.googleSetting.auth});
          if(transporter !== null) {
             return new Promise((resolve, reject) => {
-           // console.log(path.dirname(__dirname) + Mail_Config.templateCSEA.path_template);
+           // console.log(path.dirname(__dirname) + config.config_mail.templateCSEA.path_template);
            jadeCompiler.compile(path.dirname(__dirname) + path_template, self.options, function(err, html){
 
             if(err){

@@ -6,6 +6,7 @@ exports.index = function(req, res){
 };
 
 exports.getTimeProj= (req, res) => {
+
   let meseS = req.query.meseS
   let meseE = req.query.meseE
   let anno = req.query.anno

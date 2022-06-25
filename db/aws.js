@@ -1,4 +1,4 @@
-const config_AWS = require('../config/config_AWS')
+const config = require('./../config/config')
   , extract = require('extract-zip')
   , path = require('path')
   , Client = require('ssh2').Client
@@ -97,7 +97,7 @@ exports.dowloadDump = (req, res, next) => {
     console.error('SSH connection stream problem');
     throw err;
   });
-  conn.connect(config_AWS.connSettings);
+  conn.connect(config.config_AWS.connSettings);
   return localPathToList;
 
 };
