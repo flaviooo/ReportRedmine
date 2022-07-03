@@ -2,7 +2,7 @@ var express = require('express')
   , routes = require('./routes')
   , time_entries = require('./routes/time_entries')
   , reportSAL = require('./routes/reportSAL')
-  , ticketProrita = require('./routes/ticketProrita')
+  , ticket = require('./routes/ticket')
   , reportMese = require('./routes/reportMese')
   , verifica = require('./routes/verificaIssues')
   , util = require('./routes/util')
@@ -42,8 +42,8 @@ if (app.get('env') == 'development') {
 app.get('/', routes.index);
 app.get('/getTimeProj', routes.getTimeProj);
 
-app.get('/ticketProrita', ticketProrita.getProve);
-app.get('/ticketProrita', ticketProrita.getDormienti);
+app.get('/ticketProrita', ticket.getProve);
+app.get('/ticketDormienti', ticket.getDormienti);
 
 app.get('/tipologiaMese', reportMese.getAllMonth);
 app.get('/tipologiaMeseParam', reportMese.getMonthByParam);
