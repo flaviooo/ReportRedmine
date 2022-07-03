@@ -43,6 +43,7 @@ app.get('/', routes.index);
 app.get('/getTimeProj', routes.getTimeProj);
 
 app.get('/ticketProrita', ticketProrita.getProve);
+app.get('/ticketProrita', ticketProrita.getDormienti);
 
 app.get('/tipologiaMese', reportMese.getAllMonth);
 app.get('/tipologiaMeseParam', reportMese.getMonthByParam);
