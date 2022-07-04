@@ -23,6 +23,7 @@
         "g": "^2.0.1",
         "global": "^4.4.0",
         "jade": "^1.11.0",
+        "mariadb": "^3.0.0",
         "method-override": "*",
         "mockery": "^2.1.0",
         "morgan": "^1.10.0",

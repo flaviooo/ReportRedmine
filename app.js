@@ -39,8 +39,8 @@ if (app.get('env') == 'development') {
   app.locals.pretty = true;
 }
 
-app.get('/', routes.index);
-app.get('/getTimeProj', routes.getTimeProj);
+app.get('/', routes.renderIndex);
+app.get('/getTimeProj', routes.getTimeProjJson);
 
 app.get('/ticketProrita', ticket.getProve);
 app.get('/ticketDormienti', ticket.getDormienti);

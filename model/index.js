@@ -13,7 +13,7 @@ module.exports = {
         throw err;
       }
     },
- */    async getTime(spent_start,spent_end) {
+ */    async getTime(spent_start, spent_end) {
       try {
         conn = await local_db.getConnection();
      let s =  " SELECT `projects`.`name` , ROUND(SUM(`time_entries`.`hours`),2) AS sum_hours"+
