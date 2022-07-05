@@ -42,7 +42,7 @@ if (app.get('env') == 'development') {
 app.get('/', routes.renderIndex);
 app.get('/getTimeProj', routes.getTimeProjJson);
 
-app.get('/ticketProrita', ticket.getProve);
+app.get('/ticketProrita', ticket.getPriorita);
 app.get('/ticketDormienti', ticket.getDormienti);
 
 app.get('/tipologiaMese', reportMese.getAllMonth);
