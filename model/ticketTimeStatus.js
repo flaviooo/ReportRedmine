@@ -11,18 +11,11 @@ module.exports = {
       "left join projects p on p.id = i.project_id " +
       "where 1=1  " +
       "group by tipologia  having Aperte >=0  ";
-    console.log("Query: " + s);
+    console.log("Query getTipologiaRgraph: " + s);
   
-      const result = await conn.query(s,(e)=>{
-        result.array.forEach(element => {
-          console.log(element);
-        });
+      const result = await conn.query(s);
 
-        if (e) {
-          console.log(' Cannot connect to the MySQL server. Error Code: ' + e.code);
-          return;
-        }
-      });
+   
       conn.end();
       rows = result;
       if (rows.length != 0) {
@@ -45,7 +38,7 @@ module.exports = {
     " left join projects p on p.id = i.project_id " +
     " where 1=1 " +
     " group by p.name  having Aperte >=0 ";
-  console.log("Query: " + s);
+  console.log("Query getTipologiaProgetti: " + s);
  
 
       const result = await conn.query(s);
