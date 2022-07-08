@@ -44,9 +44,10 @@ app.get('/getTimeProj', routes.getTimeProjJson);
 
 app.get('/ticketProrita', ticket.getPriorita);
 app.get('/ticketDormienti', ticket.getDormienti);
+app.get('/ticketDormienti2', ticket.getDormienti_V2);
 
 app.get('/tipologiaMese', reportMese.getAllMonth);
-app.get('/tipologiaMeseParam', reportMese.getMonthByParam);
+app.get('/tipologiaMeseParam', reportMese.getMonthByParamJson);
 
 app.get('/tipologia', reportTipologia.getTipologia);
 app.get('/tipologiaRgraph', reportTipologia.getTipologiaRgraph);
@@ -56,7 +57,7 @@ app.get('/time_entries', time_entries.time_entries);
 
 app.get('/test', util.test);
 app.get('/reportSAL', reportSAL.getPageSal);
-app.get('/reportSALline', reportSAL.getData);
+app.get('/reportSALline', reportSAL.getSalDataJson);
 
 app.get('/getVerificaIssues', verifica.getIssuesVerificaCollaudo);
 app.get('/getRichiesteInfoIssues', verifica.getRichiesteInfoIssues);

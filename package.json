@@ -49,7 +49,7 @@
         "test": "mocha test/startStopServer.test -R nyan",
         "testMocha": "node_modules\\.bin\\nodemon --exec 'mocha test/startStopServer.test -R nyan'",
         "start2": "set NODE_ENV=development && node_modules\\.bin\\nodemon --inspect app",
-        "nodemonRR": "node_modules\\.bin\\nodemon app.js",
+        "nodemon": "node_modules\\.bin\\nodemon app.js",
         "debug": "node_modules\\.bin\\nodemon --inspect app",
         "start": "node app",
         "forever": "node_modules\\retry\\test\\integration\\forever start app.js",
