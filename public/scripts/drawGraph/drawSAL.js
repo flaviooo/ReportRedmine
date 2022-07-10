@@ -44,7 +44,7 @@ function formatTime(info){
     return formatted;
 }
 
-function drawGraphLines(dati) {
+function drawGraphLines(dati, dataLogarit) {
     bar = new RGraph.Bar({
         id: 'cvs_1',
         data: dati[0],
@@ -80,7 +80,8 @@ function drawGraphLines(dati) {
     var dato= [dati[1],dati[0]];
     line2 = new RGraph.Line({
         id: 'cvs_1',
-        data: dato[0],
+//data: dato[0],
+        data: dataLogarit,
         options: {
             yaxisScaleMax: 600,
             xaxis: false,

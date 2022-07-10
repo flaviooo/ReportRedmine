@@ -44,7 +44,7 @@ $(document).ready(function () {
                     var issues = $(e).find('td:eq(0)').text();
                     issuesSelected.push(issues);
 
-                    var oggettoIssues = $(e).find('td:eq(6)').text();
+                    var oggettoIssues = $(e).find('td:eq(7)').text();
                     oggettiIssues.push(oggettoIssues);
 
                     var giornotrascorsi = $(e).find('td:eq(3)').text();
@@ -59,7 +59,7 @@ $(document).ready(function () {
             // cambia autore
         });
 
-        console.log("data: " + dataStruct);
+       // console.log("data: " + dataStruct);
         data = JSON.parse(JSON.stringify(dataStruct));
         var postData = {
             dati: data

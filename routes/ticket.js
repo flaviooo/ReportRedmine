@@ -26,20 +26,16 @@ exports.getDormienti = async (req, res, next) => {
   }
 }
 exports.getDormienti_V2 = async (req, res, next) => {
-  if (!validator.isNumeric(id) || id == 0) {
-    res.send('Parameter error: invalid parameters');
-  } else {
     var inactive2Ticket = await ticketService.getDormienti2();
  
-        rows = result;
+        rows = inactive2Ticket;
         // console.log(rows.id )
         //console.log(rows);
-        res.render('ticketProrita', {
-          title: "Segnalazioni Dormienti"
+        res.render('dormienti', {
+          title: "Segnalazioni Dormienti v2"
           , result: inactive2Ticket
         });
-  }
- };
+  };
 
   
 /* exports.report1 = function(req, res){
