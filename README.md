@@ -21,6 +21,10 @@ _ Assuming you have already installed Node...
 ## RedMine Report Dependencies
 
 - npm install express --save
+FIX
+ commit folder config;
+ gestione gitignore db dumpAWS
+
 - npm install dotenv --save 
 - npm install fs --save
 - npm install ssh2 --savejs
