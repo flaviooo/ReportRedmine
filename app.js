@@ -9,6 +9,7 @@ var express = require('express')
   , consulaRapid = require('./routes/consultaRapid')
   , reportTipologia = require('./routes/reportTipologia')
   , dump_aws = require('./routes/dump_aws')
+  , dump_CDLAN = require('./routes/dump_CDLAN')
   , http = require('http')
   , path = require('path')
   , bodyParser = require('body-parser')
@@ -44,6 +45,8 @@ app.get('/getTimeProj', routes.getTimeProjJson);
 
 app.get('/ticketProrita', ticket.getPriorita);
 app.get('/ticketDormienti', ticket.getDormienti);
+//app.post('/ticketDormienti', ticket.getDormienti);
+app.post('/ticketDormienti', ticket.postDormienti);
 app.get('/ticketDormienti2', ticket.getDormienti_V2);
 
 app.get('/tipologiaMese', reportMese.getAllMonth);
@@ -53,6 +56,7 @@ app.get('/tipologia', reportTipologia.getTipologia);
 app.get('/tipologiaRgraph', reportTipologia.getTipologiaRgraph);
 app.get('/getTipologiaProgetti', reportTipologia.getTipologiaProgetti);
 app.get('/dump', dump_aws.updataSource);
+app.get('/dump_CDLAN', dump_CDLAN.updataSource);
 app.get('/time_entries', time_entries.time_entries);
 
 app.get('/test', util.test);

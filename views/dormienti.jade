@@ -2,9 +2,9 @@ extends layout
 block content
     script(src='/scripts/libraries/RGraph/RGraph.hbar.js')
     script.
-      var sorted = '#{tab}'
+      var sorted = '#{result}'
 
-    script(src='/scripts/verificaIssues.js')
+    script(src='/scripts/dormientiIssues.js')
     div.container
     .page-header
      h4 #{title}
@@ -20,7 +20,13 @@ block content
        p Dormienti
     .row 
      .col-md-2
-      p Comandi: 
+      p Comandi:
+      .form-group
+        select(id="stype", name="type").form-control
+         option(value="?giorniFa=0") oggi
+         option(value="?giorniFa=5") 5 Giorni
+         option(value="?giorniFa=10") 10 Giorni
+         option(value="?giorniFa=15" selected) 15 Giorni 
      .col-md-10
       div.container
        p 
@@ -29,8 +35,7 @@ block content
         p
          a.btn.btn-primary(id='viewGraphOccorenzeUser') Occorenze
          a.btn.btn-primary(id='noviewGraphOccorenzeUser') Nascondi Occorenze
-    div(id="occ")
-     canvas(id="cvs2", width="1200", height="800" style="border-radius: 7px; box-shadow: 2px 2px 3px gray")
+   
     ul(id="guide")  
     table(id="idTabella", class="table table-condensed table-hovered table-striped")
           thead 
@@ -39,6 +44,9 @@ block content
             th Autore    
             th Assegnato
             th GiorniTrascorsi
+            th Nome Progetto
+            th Stato
+            th Priorita
             th Ult.Aggior
             th Tipologia
             th subject
@@ -49,6 +57,9 @@ block content
             th Autore    
             th Assegnato
             th GiorniTrascorsi
+            th Nome Progetto
+            th Stato
+            th Priorita
             th Ult.Aggior
             th Tipologia
             th subject
@@ -59,7 +70,10 @@ block content
              td #[a(href="https://gestioneprogetti.csea.it/issues/#{item['id']}") #{item['id']}]     
              td #{item['Autore']}
              td #{item['Assegnato']}
-             td #{item['GiorniTrascorsi']}
+             td #{item['GGDormienteDa']}
+             td #{item['nomeProgetto']}
+             td #{item['stato']}
+             td #{item['priority_id']}
              td #{item['updated_on']}
              td #{item['name']}
              td #{item['subject']}
@@ -67,8 +81,7 @@ block content
               label.form-checkbox
                span.fa.fa-check #{item['id']}
                input#remember(type='checkbox', name=item['Autore'])
-        a.btn.btn-primary(id='send_by_button') Invia   
-        
+        a.btn.btn-primary(id='send_by_button') Invia      
     
 //    div(id="flash", class="alert alert-success")
 //     button(type="button" class="close" data-dismiss="alert") &times;

@@ -1,6 +1,7 @@
 //const local_db = require('../db/db');
 const ticketTimeStatusService = require('../model/ticketTimeStatus')
 
+
 exports.getTipologiaRgraph = async (req, res) => {
   var timeTicket = await ticketTimeStatusService.getTipologiaRgraph();
    //toJson risolve il problema bigint

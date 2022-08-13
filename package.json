@@ -34,7 +34,8 @@
         "save-dev": "^0.0.1-security",
         "scp": "^0.0.3",
         "serve-favicon": "^2.5.0",
-        "ssh2": "^1.5.0",
+        "ssh2": "^1.11.0",
+        "ssh2-sftp-client": "^9.0.3",
         "stylus": "^0.56.0",
         "validator": "^13.7.0"
     },

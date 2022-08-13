@@ -7,8 +7,7 @@ exports.getAllMonth = async (req, res, next) => {
     console.log("res query "+ req.query)
   //  if (!validator.isNumeric(id) || id == 0) {
    //     res.send('Parameter error: invalid parameters');
-   // } else {
-    
+   // } else {    
     var timeTicket = await  ticketTimeService.getAllMonth();
                 //res.json(rows);
                 // console.log(rows.sum_hour)

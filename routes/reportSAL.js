@@ -22,12 +22,11 @@ exports.getSalDataJson = async (req, res, next) => {
 
 function parserSAL(results) {
     var array = [];
-
     var obOre = [];
     var obSum = [];
     var nWeek = [];
-    // var nMese = [];
     var nAnno = [];
+    // var nMese = [];
     var sum_hours = 0;
 
     results.forEach((element, index) => {

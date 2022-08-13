@@ -22,6 +22,7 @@ _ Assuming you have already installed Node...
 
 - npm install express --save
 - npm install dotenv --save 
+- npm install fs --save
 - npm install ssh2 --savejs
 - npm install extract-zip --save
 - npm install nodemailer@2.7.2
