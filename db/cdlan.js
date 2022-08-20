@@ -3,6 +3,9 @@ const config = require('../config/config')
   , path = require('path')
   , Client = require('ssh2').Client
   , { exec } = require('child_process');
+//  var conn = new Client(config.config_CDLAN.connSettings);
+ // conn.connect(config.config_CDLAN.connSettings);
+  
 
 exports.importDump = (pathImport) => {
 
@@ -41,23 +44,23 @@ exports.dowloadDump = (req, res, next) => {
   
   var remotePathToList = process.env.DUMP_CDLAN_REMOTE_PATH || '/home/admincsea/dump/archivio';
   var localPathToList = process.env.DUMP_LOCAL_PATH || '/dumpAWS';
-  let moveTo = "";
-  
   var conn = new Client();
-  conn.connect(config.config_CDLAN.connSettings);
-  
-  conn.on('close',function(){
-    console.log("close")
+  conn.on('end', function () {
+    console.log("Event End");
   });
-  
-  conn.on('end',function(){
-    console.log("end")
+
+  conn.on('close', function () {
+    console.log("Event close");
+  });
+  conn.on('close', function () {
+    console.log("Event close");
   });
   
   conn.on('ready', function () {
     conn.sftp(function (err, sftp) {
       if (err) throw err;
       // you'll be able to use sftp here. Use sftp to execute tasks like .unlink or chmod etc
+      console.log(remotePathToList)
       sftp.readdir(remotePathToList, function (err, list) {
         if (err) throw err;
         let filename = "";
@@ -72,60 +75,46 @@ exports.dowloadDump = (req, res, next) => {
         console.dir("Ultimo last BackUp: " + filename);
         var moveFrom = remotePathToList + '/' + filename;
         console.dir("Remote Folder: " + moveFrom);
-        moveTo = path.join(localPathToList, filename);
+        let moveTo = path.join(localPathToList, filename);
         console.dir("Local Folder: " + moveTo);
 
         sftp.fastGet(moveFrom, moveTo, (downloadError) => {
           if (downloadError) console.log("err: " + downloadError);
           if (downloadError) throw downloadError;
           console.log("Succesfully uploaded " + moveTo);
-        
+          try {
+
+            //  console.log("EEE " + localPathToList  + path.basename(moveTo));
+            //  console.log("VVV" + path.dirname(moveTo));
+            //  console.log("XXX " + path.join(path.dirname(moveTo), path.basename(moveTo)));
+          //  extract(path.join(path.dirname(moveTo), path.basename(moveTo)), { dir: localPathToList });
+
+            console.log('Extraction complete');
+            let importFileName = moveTo.substring(0, moveTo.length - 3) + "sql";
+            console.log("test: " + importFileName);
+            
+          let pathImport = path.normalize(localPathToList + process.env.DUMP_AWS_REMOTE_PATH + path.sep + path.basename(importFileName));
+         
+          //  module.exports.importDump(pathImport);
+
+          } catch (err) {
+            // handle any errors
+            if (err) throw err;
+          }
+        });
         // Do not forget to close the connection, otherwise you'll get troubles
         let count = 2;
         count--;
         if (count <= 0) {
           conn.end();
         }
-
       });
-      try {
-        console.log("EEa " +moveTo);
-        console.log("EEE " +path.dirname(moveTo)+path.sep+path.basename(moveTo));
-        console.log("VVV " +  path.basename(moveTo));
-        console.log("XXX " + localPathToList);
- //extract(path.join(path.dirname(moveTo), path.basename(moveTo)), { dir: localPathToList },  (err) => {
-        extract(path.join(path.dirname(moveTo), path.basename(moveTo)), { dir: localPathToList },  (err) => {
-                     if (!err) {
-                      console.log('Extraction ');
-
-                      console.log('Extraction complete');
-                      let importFileName = moveTo.substring(0, moveTo.length - 3) + "sql";
-                      console.log("test: " + importFileName);
-                      let pathImport = path.normalize(localPathToList + process.env.DUMP_CDLAN_REMOTE_PATH + path.sep + path.basename(importFileName));
-                      console.log("test: " + pathImport);
-                      
-                      module.exports.importDump(pathImport);
-          
-        } else {
-          console.error(err);
-        }
-        return moveTo;
-     });
-
-    } catch (err) {
-      // handle any errors
-      if (err) throw err;
-    }
-  });
-
-  
     });
   });
   conn.on('error', (err) => {
     console.error('SSH connection stream problem');
     throw err;
   });
-  
- 
-
+  conn.connect(config.config_CDLAN.connSettings);
+  return localPathToList;
 };
