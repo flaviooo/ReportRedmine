@@ -4,8 +4,8 @@ const config = require('../config/config')
   , Client = require('ssh2').Client
   , { exec } = require('child_process');
 //  var conn = new Client(config.config_CDLAN.connSettings);
- // conn.connect(config.config_CDLAN.connSettings);
-  
+// conn.connect(config.config_CDLAN.connSettings);
+
 
 exports.importDump = (pathImport) => {
 
@@ -41,21 +41,12 @@ exports.enabledPlugins = () => {
 };
 
 exports.dowloadDump = (req, res, next) => {
-  
+
   var remotePathToList = process.env.DUMP_CDLAN_REMOTE_PATH || '/home/admincsea/dump/archivio';
   var localPathToList = process.env.DUMP_LOCAL_PATH || '/dumpAWS';
-  var conn = new Client();
-  conn.on('end', function () {
-    console.log("Event End");
-  });
 
-  conn.on('close', function () {
-    console.log("Event close");
-  });
-  conn.on('close', function () {
-    console.log("Event close");
-  });
-  
+  var conn = new Client();
+
   conn.on('ready', function () {
     conn.sftp(function (err, sftp) {
       if (err) throw err;
@@ -70,6 +61,8 @@ exports.dowloadDump = (req, res, next) => {
           if (temp < mtime) {
             temp = mtime;
             filename = it.filename;
+            console.log(mtime + " - " + filename)
+
           }
         });
         console.dir("Ultimo last BackUp: " + filename);
@@ -84,24 +77,28 @@ exports.dowloadDump = (req, res, next) => {
           console.log("Succesfully uploaded " + moveTo);
           try {
 
-            //  console.log("EEE " + localPathToList  + path.basename(moveTo));
-            //  console.log("VVV" + path.dirname(moveTo));
-            //  console.log("XXX " + path.join(path.dirname(moveTo), path.basename(moveTo)));
-          //  extract(path.join(path.dirname(moveTo), path.basename(moveTo)), { dir: localPathToList });
-
+            console.log("EEE " + localPathToList + path.basename(moveTo));
+            console.log("VVV" + path.dirname(moveTo));
+            console.log("XXX " + path.join(path.dirname(moveTo), path.basename(moveTo)));
+           extract(path.join(path.dirname(moveTo), path.basename(moveTo)), { dir: localPathToList },()=>{
             console.log('Extraction complete');
+            
+           });
+
             let importFileName = moveTo.substring(0, moveTo.length - 3) + "sql";
             console.log("test: " + importFileName);
+
+            let pathImport = path.normalize(localPathToList + process.env.DUMP_CDLAN_REMOTE_PATH + path.sep + path.basename(importFileName));
             
-          let pathImport = path.normalize(localPathToList + process.env.DUMP_AWS_REMOTE_PATH + path.sep + path.basename(importFileName));
-         
-          //  module.exports.importDump(pathImport);
+            module.exports.importDump(pathImport);
 
           } catch (err) {
             // handle any errors
             if (err) throw err;
           }
         });
+       // extract(path.join(path.dirname(moveTo), path.basename(moveTo)), { dir: localPathToList })
+          
         // Do not forget to close the connection, otherwise you'll get troubles
         let count = 2;
         count--;
@@ -111,10 +108,20 @@ exports.dowloadDump = (req, res, next) => {
       });
     });
   });
+
+  conn.on('end', function () {
+    console.log("Event End");
+  });
   conn.on('error', (err) => {
     console.error('SSH connection stream problem');
     throw err;
   });
+
+  conn.on('close', function () {
+    console.log("Event close");
+  });
+
   conn.connect(config.config_CDLAN.connSettings);
+
   return localPathToList;
 };

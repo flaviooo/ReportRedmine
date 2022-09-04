@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    let url = "http://localhost/rgraphOfficial/timer_entries.xml";
+    let url = "https://gestioneprogetti.csea.it/time_entries.xml";
     $.ajax({
         type: "GET",
         url: url,

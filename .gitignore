@@ -86,3 +86,5 @@ mocha.cmd
 package-lock.json
 
 build/config.gypi
+
+etc/key/
