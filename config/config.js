@@ -6,18 +6,18 @@ const path = require('path');
 const fs = require('fs');
 
 const config_AWS = {
-/*     host: process.env.AWS_HOST || "127.0.0.1", 
+    host: process.env.AWS_HOST || "127.0.0.1", 
     port: process.env.AWS_PORT || 22,  //port used for scp 
     username: process.env.AWS_USERNAME || 'bitnami', //username to authenticate
-    privateKey: fs.readFileSync(process.env.AWS_PATH_PEM || './etc/key/AWS_KEY.pem'),
+    privateKey: fs.readFileSync(process.env.AWS_PATH_PEM || './etc/key/NO.PEM'),
     
     connSettings : {
       port: process.env.AWS_PORT || 22, 
       host:  process.env.AWS_HOST || "127.0.0.1",
       username: process.env.AWS_USERNAME || 'bitnami',
-      privateKey:  fs.readFileSync(process.env.AWS_PATH_PEM || './etc/key/AWS_KEY.pem')
+      privateKey:  fs.readFileSync(process.env.AWS_PATH_PEM || './etc/key/NO.PEM')
      }
- */
+
     };
 
 const config_CDLAN = {

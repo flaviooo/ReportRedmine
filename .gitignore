@@ -2,8 +2,8 @@
 node_modules/
 dumpAWS/*.zip
 # Ignore Configuration
-
 etc/key/*.*
+etc/key/
 db/*.txt
 
 
@@ -87,4 +87,4 @@ package-lock.json
 
 build/config.gypi
 
-etc/key/
+
