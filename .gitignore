@@ -2,7 +2,6 @@
 node_modules/
 dumpAWS/*.zip
 # Ignore Configuration
-etc/key/*.*
 etc/key/
 db/*.txt
 
