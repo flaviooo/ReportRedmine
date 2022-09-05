@@ -6,7 +6,6 @@ const config = require('../config/config')
 //  var conn = new Client(config.config_CDLAN.connSettings);
 // conn.connect(config.config_CDLAN.connSettings);
 
-
 exports.importDump = (pathImport) => {
 
   let execution = process.env.DUMP_EXEC + pathImport;

@@ -16,10 +16,24 @@ var express = require('express')
   , favicon = require('serve-favicon')
   , logger = require('morgan')
   , methodOverride = require('method-override');
+ const  cors = require('cors');
 
-//const  cors = require('cors');
 var app = express();
-//app.use(cors());
+
+const corsOpts = {
+  origin: '*',
+
+  methods: [
+    'GET',
+    'POST',
+  ],
+
+  allowedHeaders: [
+    'Content-Type',
+  ],
+};
+
+app.use(cors(corsOpts));
 
 app.set('port', process.env.PORT || 4000);
 app.set('views', __dirname + '/views');
@@ -39,7 +53,13 @@ app.use(bodyParser.json());
 if (app.get('env') == 'development') {
   app.locals.pretty = true;
 }
-
+app.all('*', (req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  next();
+});
 app.get('/', routes.renderIndex);
 app.get('/getTimeProj', routes.getTimeProjJson);
 

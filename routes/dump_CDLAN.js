@@ -8,7 +8,7 @@ exports.updataSource = (req, res, next) => {
     let dump_toImport = cdlan_db.dowloadDump(req, res, next);
 
     //cdlan_db.importDump(dump_toImport);
-    cdlan_db.migrateDump(next);
+    //cdlan_db.migrateDump(next);
     console.log("FINE");
     res.render('dump');
 };

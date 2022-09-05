@@ -1,5 +1,6 @@
 # Ignore the node_modules directory
 node_modules/
+db/dumpAWS/home/bitnami/dump/archivio/
 dumpAWS/*.zip
 # Ignore Configuration
 
@@ -8,9 +9,7 @@ etc/key/*ppk*
 etc/key/*flavio*
 etc/key/*rsa*
 
-
 db/*.txt
-
 
 # Ignore Logs
 logs
@@ -30,10 +29,8 @@ logs
 .vscode/
 *.sw*
 
-db/dumpAWS/home/bitnami/dump/archivio/
 
 *.zip
-
 *.csv
 *.dat
 *.iml
