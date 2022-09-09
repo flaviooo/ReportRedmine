@@ -15,14 +15,14 @@ div.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
      a(data-toggle='dropdown', href='#menu1').dropdown-toogle Consulta
       b.caret
      ul.dropdown-menu
+       //li
+       // a(href='consultaRapid') Consultazione Rapida
+       //li
+       // a(href="ticketProrita") Lista ticket con Priorità
        li
-        a(href='consultaRapid') Consultazione Rapida
-       li
-        a(href="ticketProrita") Lista ticket con Priorità
-       li
-        a(href="ticketDormienti?giorniFa=15") Lista ticket Dormienti
-       li
-        a(href="ticketDormienti2") Lista ticket Dormienti2  
+        a(href="ticketDormienti?giorniFa=0") Lista ticket Dormienti
+       //li
+       // a(href="ticketDormienti2") Lista ticket Dormienti2  
     li(id='menu2').dropdown
      a(data-toggle='dropdown', href='#menu2').dropdown-toogle Report
       b.caret
@@ -47,9 +47,9 @@ div.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
       b.caret
      ul.dropdown-menu
        li
-        a(href="dump") Dump
+        a(href="dump") Dump AWS
        li
-        a(href="dump_CDLAN") Dump CDLAN in progress
+        a(href="#") Dump CDLAN in progress dump_CDLAN
        li
         a(href="tipologiaRgraph") Json
        li

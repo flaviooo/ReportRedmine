@@ -43,9 +43,9 @@ module.exports = {
     " INNER JOIN `issue_statuses` ON `issue_statuses`.`id` = `issues`.`status_id` " +
     " LEFT OUTER JOIN enumerations ON enumerations.id = issues.priority_id  " +
     " WHERE (projects.status <> 9 AND EXISTS (SELECT 1 AS one FROM enabled_modules em WHERE em.project_id = projects.id AND em.name='issue_tracking')) " +
-    " AND ((issues.status_id IN ('11')) )  and `issues`.`is_private` = 0  " +
+    " AND ((issues.status_id IN ('29')) )  and `issues`.`is_private` = 0  " +
     " ORDER BY au.`login` ASC, enumerations.position DESC, issues.updated_on DESC, issues.id DESC  ";
-    //console.log("getIssuesVerificaCollaudo "+ s);
+    console.log("getIssuesVerificaCollaudo "+ s);
       const result = await conn.query(s);
       conn.end();
       rows = result;

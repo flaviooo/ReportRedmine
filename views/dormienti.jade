@@ -23,18 +23,18 @@ block content
       p Comandi:
       .form-group
         select(id="stype", name="type").form-control
-         option(value="?giorniFa=0") oggi
-         option(value="?giorniFa=5") 5 Giorni
+         option(value="?giorniFa=30") 30 Giorni
          option(value="?giorniFa=10") 10 Giorni
-         option(value="?giorniFa=15" selected) 15 Giorni 
+         option(value="?giorniFa=5") 5 Giorni
+         option(value="?giorniFa=0" selected) oggi 
      .col-md-10
       div.container
        p 
-        a.btn.btn-primary(id='checkAll') Seleziona Tutti 
-        a.btn.btn-primary(id='deCheckAll') Deseleziona Tutti  
+        //a.btn.btn-primary(id='checkAll') Seleziona Tutti 
+        //a.btn.btn-primary(id='deCheckAll') Deseleziona Tutti  
         p
-         a.btn.btn-primary(id='viewGraphOccorenzeUser') Occorenze
-         a.btn.btn-primary(id='noviewGraphOccorenzeUser') Nascondi Occorenze
+         //a.btn.btn-primary(id='viewGraphOccorenzeUser') Occorenze
+         //a.btn.btn-primary(id='noviewGraphOccorenzeUser') Nascondi Occorenze
    
     ul(id="guide")  
     table(id="idTabella", class="table table-condensed table-hovered table-striped")
