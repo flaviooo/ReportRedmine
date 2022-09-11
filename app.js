@@ -24,7 +24,7 @@ var app = express();
 app.set('port', process.env.PORT || 4000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
-app.use(cors({origin: '*'}));
+//app.use(cors({origin: '*'}));
 app.use(favicon(__dirname + '/public/images/favicon.png'));
 app.use(logger('dev'));
 app.use(methodOverride('_method'));
@@ -61,7 +61,7 @@ app.get('/dump_CDLAN', dump_CDLAN.updataSource);
 
 app.get('/time_entries', time_entries.time_entries);
 //app.get('/time_entriesJSON', time_entries.time_entriesJSON);
-app.get('/time_entriesXML', time_entriesAxios.time_entriesXML);
+app.get('/time_entriesXML', cors(), time_entriesAxios.time_entriesXML);
 
 app.get('/test', util.test);
 app.get('/reportSAL', reportSAL.getPageSal);
