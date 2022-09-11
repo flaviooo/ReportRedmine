@@ -10,7 +10,6 @@ async function getTimeEntriesXML(){
     }
   
     let res = await axios(connAPI)
-
  //   console.log(res.request._header);
     console.log(res.data);
 }
