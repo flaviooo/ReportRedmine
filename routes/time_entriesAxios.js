@@ -1,5 +1,7 @@
 const axios = require('axios');
 const xml2js = require('xml2js');
+const fs = require('fs');
+const path = require('path')
 
 //const { config } = require('dotenv');
 const config_ENV = require('./../config/config');
@@ -9,7 +11,7 @@ exports.time_entries = function (req, res) {
   res.render('time_entries');
 };
 
-exports.time_entriesXML2 = function (req, res) {
+exports.time_entriesXML = function (req, res) {
 
   const getTimeEntriesXML = async () => {
     try {
@@ -59,7 +61,7 @@ exports.time_entriesXML2 = function (req, res) {
         i += 100;
         listURLs.push(config_ENV.config_app.timeEntries + '/' + dataQuery);
       }
-      doRequests(listURLs)
+      // doRequests(listURLs)
 
     }
     // res.send(timeEntries.data)
@@ -77,12 +79,14 @@ exports.time_entriesXML2 = function (req, res) {
 
     const promises = urls.map(fetchUrl);
     let responses = await Promise.all(promises);
+    let i = 0;
     responses.forEach(resp => {
       let msg = `${resp.config.url} -> ${resp.headers.server}: ${resp.status}`;
            console.log(msg);
-           const fs = require('fs');
-
-          fs.appendFileSync('message.txt', resp.data);
+         let dataXML = resp.data;
+         const dataString = dataXML.join('\r\n')
+         const filePath = path.join(__dirname, '../test.XML')
+        fs.appendFileSync(filePath, dataString);
     });
   }
 

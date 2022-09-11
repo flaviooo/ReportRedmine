@@ -1,21 +1,18 @@
 $(document).ready(function () {
-    let url = "http://192.168.40.30:3000/time_entries.xml"
-    url = "https://gestioneprogetti.csea.it/time_entries.xml";
-    url = "http://localhost:3000/time_entries.xml"
-    url = "http://192.168.40.30:3000/time_entries.xml"
     
-    url = "http://localhost:4000/time_entriesXML"
+    let urlXML = "http://localhost:4000/time_entriesXML"
     
     $.ajax({
         type: "GET",
-        url: url,
-        dataType: "xml",
+        url: urlXML,
+        dataType: "text",
         dataCharset: 'xml',
-        crossDomain: true,
+        //crossDomain: true,
         success: function (response) {
-            var xmlDoc = $.parseXML(response);
-           var $xml0 = $(xmlDoc);
-           console.log(response);
+           //console.log(response);
+        var xmlDoc = $.parseXML(response);
+        var $xml0 = $(xmlDoc);
+           
            // jsonParser(response)
             xmlParser($xml0)
             //calcola($xml0)
@@ -30,38 +27,11 @@ $(document).ready(function () {
         },
         done: function (data) { console.log('data ' + data); }
     }).done(function (data) {
-        //   console.log( 'data '+ data )
+      //     console.log( 'data '+ data )
     });
 
 });
 
-function jsonParser(response){
-   // console.log(response);
-   var $time_entry = JSON.parse(JSON.stringify(response));
-    console.log($time_entry);
-  //  $time_entry.each(function () {
-    $.each($time_entry, function(index, element) {
-        var $ele = JSON.parse(JSON.stringify(element));
-
-        $.each($ele, function(i, e) {
-            console.log($(this).find('id').text())
-        })
-            /* 
-        var id = $(this).find('id').text();
-        var hours = $(this).find('hours').text();
-        var issue = $(this).find('issue').attr('id');
-        var project = $(this).find('project').attr('name');
-        var user = $(this).find('user').attr('name');
-        var tr = $("<tr/>");
-        tr.append("<td>" + id + "</td>");
-        tr.append("<td>" + hours + "</td>");
-        tr.append("<td>" + issue + "</td>");
-        tr.append("<td>" + project + "</td>");
-        tr.append("<td>" + user + "</td>");
-
-        $("#BuyOrders").append(tr); */
-}
-)};                     
 
 function xmlParser(xml) {
     const LIMIT = 25;
@@ -94,13 +64,19 @@ function xmlParser(xml) {
         var issue = $(this).find('issue').attr('id');
         var project = $(this).find('project').attr('name');
         var user = $(this).find('user').attr('name');
+        var spent_on = $(this).find('spent_on').text();
+        var comments = $(this).find('comments').text();
+        
+        
+        
         var tr = $("<tr/>");
         tr.append("<td>" + id + "</td>");
         tr.append("<td>" + hours + "</td>");
         tr.append("<td>" + issue + "</td>");
         tr.append("<td>" + project + "</td>");
         tr.append("<td>" + user + "</td>");
-
+        tr.append("<td>" + spent_on + "</td>");
+        tr.append("<td>" + comments + "</td>");
         $("#BuyOrders").append(tr);
 
         //$("ul").append('<li>' +id+ ' - ' +hours+ '</li>');
@@ -216,11 +192,11 @@ function calcola($xml) {
     var hoursSum = 0
     $time_entry2.each(function () {
 
-        var id = $(this).find('id').text();
+   /*      var id = $(this).find('id').text();
         var $hours = $(this).find('hours').text();
         var issue = $(this).find('issue').attr('id');
         var project = $(this).find('project').attr('name');
-        var user = $(this).find('user').attr('name');
+        var user = $(this).find('user').attr('name'); */
         hoursSum = Number($hours) + Number(hoursSum)
 
         //$("ul").append('<li>' +id+ ' - ' +hours+ '</li>');
@@ -269,3 +245,30 @@ function parser1($xml) {
     });
     //console.log(dataJoson)
 }
+function jsonParser(response){
+   // console.log(response);
+   var $time_entry = JSON.parse(JSON.stringify(response));
+    console.log($time_entry);
+  //  $time_entry.each(function () {
+    $.each($time_entry, function(index, element) {
+        var $ele = JSON.parse(JSON.stringify(element));
+
+        $.each($ele, function(i, e) {
+            console.log($(this).find('id').text())
+        })
+            /* 
+        var id = $(this).find('id').text();
+        var hours = $(this).find('hours').text();
+        var issue = $(this).find('issue').attr('id');
+        var project = $(this).find('project').attr('name');
+        var user = $(this).find('user').attr('name');
+        var tr = $("<tr/>");
+        tr.append("<td>" + id + "</td>");
+        tr.append("<td>" + hours + "</td>");
+        tr.append("<td>" + issue + "</td>");
+        tr.append("<td>" + project + "</td>");
+        tr.append("<td>" + user + "</td>");
+
+        $("#BuyOrders").append(tr); */
+}
+)};                     

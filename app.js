@@ -1,6 +1,7 @@
 var express = require('express')
   , routes = require('./routes')
   , time_entries = require('./routes/time_entries')
+  , time_entriesAxios = require('./routes/time_entriesAxios')
   , reportSAL = require('./routes/reportSAL')
   , ticket = require('./routes/ticket')
   , reportMese = require('./routes/reportMese')
@@ -16,24 +17,9 @@ var express = require('express')
   , favicon = require('serve-favicon')
   , logger = require('morgan')
   , methodOverride = require('method-override');
- const  cors = require('cors');
 
 var app = express();
 
-const corsOpts = {
-  origin: '*',
-
-  methods: [
-    'GET',
-    'POST',
-  ],
-
-  allowedHeaders: [
-    'Content-Type',
-  ],
-};
-
-app.use(cors(corsOpts));
 
 app.set('port', process.env.PORT || 4000);
 app.set('views', __dirname + '/views');
@@ -53,13 +39,7 @@ app.use(bodyParser.json());
 if (app.get('env') == 'development') {
   app.locals.pretty = true;
 }
-app.all('*', (req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  next();
-});
+
 app.get('/', routes.renderIndex);
 app.get('/getTimeProj', routes.getTimeProjJson);
 
@@ -77,7 +57,10 @@ app.get('/tipologiaRgraph', reportTipologia.getTipologiaRgraph);
 app.get('/getTipologiaProgetti', reportTipologia.getTipologiaProgetti);
 app.get('/dump', dump_aws.updataSource);
 app.get('/dump_CDLAN', dump_CDLAN.updataSource);
+
 app.get('/time_entries', time_entries.time_entries);
+//app.get('/time_entriesJSON', time_entries.time_entriesJSON);
+app.get('/time_entriesXML', time_entriesAxios.time_entriesXML);
 
 app.get('/test', util.test);
 app.get('/reportSAL', reportSAL.getPageSal);
@@ -93,7 +76,7 @@ app.get('/consultaRapidJson', consulaRapid.view);
 app.post("/invioMail", verifica.invioMailVerificaCollaudo);
 
 // catch 404 and forward to error handler
-/* app.use(function(req, res, next) {
+ app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
 
@@ -110,7 +93,7 @@ app.use(function(err, req, res, next) {
       error: err
   });
 });
- */
+
 
 if (require.main === module) {
   const server = http.createServer(app);

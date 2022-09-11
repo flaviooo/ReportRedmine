@@ -5,6 +5,13 @@ console.log(process.env.DB_HOST);
 const path = require('path');
 const fs = require('fs');
 
+const config_app = {
+    host: process.env.HOST || "127.0.0.1",
+    port: process.env.PORT || 4000,
+    timeEntries: process.env.TIME_ENTRIES || 000    
+    
+};
+
 const config_AWS = {
     host: process.env.AWS_HOST || "127.0.0.1",
     port: process.env.AWS_PORT || 22,  //port used for scp 
@@ -21,6 +28,7 @@ const config_AWS = {
 };
 
 const config_CDLAN = {
+    
     port: process.env.CDLAN_PORT || 22,  //port used for scp 
 
     connSettings: {
@@ -69,6 +77,7 @@ const config_mail = {
 };
 
 module.exports = {
+    config_app: config_app,
     config_CDLAN: config_CDLAN,
     config_AWS: config_AWS,
     config_db: config_db,
