@@ -1,19 +1,23 @@
 const expect = require('chai').expect
 , Client = require('ssh2').Client
+, path = require('path')
 //const config = require('./../config/config');
-//const config = require('dotenv').config({ path: './../.env' });
+const config = require('dotenv').config({ path: './../.env' });
 const fs = require('fs');
+//console.log("../"+process.env.CDLAN_PATH_PEM)
 
 let config_CDLAN = {
+ 
   connSettings : {
     port: process.env.CDLAN_PORT || 22, 
-    host:  process.env.CDLAN_HOST || "95.157.76.170",
+    host:  process.env.CDLAN_HOST || "00.157.76.170",
     username: process.env.CDLAN_USERNAME || 'admincsea',
     interactiveAuth: true,
     tryKeyboard: true,
-    password : process.env.CDLAN_PASS || 'Cse4R3dmine2022!',
-    privateKey:  fs.readFileSync(process.env.CDLAN_PATH_PEM || '../etc/key/id_rsa.pem')
+    password : process.env.CDLAN_PASS || 'password',
+    privateKey:  fs.readFileSync("../"+process.env.CDLAN_PATH_PEM || '../etc/key/NO_.PEM')
   }
+
 };
     var conn = new Client();
     var remotePathToList = process.env.DUMP_CDLAN_REMOTE_PATH || '/home/admincsea/dump/archivio';
@@ -57,13 +61,13 @@ let config_CDLAN = {
               //  console.log("EEE " + localPathToList  + path.basename(moveTo));
               //  console.log("VVV" + path.dirname(moveTo));
               //  console.log("XXX " + path.join(path.dirname(moveTo), path.basename(moveTo)));
-              extract(path.join(path.dirname(moveTo), path.basename(moveTo)), { dir: localPathToList });
+             // extract(path.join(path.dirname(moveTo), path.basename(moveTo)), { dir: localPathToList });
   
               console.log('Extraction complete');
               let importFileName = moveTo.substring(0, moveTo.length - 3) + "sql";
               console.log("test: " + importFileName);
-              let pathImport = path.normalize(DIR + process.env.DUMP_AWS_REMOTE_PATH + path.sep + path.basename(moveTo));
-              module.exports.importDump(localPathToList, path.basename(pathImport));
+              let pathImport = path.normalize(process.env.DUMP_CDLAN_REMOTE_PATH + path.sep + path.basename(moveTo));
+             // module.exports.importDump(localPathToList, path.basename(pathImport));
   
             } catch (err) {
               // handle any errors
@@ -86,5 +90,7 @@ let config_CDLAN = {
     conn.connect(config_CDLAN.connSettings);
       
   //  let myConn = connection.connect(done)
-    console.log(conn)
+  //  console.log(conn)
+  console.log("END: " );
+              
     expect(conn)
