@@ -9,17 +9,18 @@ let sftp = new Client();
 sftp.connect({
   host: '95.157.76.170',
   port: '22',
-  username: 'admincsea',
-  password: 'Cse4R3dmine2022!'
+  username: 'flaviotuosto',
+  password: 'Cse4R3dmine2022*',
+  privateKey:  fs.readFileSync( '../etc/key/id_flavio4_pem')
 }).then(() => {
-  return sftp.list('./dump');
+  return sftp.list('/tmp');
 }).then(data => {
   console.log(data, 'the data info');
 }).catch(err => {
   console.log(err, 'catch error');
 });
 
-
+/* 
 let config_CDLAN = {
   connSettings : {
     port: process.env.CDLAN_PORT || 22, 
@@ -27,7 +28,7 @@ let config_CDLAN = {
     username: process.env.CDLAN_USERNAME || 'admincsea',
     interactiveAuth: true,
     tryKeyboard: true,
-    password : process.env.CDLAN_PASS || 'Cse4R3dmine2022!',
+    password : process.env.CDLAN_PASS || 'password',
     privateKey:  fs.readFileSync(process.env.CDLAN_PATH_PEM || '../etc/key/id_rsa.pem')
-  }
-};
+  } 
+};*/
