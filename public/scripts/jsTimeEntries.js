@@ -1,6 +1,6 @@
 $(document).ready(function () {
     
-    let urlXML = "http://localhost:4000/time_entriesXML"
+    let urlXML = "http://192.168.40.30:4000/time_entriesXML"
     
     $.ajax({
         type: "GET",
