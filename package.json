@@ -39,7 +39,8 @@
         "ssh2": "^1.11.0",
         "ssh2-sftp-client": "^9.0.3",
         "stylus": "^0.56.0",
-        "validator": "^13.7.0"
+        "validator": "^13.7.0",
+        "xml2js": "^0.4.23"
     },
     "devDependencies": {
         "chai": "^3.5.0",

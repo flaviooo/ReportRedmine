@@ -14,7 +14,7 @@ exports.time_entriesJSON = function(req, res){
   
 var hostname = process.env.REDMINE_HOST || url;
 var config = {
-  apiKey: process.env.REDMINE_APIKEY || 'dc68e7275b90ebcd609269b40eb65c9f1841376e'
+  apiKey: process.env.REDMINE_APIKEY || '275b906e'
 };
 
 var redmine = new Redmine(hostname, config);

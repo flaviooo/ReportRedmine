@@ -40,10 +40,12 @@ exports.enabledPlugins = () => {
 };
 
 exports.dowloadDump = (req, res, next) => {
-
+  console.log(" sTART dump ");
+  
   var remotePathToList = process.env.DUMP_CDLAN_REMOTE_PATH || '/home/admincsea/dump/archivio';
   var localPathToList = process.env.DUMP_LOCAL_PATH || '/dumpAWS';
-
+  
+  console.log(" Execution: " + localPathToList);
   var conn = new Client();
 
   conn.on('ready', function () {
@@ -112,7 +114,7 @@ exports.dowloadDump = (req, res, next) => {
     console.log("Event End");
   });
   conn.on('error', (err) => {
-    console.error('SSH connection stream problem');
+    console.error('SSH connection stream problem'+err);
     throw err;
   });
 
