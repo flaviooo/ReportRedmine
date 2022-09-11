@@ -41,9 +41,9 @@ exports.enabledPlugins = () => {
 
 exports.dowloadDump = (req, res, next) => {
   console.log(" sTART dump ");
-  
+  console.log(config.config_CDLAN.connSettings);
   var remotePathToList = process.env.DUMP_CDLAN_REMOTE_PATH || '/home/admincsea/dump/archivio';
-  var localPathToList = process.env.DUMP_LOCAL_PATH || '/dumpAWS';
+  var localPathToList = process.env.DUMP_LOCAL_PATH || '/tmp';
   
   console.log(" Execution: " + localPathToList);
   var conn = new Client();

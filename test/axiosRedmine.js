@@ -1,18 +1,17 @@
+require('dotenv').config({ path: './../.env' });
 const axios = require('axios');
-//const { config } = require('dotenv');
-const config_ENV = require('./../config/config');
-//console.log(config_ENV.config_CDLAN)
-async function getTimeEntriesXML() {
-
-    const config = {
+async function getTimeEntriesXML(){
+    
+    const connAPI = {
         method: 'get',
-        url: config_ENV.config_CDLAN.connAPI.url ,
-        headers: { 'X-Redmine-API-Key': config_ENV.config_CDLAN.connAPI.password }
+        url: process.env.CDLAN_URL_API || 'http://192.168.40.30:3000/time_entries.xml',
+        headers: { 'X-Redmine-API-Key': process.env.CDLAN_PASS_API || 'password' },
+        password : process.env.CDLAN_PASS_API || 'admincsea'
     }
+  
+    let res = await axios(connAPI)
 
-    let res = await axios(config)
-
-    console.log(res.request._header);
+ //   console.log(res.request._header);
     console.log(res.data);
 }
 

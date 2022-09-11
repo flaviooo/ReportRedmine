@@ -16,14 +16,15 @@ var express = require('express')
   , bodyParser = require('body-parser')
   , favicon = require('serve-favicon')
   , logger = require('morgan')
-  , methodOverride = require('method-override');
+  , methodOverride = require('method-override')
+  , cors = require('cors');
 
 var app = express();
-
 
 app.set('port', process.env.PORT || 4000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
+app.use(cors({origin: '*'}));
 app.use(favicon(__dirname + '/public/images/favicon.png'));
 app.use(logger('dev'));
 app.use(methodOverride('_method'));

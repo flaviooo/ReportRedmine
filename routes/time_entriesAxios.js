@@ -2,10 +2,7 @@ const axios = require('axios');
 const xml2js = require('xml2js');
 const fs = require('fs');
 const path = require('path')
-
-//const { config } = require('dotenv');
 const config_ENV = require('./../config/config');
-//console.log(config_ENV.config_CDLAN)
 
 exports.time_entries = function (req, res) {
   res.render('time_entries');
@@ -94,6 +91,10 @@ exports.time_entriesXML = function (req, res) {
 
     let te = await count_();
     //console.log(te)
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4000');
+    
+
+    res.setHeader('Access-Control-Allow-Credentials', true);
     res.header("Content-Type", "application/xml");
     res.status(200).send(te);
   }
