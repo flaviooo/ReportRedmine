@@ -22,7 +22,6 @@ exports.time_entriesXML = function (req, res) {
       console.error(error)
     }
   }
-
   const count_ = async () => {
     const timeEntries = await getTimeEntriesXML()
     let totRecords = 0;
