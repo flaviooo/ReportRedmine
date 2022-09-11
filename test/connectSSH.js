@@ -4,7 +4,7 @@ const expect = require('chai').expect
 //const config = require('./../config/config');
 const config = require('dotenv').config({ path: './../.env' });
 const fs = require('fs');
-//console.log("../"+process.env.CDLAN_PATH_PEM)
+console.log("../"+process.env.CDLAN_PATH_PEM)
 
 let config_CDLAN = {
  
