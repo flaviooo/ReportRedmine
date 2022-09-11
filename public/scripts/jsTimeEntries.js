@@ -152,7 +152,7 @@ function test($xml) {
             colors: ['#4472C4','black'],
             xaxis: false,
             yaxis: false,
-            xaxisLabels: '',
+            yaxisLabels: '',
             backgroundGridBorder: false,
             backgroundGridVlines: false,
             marginInner: 10,
