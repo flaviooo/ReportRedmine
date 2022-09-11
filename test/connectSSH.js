@@ -4,7 +4,10 @@ const expect = require('chai').expect
 //const config = require('./../config/config');
 const config = require('dotenv').config({ path: './../.env' });
 const fs = require('fs');
+console.log(process.platform)
+
 console.log("../"+process.env.CDLAN_PATH_PEM)
+console.log(process.env.CDLAN_PATH_PEM)
 
 let config_CDLAN = {
  
@@ -15,7 +18,7 @@ let config_CDLAN = {
     interactiveAuth: true,
     tryKeyboard: true,
     password : process.env.CDLAN_PASS || 'password',
-    privateKey:  fs.readFileSync("../"+process.env.CDLAN_PATH_PEM || '../etc/key/NO_.PEM')
+    privateKey:  fs.readFileSync(process.env.CDLAN_PATH_PEM || '../etc/key/NO_.PEM')
   }
 
 };
