@@ -44,6 +44,10 @@ const config_CDLAN = {
         url: process.env.CDLAN_URL_API || 'http://192.168.40.30:3000/time_entries.xml',
         headers: { 'X-Redmine-API-Key': process.env.CDLAN_PASS_API },
         password : process.env.CDLAN_PASS_API || 'admincsea'
+    },
+    dump:{
+        localPath : process.env.DUMP_LOCAL_PATH || '//',
+        remotePath: process.env.DUMP_CDLAN_REMOTE_PATH || '/home/admincsea/dump/archivio'
     }
 };
 

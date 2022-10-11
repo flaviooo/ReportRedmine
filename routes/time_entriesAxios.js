@@ -67,22 +67,22 @@ exports.time_entriesXML = function (req, res) {
   const doRequests = async (urls) => {
     const _config = {
       method: 'get',
-   //   url: config_ENV.config_CDLAN.connAPI.url + '?&limit=100',
+      //   url: config_ENV.config_CDLAN.connAPI.url + '?&limit=100',
       headers: { 'X-Redmine-API-Key': config_ENV.config_CDLAN.connAPI.password }
     }
 
-    const fetchUrl = (url) => axios.get(url ,_config);
+    const fetchUrl = (url) => axios.get(url, _config);
 
     const promises = urls.map(fetchUrl);
     let responses = await Promise.all(promises);
     let i = 0;
     responses.forEach(resp => {
       let msg = `${resp.config.url} -> ${resp.headers.server}: ${resp.status}`;
-           console.log(msg);
-         let dataXML = resp.data;
-         const dataString = dataXML.join('\r\n')
-         const filePath = path.join(__dirname, '../test.XML')
-        fs.appendFileSync(filePath, dataString);
+      console.log(msg);
+      let dataXML = resp.data;
+      const dataString = dataXML.join('\r\n')
+      const filePath = path.join(__dirname, '../test.XML')
+      fs.appendFileSync(filePath, dataString);
     });
   }
 
@@ -91,7 +91,7 @@ exports.time_entriesXML = function (req, res) {
     let te = await count_();
     //console.log(te)
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4000');
-    
+
 
     res.setHeader('Access-Control-Allow-Credentials', true);
     res.header("Content-Type", "application/xml");

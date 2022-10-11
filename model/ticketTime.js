@@ -58,7 +58,7 @@ module.exports = {
     }
   } ,
    //SAL
-  async getPageSal() {
+  async getPageSal(fornitore) {
     try {
       conn = await local_db.getConnection();
       let s = " SELECT SUM(`time_entries`.`hours`) AS sum_hours, `time_entries`.`tyear` AS time_entries_tyear, `time_entries`.`tmonth` AS time_entries_tmonth, `time_entries`.`tweek` AS time_entries_tweek "+
@@ -71,7 +71,7 @@ module.exports = {
        " WHERE ( projects.status <> 9 AND EXISTS (SELECT 1 AS one FROM enabled_modules em  WHERE em.project_id = projects.id AND em.name='time_tracking')) "+
         " AND  (time_entries.id  IN (SELECT time_entries.id FROM time_entries LEFT OUTER JOIN custom_values ON custom_values.customized_type='TimeEntry'  "+
         " AND  custom_values.customized_id=time_entries.id AND custom_values.custom_field_id=4  "+
-      " WHERE (custom_values.value IN ('25')) AND (1=1)))  "+
+      " WHERE (custom_values.value IN ('"+fornitore+"')) AND (1=1)))  "+
         " GROUP BY  `time_entries`.`tyear`, `time_entries`.`tmonth`, `time_entries`.`tweek`  ";
 console.log("getMonthByParam "+ s);
 

@@ -37,7 +37,7 @@
         "scp": "^0.0.3",
         "serve-favicon": "^2.5.0",
         "ssh2": "^1.11.0",
-        "ssh2-sftp-client": "^9.0.3",
+        "ssh2-sftp-client": "^8.0.0",
         "stylus": "^0.56.0",
         "validator": "^13.7.0",
         "xml2js": "^0.4.23"
@@ -56,6 +56,8 @@
         "nodemon": "node_modules\\.bin\\nodemon app.js",
         "debug": "node_modules\\.bin\\nodemon --inspect app",
         "start": "node app",
+        "nohup": "nohup node app.js &",
+        "Foreverstart": "forever start app",
         "startLog": "node app --throw-deprecation --trace-uncaught  > app.log 2>&1",
         "startLog1": "node app --throw-deprecation --redirect-warnings=file.log",
         "forever": "node_modules\\retry\\test\\integration\\forever start app.js",
