@@ -2,6 +2,7 @@
 node_modules/
 db/dumpAWS/home/bitnami/dump/archivio/
 dumpAWS/*.zip
+.git
 #.gitignore
 # Ignore Configuration
 
