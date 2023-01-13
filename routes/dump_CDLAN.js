@@ -41,7 +41,6 @@ exports.updataSource = (req, res, next) => {
        cdlandb.importDump(dumpsql);
         try {
             let execution = process.env.DUMP_EXEC + dumpsql;
-
          // exec(execution, (err, stdout, stderr) => {              if (err) { console.error(`exec error: ${err}`); return; }              console.log("Succesfully imported"+ dumpsql);            });       
         } catch (error) {
             console.error(error)
