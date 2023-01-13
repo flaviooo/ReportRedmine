@@ -56,7 +56,7 @@
         "nodemon": "node_modules\\.bin\\nodemon app.js",
         "debug": "node_modules\\.bin\\nodemon --inspect app",
         "start": "node app",
-        "nohup": "nohup node app.js &",
+        "nohup": "node_modules\\.bin\\nohup node app.js &",
         "Foreverstart": "forever start app",
         "startLog": "node app --throw-deprecation --trace-uncaught  > app.log 2>&1",
         "startLog1": "node app --throw-deprecation --redirect-warnings=file.log",
