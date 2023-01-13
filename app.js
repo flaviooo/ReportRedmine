@@ -58,7 +58,7 @@ app.get('/tipologiaRgraph', reportTipologia.getTipologiaRgraph);
 app.get('/getTipologiaProgetti', reportTipologia.getTipologiaProgetti);
 app.get('/dump', dump_aws.updataSource);
 
-app.get('/dump_CDLAN', dump_CDLAN.updataSource);
+app.get('/dumpCdLan', dump_CDLAN.updataSource);
 
 app.get('/time_entries', time_entries.time_entries);
 //app.get('/time_entriesJSON', time_entries.time_entriesJSON);
