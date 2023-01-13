@@ -2,7 +2,7 @@
 node_modules/
 db/dumpAWS/home/bitnami/dump/archivio/
 dumpAWS/*.zip
-.gitignore
+#.gitignore
 # Ignore Configuration
 
 etc/key/*pem*
