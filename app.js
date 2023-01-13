@@ -11,6 +11,7 @@ var express = require('express')
   , reportTipologia = require('./routes/reportTipologia')
   , dump_aws = require('./routes/dump_aws')
   , dump_CDLAN = require('./routes/dump_CDLAN')
+  , dump_CDLAN2 = require('./routes/dump_CDLAN2')
   , http = require('http')
   , path = require('path')
   , bodyParser = require('body-parser')
@@ -57,7 +58,8 @@ app.get('/tipologia', reportTipologia.getTipologia);
 app.get('/tipologiaRgraph', reportTipologia.getTipologiaRgraph);
 app.get('/getTipologiaProgetti', reportTipologia.getTipologiaProgetti);
 app.get('/dump', dump_aws.updataSource);
-app.get('/dump_CDLAN', dump_CDLAN.updataSource);
+// app.get('/dump_CDLAN', dump_CDLAN.updataSource);
+app.get('/dump_CDLAN2', dump_CDLAN2.updataSource);
 
 app.get('/time_entries', time_entries.time_entries);
 //app.get('/time_entriesJSON', time_entries.time_entriesJSON);

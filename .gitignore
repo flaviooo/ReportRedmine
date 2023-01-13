@@ -9,7 +9,7 @@ etc/key/*pem*
 etc/key/*ppk*
 etc/key/*flavio*
 etc/key/*rsa*
-
+test/*.js
 db/*.txt
 
 # Ignore Logs

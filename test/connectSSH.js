@@ -13,12 +13,12 @@ let config_CDLAN = {
  
   connSettings : {
     port: process.env.CDLAN_PORT || 22, 
-    host:  process.env.CDLAN_HOST || "00.157.76.170",
-    username: process.env.CDLAN_USERNAME || 'admincsea',
+    host:  process.env.CDLAN_HOST || "00.157.7",
+    username: process.env.CDLAN_USERNAME || 'admin',
     interactiveAuth: true,
     tryKeyboard: true,
     password : process.env.CDLAN_PASS || 'password',
-    privateKey:  fs.readFileSync(process.env.CDLAN_PATH_PEM || '../etc/key/NO_.PEM')
+    privateKey:  fs.readFileSync("."+process.env.CDLAN_PATH_PEM || '../etc/key/id_flavio4_pem')
   }
 
 };
