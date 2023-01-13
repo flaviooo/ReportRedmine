@@ -1,5 +1,6 @@
 // require('dotenv').config({ path: './../.env' });
-require('dotenv').config();
+//require('dotenv').config();
+require('dotenv').config({path:__dirname+'/./../.env'});
 console.log("Test Reading Configuration: "+process.env.DB_HOST);
 
 const path = require('path');
