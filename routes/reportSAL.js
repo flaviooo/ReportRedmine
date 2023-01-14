@@ -5,9 +5,16 @@ const ticketTimeService = require('../model/ticketTime')
 
 exports.getPageSal = async (req, res, next) => {
     //   console.log("res query "+ req.query.fornitore);
-    var timeTicket = await ticketTimeService.getPageSal();
+    console.log("res query " + req.query.fornitore);
+    let fornitore = req.query.fornitore;
+    if(fornitore!=null){
+    timeTicket = await ticketTimeService.getPageSal(fornitore);
+    rows = parserSAL(timeTicket);
     res.render('reportSAL', { title: "Report SAL", result: rows });
-
+}else{
+    rows= [];
+    res.render('reportSAL', { title: "Report SAL", result: rows });
+}
 };
 
 exports.getSalDataJson = async (req, res, next) => {

@@ -27,6 +27,7 @@ module.exports = {
       throw err;
     }
   }  ,
+
   async getMonthByParam(spent_start, spent_end) {
     try {
       conn = await local_db.getConnection();
@@ -59,6 +60,7 @@ module.exports = {
   } ,
    //SAL
   async getPageSal(fornitore) {
+    
     try {
       conn = await local_db.getConnection();
       let s = " SELECT SUM(`time_entries`.`hours`) AS sum_hours, `time_entries`.`tyear` AS time_entries_tyear, `time_entries`.`tmonth` AS time_entries_tmonth, `time_entries`.`tweek` AS time_entries_tweek "+
@@ -73,7 +75,7 @@ module.exports = {
         " AND  custom_values.customized_id=time_entries.id AND custom_values.custom_field_id=4  "+
       " WHERE (custom_values.value IN ('"+fornitore+"')) AND (1=1)))  "+
         " GROUP BY  `time_entries`.`tyear`, `time_entries`.`tmonth`, `time_entries`.`tweek`  ";
-console.log("getMonthByParam "+ s);
+console.log("getPageSal "+ s);
 
 
       const result = await conn.query(s,);

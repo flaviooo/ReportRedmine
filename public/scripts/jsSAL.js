@@ -1,7 +1,10 @@
 $(document).ready(function () {
 
-    let url = "reportSALline?fornitore=25";
-    callDati(url);
+   
+    var $value =$("#stype").find('option:selected').val();  
+    console.log($value);
+
+    callDati($value);
     function callDati(url) {
         $.ajax({
             type: "GET",
@@ -23,6 +26,7 @@ $(document).ready(function () {
     }
     function parser(dati) {
         // dati 0:ore, 1:sommaore, 2:week, 3:mese, 4:anno
+        //FIXME Inserire controlli
          var dataLogarit = [];
          for (var i = 0; i < dati[0].length; ++i) {
              dataLogarit[i] = RGraph.log(dati[0][i], 10)*100; // This function is in RGraph.common.core.js
