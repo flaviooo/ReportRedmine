@@ -8,6 +8,7 @@ const config = require('../config/config')
 
 exports.importDump = (pathImport) => {
   let pathImported = path.normalize(process.env.DUMP_CDLAN_REMOTE_PATH + path.sep + path.basename(pathImport));
+  
   let execution = process.env.DUMP_EXEC + pathImport;
   console.log("Eseguo: "+execution);
   exec(execution, (err, stdout, stderr) => {

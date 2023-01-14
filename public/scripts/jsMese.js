@@ -14,7 +14,8 @@ $(document).ready(function () {
 });
 
 function _init(url) {
-    let params = "?meseS=01&meseE=12&anno=2022"
+    var annoCorrente = new Date().getFullYear();
+    let params = "?meseS=01&meseE=12&anno="+annoCorrente
     $("#paramID").html("<i>" + params + "</i>")
     callDraw(url + params)
 
