@@ -1,11 +1,17 @@
 # Ignore the node_modules directory
 node_modules/
+db/dumpAWS/home/bitnami/dump/archivio/
 dumpAWS/*.zip
+.git
+#.gitignore
 # Ignore Configuration
-config/
-etc/key/*.*
-db/*.txt
 
+etc/key/*pem*
+etc/key/*ppk*
+etc/key/*flavio*
+etc/key/*rsa*
+test/*.js
+db/*.txt
 
 # Ignore Logs
 logs
@@ -25,10 +31,9 @@ logs
 .vscode/
 *.sw*
 
-db/dumpAWS/home/bitnami/dump/archivio/
 
 *.zip
-
+*.cmd
 *.csv
 *.dat
 *.iml
@@ -86,3 +91,5 @@ mocha.cmd
 package-lock.json
 
 build/config.gypi
+
+

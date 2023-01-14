@@ -1,28 +1,30 @@
 var express = require('express')
   , routes = require('./routes')
   , time_entries = require('./routes/time_entries')
+  , time_entriesAxios = require('./routes/time_entriesAxios')
   , reportSAL = require('./routes/reportSAL')
-  , ticketProrita = require('./routes/ticketProrita')
+  , ticket = require('./routes/ticket')
   , reportMese = require('./routes/reportMese')
   , verifica = require('./routes/verificaIssues')
   , util = require('./routes/util')
   , consulaRapid = require('./routes/consultaRapid')
   , reportTipologia = require('./routes/reportTipologia')
   , dump_aws = require('./routes/dump_aws')
+  , dump_CDLAN = require('./routes/dump_CDLAN')
   , http = require('http')
   , path = require('path')
   , bodyParser = require('body-parser')
   , favicon = require('serve-favicon')
   , logger = require('morgan')
-  , methodOverride = require('method-override');
+  , methodOverride = require('method-override')
+  , cors = require('cors');
 
-//const  cors = require('cors');
 var app = express();
-//app.use(cors());
 
 app.set('port', process.env.PORT || 4000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
+//app.use(cors({origin: '*'}));
 app.use(favicon(__dirname + '/public/images/favicon.png'));
 app.use(logger('dev'));
 app.use(methodOverride('_method'));
@@ -39,23 +41,32 @@ if (app.get('env') == 'development') {
   app.locals.pretty = true;
 }
 
-app.get('/', routes.index);
-app.get('/getTimeProj', routes.getTimeProj);
+app.get('/', routes.renderIndex);
+app.get('/getTimeProj', routes.getTimeProjJson);
 
-app.get('/ticketProrita', ticketProrita.getProve);
+app.get('/ticketProrita', ticket.getPriorita);
+app.get('/ticketDormienti', ticket.getDormienti);
+//app.post('/ticketDormienti', ticket.getDormienti);
+app.post('/ticketDormienti', ticket.postDormienti);
+app.get('/ticketDormienti2', ticket.getDormienti_V2);
 
 app.get('/tipologiaMese', reportMese.getAllMonth);
-app.get('/tipologiaMeseParam', reportMese.getMonthByParam);
+app.get('/tipologiaMeseParam', reportMese.getMonthByParamJson);
 
 app.get('/tipologia', reportTipologia.getTipologia);
 app.get('/tipologiaRgraph', reportTipologia.getTipologiaRgraph);
 app.get('/getTipologiaProgetti', reportTipologia.getTipologiaProgetti);
 app.get('/dump', dump_aws.updataSource);
+
+app.get('/dumpCdLan', dump_CDLAN.updataSource);
+
 app.get('/time_entries', time_entries.time_entries);
+//app.get('/time_entriesJSON', time_entries.time_entriesJSON);
+app.get('/time_entriesXML', cors(), time_entriesAxios.time_entriesXML);
 
 app.get('/test', util.test);
 app.get('/reportSAL', reportSAL.getPageSal);
-app.get('/reportSALline', reportSAL.getData);
+app.get('/reportSALline', reportSAL.getSalDataJson);
 
 app.get('/getVerificaIssues', verifica.getIssuesVerificaCollaudo);
 app.get('/getRichiesteInfoIssues', verifica.getRichiesteInfoIssues);
@@ -67,7 +78,7 @@ app.get('/consultaRapidJson', consulaRapid.view);
 app.post("/invioMail", verifica.invioMailVerificaCollaudo);
 
 // catch 404 and forward to error handler
-/* app.use(function(req, res, next) {
+ app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
 
@@ -84,7 +95,7 @@ app.use(function(err, req, res, next) {
       error: err
   });
 });
- */
+
 
 if (require.main === module) {
   const server = http.createServer(app);
@@ -105,9 +116,6 @@ boot();// node app.js
   module.exports = app
 
 }
-
-
-
 
 const shutdown = () => {
   console.log("Shutting down");

@@ -1,10 +1,22 @@
 $(document).ready(function () {
 
     //  console.log(sorted);
-    initTable();
-    gestioneOccorenze();
-  
-    let queryForm = "invioMail";
+   // initTable();
+   // gestioneOccorenze();
+    
+    $("#stype").on('change', function (event) {
+        event.preventDefault();
+        console.log(event);
+        let queryForm = "ticketDormienti" + this.value
+        console.log(queryForm);
+        //RGraph.reset($("cvs"));
+        $("#paramID").html("<i>"+queryForm+"</i>")
+        //callService (queryForm)
+        postService(queryForm);
+       // callDraw(queryForm)
+    });
+
+ /*    let queryForm = "invioMail";
     $("#getTipologie").on('change', function (event) {
         event.preventDefault();
         console.log(event);
@@ -12,7 +24,7 @@ $(document).ready(function () {
         console.log(queryForm);
         $("#paramID").html("<i>" + queryForm + "</i>")
         // callDraw(queryForm)
-    });
+    }); 
 
     $('#send_by_button').click(function (e) {
         e.preventDefault();
@@ -26,9 +38,9 @@ $(document).ready(function () {
         });
         console.log("listaAutori " + listaAutori);
         //const uniqueAutori = [...new Set(listaAutori)]
-        /* una volta selezionati gli autori della segnalazione 
-        ** raggruppo tutte le segnalazioni per autore 
-        */
+        // una volta selezionati gli autori della segnalazione 
+        // raggruppo tutte le segnalazioni per autore 
+        //
         var dataStruct = [];
         $(listaAutori).each((i, autore) => {
             var $selezionati = $('#idTabella tr').find(':checked').parents("tr");
@@ -66,6 +78,52 @@ $(document).ready(function () {
         };
         inviaMail(queryForm, postData);
     });
+    */
+
+    function postService (url){
+        $.ajax({
+            type: "POST",
+            url: url,
+            crossDomain: true,
+            success: function (response) {
+               // console.log(response);
+               paser(response);
+    
+            },
+            error: function (responseData, textStatus, errorThrown) {
+                console.warn(responseData, textStatus, errorThrown);
+                alert('Failed - ' + textStatus);
+            },
+            done: function (data) { console.log('data ' + data); }
+        })//.done(function (data) {
+            //   console.log( 'data '+ data )
+       // });
+    }
+    
+    function callService (url){
+    $.ajax({
+        type: "GET",
+        url: url,
+        crossDomain: true,
+        success: function (response) {
+           // console.log(response);
+           paser(response);
+
+        },
+        error: function (responseData, textStatus, errorThrown) {
+            console.warn(responseData, textStatus, errorThrown);
+            alert('Failed - ' + textStatus);
+        },
+        done: function (data) { console.log('data ' + data); }
+    })//.done(function (data) {
+        //   console.log( 'data '+ data )
+   // });
+}
+function paser(response) {
+    $('body').html(response);
+    //drawReports(progetti, label);
+}
+
 
     function inviaMail(queryForm, data) {
         //        console.log(queryForm);
@@ -120,7 +178,7 @@ function gestioneOccorenze(){
 
 }
 
-function initTable() {
+/* function initTable() {
     console.log("INIT");
    // $("#flash").hide();
     $("#deCheckAll").hide();
@@ -141,14 +199,13 @@ function initTable() {
 
     var campoSearch = $('#idTabella thead tr').children('th').eq(1);
     var title = $('#example thead th').eq($(campoSearch).index()).text();
-    $(campoSearch).html('<input type="text" placeholder="Search ' + title + '" />');
+    $(campoSearch).html('<input type="text" placeholder="Assegnatario ' + title + '" />');
 
     var table = $('#idTabella').DataTable({
-
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Italian.json"
         },
-        "lengthMenu": [50, 100, 150, 200, 300],
+        "lengthMenu": [ 100, 150, 200, 300],
     });
 
     table.columns(1).every(function () {
@@ -161,32 +218,4 @@ function initTable() {
 
 }
 
-function viewGraphOccorenzeUtente(sorted) {
- //   let sortParseData = JSON.parse(JSON.stringify(sorted));
-//    console.log(sortParseData);
-    let etichette = [];
-    let datiCVS = [];
-    var datiSplit = sorted.split(",");
-    $.each(datiSplit, function (indice, valore) {
-        // console.log(indice + ': ' + valore);
-        var nameSurmane = valore.split("@");
-        (indice % 2 == 1) ? datiCVS.push(valore) : etichette.push(nameSurmane[0]);
-    });
-
-    RGraph.reset($("cvs"));
-    new RGraph.HBar({
-        id: 'cvs2',
-        data: datiCVS,
-        adjustable: true,
-        options: {
-            colorsSequential: true,
-            // marginLeft: 100,
-            marginInner: 5,
-            textAccessiblePointerevents: true,
-            labelsAbove: true,
-            yaxisLabels: etichette,
-            textSize: 12,
-            xaxis: false
-        }
-    }).grow();
-}
+ */

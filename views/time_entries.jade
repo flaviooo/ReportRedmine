@@ -17,9 +17,11 @@ block content
              th Iusses   
              th Project
              th Assegnato a
+             th Aggiornato
+             th Commenti
  //- Alert mixin
 mixin alert(style)
     div( class=["alert", "alert-dismissable", "alert-" + style] )
-    a( href="http://localhost/rgraphOfficial/timer_entries.xml" ) Fonte
+    a( href="http://192.168.40.30:4000/time_entriesXML" ) Fonte
         button.close( type="button", data-dismiss="alert" ) 
         block

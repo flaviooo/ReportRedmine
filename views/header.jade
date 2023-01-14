@@ -15,12 +15,14 @@ div.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
      a(data-toggle='dropdown', href='#menu1').dropdown-toogle Consulta
       b.caret
      ul.dropdown-menu
+       //li
+       // a(href='consultaRapid') Consultazione Rapida
+       //li
+       // a(href="ticketProrita") Lista ticket con Priorità
        li
-        a(href='consultaRapid') Consultazione Rapida
-       li
-        a(href="ticketProrita") Lista ticket con Priorità
-       li
-        a(href="ticketDormienti") Lista ticket Dormienti
+        a(href="ticketDormienti?giorniFa=0") Lista ticket Dormienti
+       //li
+       // a(href="ticketDormienti2") Lista ticket Dormienti2  
     li(id='menu2').dropdown
      a(data-toggle='dropdown', href='#menu2').dropdown-toogle Report
       b.caret
@@ -31,7 +33,9 @@ div.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
         a(href="tipologiaMese") Report Ticket Mese	
        li
         a(href="reportSAL") Report SAL	
- 
+       li
+        a(href="time_entries") timer_entries API
+       
     li(id='menu3').dropdown
      a(data-toggle='dropdown', href='#menu3').dropdown-toogle Invia Notifiche
       b.caret
@@ -45,11 +49,11 @@ div.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
       b.caret
      ul.dropdown-menu
        li
-        a(href="dump") Dump
+        a(href="#") Dump AWS - deprecato
+       li
+        a(href="dumpCdLan") Dump CDLAN in progress dump_CDLAN
        li
         a(href="tipologiaRgraph") Json
-       li
-        a(href="time_entries") XML timer_entries.xml
        li
         a(href="test") test
     

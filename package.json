@@ -1,7 +1,7 @@
 {
     "name": "report-redmine",
     "version": "1.0.0",
-    "description": "Report by SQLQuery",
+    "description": "Report CSEA Redmine",
     "main": "app",
     "homepage": "https://github.com/flaviooo/ReportRedmine",
     "author": "Flavio <flaviooo@gmail.com> (https://it.linkedin.com/in/flavio-tuosto-597b9488)",
@@ -14,6 +14,7 @@
         "url": "https://github.com/flaviooo/ReportRedmine/issues"
     },
     "dependencies": {
+        "axios-redmine": "^0.1.17",
         "body-parser": "^1.19.0",
         "cors": "^2.8.5",
         "dotenv": "^14.3.2",
@@ -23,19 +24,23 @@
         "g": "^2.0.1",
         "global": "^4.4.0",
         "jade": "^1.11.0",
+        "mariadb": "^3.0.0",
         "method-override": "*",
         "mockery": "^2.1.0",
         "morgan": "^1.10.0",
         "mysql": "^2.18.1",
         "node-gyp": "^8.4.1",
+        "node-redmine": "^0.2.2",
         "node-scp": "^0.0.16",
         "nodemailer": "^2.7.2",
         "save-dev": "^0.0.1-security",
         "scp": "^0.0.3",
         "serve-favicon": "^2.5.0",
-        "ssh2": "^1.5.0",
+        "ssh2": "^1.11.0",
+        "ssh2-sftp-client": "^8.0.0",
         "stylus": "^0.56.0",
-        "validator": "^13.7.0"
+        "validator": "^13.7.0",
+        "xml2js": "^0.4.23"
     },
     "devDependencies": {
         "chai": "^3.5.0",
@@ -48,9 +53,13 @@
         "test": "mocha test/startStopServer.test -R nyan",
         "testMocha": "node_modules\\.bin\\nodemon --exec 'mocha test/startStopServer.test -R nyan'",
         "start2": "set NODE_ENV=development && node_modules\\.bin\\nodemon --inspect app",
-        "nodemonRR": "node_modules\\.bin\\nodemon app.js",
+        "nodemon": "node_modules\\.bin\\nodemon app.js",
         "debug": "node_modules\\.bin\\nodemon --inspect app",
         "start": "node app",
+        "nohup": "node_modules\\.bin\\nohup node app.js &",
+        "Foreverstart": "forever start app",
+        "startLog": "node app --throw-deprecation --trace-uncaught  > app.log 2>&1",
+        "startLog1": "node app --throw-deprecation --redirect-warnings=file.log",
         "forever": "node_modules\\retry\\test\\integration\\forever start app.js",
         "forever2": "C:\\Users\\fl\\AppData\\Roaming\\npm\\forever start app.js"
     }

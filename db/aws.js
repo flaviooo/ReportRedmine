@@ -1,12 +1,13 @@
 const config = require('./../config/config')
+//const config = require('../config/config')
   , extract = require('extract-zip')
   , path = require('path')
   , Client = require('ssh2').Client
   , { exec } = require('child_process');
 
-exports.importDump = (DIR, moveTo) => {
+exports.importDump = (pathImport) => {
 
-  let pathImport = path.normalize(DIR + process.env.DUMP_AWS_REMOTE_PATH + path.sep + moveTo);
+  //let pathImport = path.normalize(DIR + process.env.DUMP_AWS_REMOTE_PATH + path.sep + moveTo);
   let execution = process.env.DUMP_EXEC + pathImport;
   console.log("execution: " + execution);
   exec(execution, (err, stdout, stderr) => {
@@ -77,7 +78,10 @@ exports.dowloadDump = (req, res, next) => {
             console.log('Extraction complete');
             let importFileName = moveTo.substring(0, moveTo.length - 3) + "sql";
             console.log("test: " + importFileName);
-            module.exports.importDump(localPathToList, path.basename(importFileName));
+            
+          let pathImport = path.normalize(localPathToList + process.env.DUMP_AWS_REMOTE_PATH + path.sep + path.basename(importFileName));
+         
+            module.exports.importDump(pathImport);
 
           } catch (err) {
             // handle any errors

@@ -18,15 +18,14 @@ _ Assuming you have already installed Node...
 - Next, run the app by entering: node app
 - Browse to http://localhost:4000
 
+
+## install NVM NODE NPM ubtutu20.4
+https://nextgentips.com/2022/01/27/how-to-install-redmine-on-ubuntu-20-04/
+
 ## RedMine Report Dependencies
 
-- npm install express --save
-- npm install dotenv --save 
-- npm install ssh2 --savejs
-- npm install extract-zip --save
-- npm install nodemailer@2.7.2
-- npm i -g forever
-- npm i fs
+-- npm install
+-- npm i -g forever
 
 ## RedMine Report Dependencies DEV
 - npm install nodemon --save-dev

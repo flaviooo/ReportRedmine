@@ -1,15 +1,19 @@
 $(document).ready(function () {
-    let url = "http://localhost/rgraphOfficial/timer_entries.xml";
+    
+    let urlXML = "http://192.168.40.30:4000/time_entriesXML"
+    
     $.ajax({
         type: "GET",
-        url: url,
-        crossDomain: true,
-        dataType: 'text',
+        url: urlXML,
+        dataType: "text",
         dataCharset: 'xml',
+        //crossDomain: true,
         success: function (response) {
-            var xmlDoc = $.parseXML(response);
-            var $xml0 = $(xmlDoc);
-            //           console.log(response);
+           //console.log(response);
+        var xmlDoc = $.parseXML(response);
+        var $xml0 = $(xmlDoc);
+           
+           // jsonParser(response)
             xmlParser($xml0)
             //calcola($xml0)
             //parser1($xml0)
@@ -23,11 +27,12 @@ $(document).ready(function () {
         },
         done: function (data) { console.log('data ' + data); }
     }).done(function (data) {
-        //   console.log( 'data '+ data )
+      //     console.log( 'data '+ data )
     });
 
 });
-// $xml1 =
+
+
 function xmlParser(xml) {
     const LIMIT = 25;
     var $xml0 = $(xml);
@@ -59,13 +64,19 @@ function xmlParser(xml) {
         var issue = $(this).find('issue').attr('id');
         var project = $(this).find('project').attr('name');
         var user = $(this).find('user').attr('name');
+        var spent_on = $(this).find('spent_on').text();
+        var comments = $(this).find('comments').text();
+        
+        
+        
         var tr = $("<tr/>");
         tr.append("<td>" + id + "</td>");
         tr.append("<td>" + hours + "</td>");
         tr.append("<td>" + issue + "</td>");
         tr.append("<td>" + project + "</td>");
         tr.append("<td>" + user + "</td>");
-
+        tr.append("<td>" + spent_on + "</td>");
+        tr.append("<td>" + comments + "</td>");
         $("#BuyOrders").append(tr);
 
         //$("ul").append('<li>' +id+ ' - ' +hours+ '</li>');
@@ -141,12 +152,13 @@ function test($xml) {
             colors: ['#4472C4','black'],
             xaxis: false,
             yaxis: false,
+            yaxisLabels: '',
             backgroundGridBorder: false,
             backgroundGridVlines: false,
             marginInner: 10,
             marginLeft: 100,
             marginBottom: 180,
-            title: 'A Bar chart with a moving average line',
+            title: 'Somma Ore Consumate',
             titleSize: 16,
             titleBold: true,
             yaxisScaleUnitsPre: 'Ore',
@@ -181,11 +193,11 @@ function calcola($xml) {
     var hoursSum = 0
     $time_entry2.each(function () {
 
-        var id = $(this).find('id').text();
+   /*      var id = $(this).find('id').text();
         var $hours = $(this).find('hours').text();
         var issue = $(this).find('issue').attr('id');
         var project = $(this).find('project').attr('name');
-        var user = $(this).find('user').attr('name');
+        var user = $(this).find('user').attr('name'); */
         hoursSum = Number($hours) + Number(hoursSum)
 
         //$("ul").append('<li>' +id+ ' - ' +hours+ '</li>');
@@ -234,3 +246,30 @@ function parser1($xml) {
     });
     //console.log(dataJoson)
 }
+function jsonParser(response){
+   // console.log(response);
+   var $time_entry = JSON.parse(JSON.stringify(response));
+    console.log($time_entry);
+  //  $time_entry.each(function () {
+    $.each($time_entry, function(index, element) {
+        var $ele = JSON.parse(JSON.stringify(element));
+
+        $.each($ele, function(i, e) {
+            console.log($(this).find('id').text())
+        })
+            /* 
+        var id = $(this).find('id').text();
+        var hours = $(this).find('hours').text();
+        var issue = $(this).find('issue').attr('id');
+        var project = $(this).find('project').attr('name');
+        var user = $(this).find('user').attr('name');
+        var tr = $("<tr/>");
+        tr.append("<td>" + id + "</td>");
+        tr.append("<td>" + hours + "</td>");
+        tr.append("<td>" + issue + "</td>");
+        tr.append("<td>" + project + "</td>");
+        tr.append("<td>" + user + "</td>");
+
+        $("#BuyOrders").append(tr); */
+}
+)};                     

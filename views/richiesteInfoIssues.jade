@@ -41,6 +41,7 @@ block content
             th GiorniTrascorsi
             th Ult.Aggior
             th Tipologia
+            th Progetto
             th subject
             th Mail
           tfoot
@@ -51,6 +52,7 @@ block content
             th GiorniTrascorsi
             th Ult.Aggior
             th Tipologia
+            th Progetto
             th subject
             th Mail
           tbody   
@@ -61,7 +63,8 @@ block content
              td #{item['Assegnato']}
              td #{item['GiorniTrascorsi']}
              td #{item['updated_on']}
-             td #{item['name']}
+             td #{item['tipoRichiesta']}
+             td #{item['NomeProgetto']}
              td #{item['subject']}
              td 
               label.form-checkbox
