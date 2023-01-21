@@ -29,12 +29,12 @@ module.exports = {
       throw err;
     }
   }  ,
-  async getlastFiles() {
+  async getNameLastFilesDumpZip() {
     try {
     //  console.log(config.config_CDLAN.dump.remotePath)
         const result = await ftp.getlastFiles(config.config_CDLAN.dump.remotePath);
       rows = result;
-      console.log(rows)
+      console.log("getlastFiles "+ rows);
       if (rows.length != 0) {
         return rows;
       } else {
@@ -43,6 +43,27 @@ module.exports = {
     } catch (err) {
       throw err;
     }
+  },
+    async downloadFile (filedumpZIP) {
+      try {
+      //  console.log(config.config_CDLAN.dump.remotePath)
+      console.log(filedumpZIP)
+      let from = config.config_CDLAN.dump.remotePath + "/" + filedumpZIP;
+      let to =  config.config_CDLAN.dump.localPath  + filedumpZIP;
+      console.log("Downloading ... From "+ from + " to "+to);
+       const result = await ftp.downloadFile(from,to);
+          
+        rows = result;
+        console.log("downloadFile "+ rows);
+        if (rows.length != 0) {
+          return rows;
+        } else {
+          return false;
+        }
+      } catch (err) {
+        throw err;
+      }
+    
   }
   
 }; 

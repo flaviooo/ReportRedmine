@@ -3,7 +3,7 @@ $(document).ready(function () {
    
     var $value =$("#stype").find('option:selected').val();  
     console.log($value);
-
+url =$value;
     callDati($value);
     function callDati(url) {
         $.ajax({
@@ -14,7 +14,6 @@ $(document).ready(function () {
                 parser(dati);
             },
             error: function (responseData, textStatus, errorThrown) {
-               // console.warn(responseData, textStatus, errorThrown);
                 alert('Failed - ' + textStatus);
             },
             done: function (data) {
@@ -35,7 +34,7 @@ $(document).ready(function () {
         //console.log('data 2' + dati[0])
         let infoTimeLabel = getInfoTimeLabel(dati);
         let timelabel = getInfoLCmpl(infoTimeLabel);
-        drawGraphLine (dati, timelabel);
+        //drawGraphLine (dati, timelabel);
         drawGraphLines(dati, dataLogarit);
         
     }
@@ -45,7 +44,7 @@ $(document).ready(function () {
         let queryForm = "reportSALline" + this.value
         //queryForm = "reportSAL" + this.value
         console.log(queryForm);
-        RGraph.reset($("cvs"));
+     //   RGraph.reset($("cvs"));
         RGraph.reset($("cvs_1"));
         $("#paramID").html("<i>"+queryForm+"</i>")
         callDati(queryForm);

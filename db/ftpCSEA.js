@@ -69,6 +69,7 @@ module.exports = {
             }
             // fileNames.push(file.name);
         }
+       // console.log("Download SQL ZIP Effettuato! "+ filename);
         return filename;
     },
 
@@ -82,9 +83,9 @@ module.exports = {
     },
 
     async downloadFile(remoteFile, localFile) {
-        console.log(`Downloading ${remoteFile} to ${localFile} ...`);
+        console.log(`Downloading a ${remoteFile} to ${localFile} ...`);
         try {
-            await this.client.get(remoteFile, localFile);
+           return await client.get(remoteFile, localFile);
         } catch (err) {
             console.error('Downloading failed:', err);
         }

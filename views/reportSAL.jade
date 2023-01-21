@@ -18,13 +18,13 @@ block content
           option(value="?fornitore=25") Exprivia
           option(value="?fornitore=12") Deda
           option(value="?fornitore=13") ASI
-          option(value="?fornitore=13") Altro - non a time and material
+          option(value="?fornitore=4") Altro - non a time and material
        .col-md-10
         p Per Selezionare il fornitore in TimeEntry: 
          small "SELECT `custom_field_enumerations`.* FROM `custom_field_enumerations` WHERE `custom_field_enumerations`.`custom_field_id` = 4 AND `custom_field_enumerations`.`active` = TRUE ORDER BY `custom_field_enumerations`.`position` ASC"
   
   .col-lg-12
-   canvas(id="cvs", width="1600", height="300" style="marging-bottom:220px;padding-bottom:10px; padding-top:20px;")
+   canvas(id="cvs_1", width="1600", height="600" style="marging-bottom:220px;padding-bottom:10px; padding-top:20px;")
   .col-lg-12
    p &nbsp;
   .col-lg-12
@@ -32,7 +32,7 @@ block content
   .col-lg-12
    p &nbsp; 
   .col-lg-12
-   canvas(id="cvs_1" width="1600" height="600"  style="marging-bottom:220px;padding-bottom:10px; padding-top:20px;")
+   //canvas(id="cvs" width="1600" height="300"  style="marging-bottom:220px;padding-bottom:10px; padding-top:20px;")
       
   - each item in result
    - each i in item

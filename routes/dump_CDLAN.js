@@ -10,10 +10,10 @@ exports.updataSource = (req, res, next) => {
     const getNamelastDump = async () => {      
         try {
             await dumpFtp.connect();
-            let filedump = await dumpFtp.getlastFiles();
-       //     dumpFtp.disconnect();
+            let filedumpZIP = await dumpFtp.getNameLastFilesDumpZip();
+            let filedump = await dumpFtp.downloadFile(filedumpZIP);
        //   let dump_toImport = await cdlan_db.getNamelastDump();
-            console.log("1 - Scarica dump "+filedump);
+            console.log("1 - Scaricato dump "+filedump);
             return filedump;
             
         } catch (error) {
@@ -38,8 +38,9 @@ exports.updataSource = (req, res, next) => {
     }
 
     const importDumpSQL = async (dumpsql) => {
-       cdlandb.importDump(dumpsql);
+       //cdlandb.importDump(dumpsql);
         try {
+        
             let execution = process.env.DUMP_EXEC + dumpsql;
          // exec(execution, (err, stdout, stderr) => {              if (err) { console.error(`exec error: ${err}`); return; }              console.log("Succesfully imported"+ dumpsql);            });       
         } catch (error) {
@@ -51,39 +52,55 @@ exports.updataSource = (req, res, next) => {
     const unzipDump = async (dump_toImport) => {
         try {
             console.log("3 - unzip dump "+dump_toImport);
-             let basePath = '\\\\192.168.0.130\\csea-nas\\Exprivia\\DumpGP';
+            // let basePath = '\\\\192.168.0.130\\csea-nas\\Exprivia\\DumpGP';
              let basePathZip = '\\home\\admincsea\\dump\\archivio';
-             let from = dump_toImport;
-             from = basePath+'\\'+dump_toImport;
+             //let from = dump_toImport;
+             // = path.basename(dump_toImport);
+
              let importFileName = dump_toImport.substring(0, dump_toImport.length - 3) + "sql";
-             console.log("importFileName: " + importFileName);
-             let sqlFile = basePath+basePathZip+"\\"+importFileName;
+             console.log("importFileName SQL: " + path.basename(importFileName));
+             console.log("importFileName SQL: " + path.dirname(importFileName));
+             console.log("importFileName SQL: " + path.normalize(importFileName));
+            // let sqlFile = basePath+basePathZip+"\\"+importFileName;
             
-           /*  return new Promise((resolve, reject) => {
+            const inputFile = fs.createReadStream(dump_toImport)
+const outputFile = fs.createWriteStream('file.ext')
+            let extracted= extract(
+                dump_toImport,
+                {dir: path.dirname(importFileName)},
+                error => {
+                  if (error) return reject(error);
+                  resolve(path.basename(importFileName));
+                }
+              );
+              const stream = inputFile.pipe(extracted).pipe(outputFile)
+stream.on('finish', () => console.log('finished'))
+
+              console.log("Estratto?"+ extracted);
+              return importFileName;
+            /*  return new Promise((resolve, reject) => {
                   return extract(
-                    from,
-                    {dir: sqlFile},
+                    dump_toImport,
+                    {dir: path.dirname(importFileName)},
                     error => {
                       if (error) return reject(error);
-                      resolve(sqlFile);
+                      resolve(path.basename(importFileName));
                     }
                   )
-                  console.log("4 - Scarica dump "+dump_toImport);
                 });
-                console.log("5 - Scarica dump "+dump_toImport); */
-        return await importDumpSQL(sqlFile);
-          //  dump_toImported = cdlandb.extract(dump_toImport);
-            //return await cdlan_db.dowloadDump(dump_toImport);
-            
+             */    
         } catch (error) {
             console.error(error)
         }
     }
     const downloadDump = async () => {
         try {
-            let dump_toImport = await getNamelastDump();
-            console.log("1 - Scarica dump "+dump_toImport);
-            return dump_toImported = await unzipDump(dump_toImport);
+            
+        //    let dump_toImport = await getNamelastDump();
+        //    console.log("1 - nomeUltimoDump "+dump_toImport);
+        dump_toImport ="\\\\192.168.0.130\\csea-nas\\Exprivia\\DumpGP\\backup_20-01-2023.zip";
+        dump_toImported = await unzipDump(dump_toImport);    
+        return await importDumpSQL(dump_toImported);
           //  console.log("2 -  dump Scaricato "+dump_toImport);
         } catch (error) {
             console.error(error)

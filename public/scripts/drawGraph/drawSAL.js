@@ -22,9 +22,9 @@ function getInfoTimeLabel(dati) {
     let infoTimeLabel = [];
     aday = new Date();
     $(week).each((i, nWeek) => {
-    let dataWeekStart = aday.getDateOfISOWeek(nWeek,anno[i]);
-    let dataWeekEnd = aday.getDateOfISOWeekEnd(nWeek,anno[i]);
-//        console.log(i+" week " +nWeek+" anno "+anno[i]+"< Inizia  il "+ dataWeekStart+" > Finisce il "+ dataWeekEnd );
+        let dataWeekStart = aday.getDateOfISOWeek(nWeek,anno[i]);
+        let dataWeekEnd   = aday.getDateOfISOWeekEnd(nWeek,anno[i]);
+        console.log(i+" week " +nWeek+" anno "+anno[i]+"< Inizia  il "+ dataWeekStart+" > Finisce il "+ dataWeekEnd );
         infoTimeLabel.push([nWeek, anno[i], dataWeekStart,dataWeekEnd]);
     });
     return infoTimeLabel;
@@ -33,13 +33,7 @@ function getInfoTimeLabel(dati) {
 function formatTime(info){
     const d = new Date(info);
     const date = d.getDate() // 23
-    let year = d.getFullYear().toString().substring(2); 
-    const dayIndex = d.getDay();
-    //let nameDay = d.getDayName(dayIndex);
-    const monthIndex = d.getMonth();
-   // let meseName = d.getMeseName(monthIndex + 1);
-    //const formatted = `${nameDay} ${date} ${meseName} ${year}`;
-   // const formatted = `${date}-${monthIndex+1}-${year}`;
+       const monthIndex = d.getMonth();
    const formatted = `${date}-${monthIndex+1}`;
     return formatted;
 }
@@ -105,70 +99,73 @@ function drawGraphLines(dati, dataLogarit) {
     combo = new RGraph.CombinedChart([bar, line2]).draw();
 
 }
-   function drawGraphLine(dati, labelsAboves) {
-    marginLeft = 20;
-    marginRight = 25;
-    myLine = new RGraph.Line({
-        id: 'cvs',
-        data: [dati[0], dati[1]],
-        //  data: [dataLogarit, dati[1]],
-        // data: dati,
-        options: {
 
-            xaxisLabels: dati[2],
-            //labelsAbove : true ,
-            tooltips: labelsAboves,
-            xaxisLabelsOffsety: 5,
-            xaxisLabelsAngle: 45,
-            marginBottom: 50,
-            tickmarksStyle: 'circle',
-            tickmarksSize: 3,
-            marginLeft: 40,
-            marginRight: 15,
-            colors: ['red', 'black'],
-            key: ['Per settimana', 'Cumulato'],
-            keyColors: ['red', 'black'],
-            keyBackground: 'white',
-            keyPosition: 'margin',
-            //keyPositionMarginBoxed: false,
-            keyPositionX: ((document.getElementById('cvs').width - marginLeft - marginRight) / 2) + marginLeft - 115,
-            // yaxisLabelsCount: 3,
-            yaxisScaleUnitsPost: ' h',
-            //yaxisScaleUnitsPost: '%',
-            linewidth: 5,
-            marginInner: 15,
-            textColor: '#333',
-            backgroundGridVlinesCount: 11,
-            backgroundGridVlines: true,
-            //backgroundGridBorder: false,
-            backgroundGridColor: '#999',
+//    function drawGraphLine(dati, labelsAboves) {
+//     marginLeft = 20;
+//     marginRight = 25;
+//     myLine = new RGraph.Line({
+//         id: 'cvs',
+//         data: [dati[0], dati[1]],
+//         //  data: [dataLogarit, dati[1]],
+//         // data: dati,
+//         options: {
 
-            xaxis: false,
-            yaxis: false,
-            title: 'Giorni uomo',
-            titleSize: 15,
-            titleBold: true,
-            axesColor: '#666',
-            spline: true,
-            trendline: true,
-            trendlineMargin: 15,
-            trendlineDashed: true,
+//             xaxisLabels: dati[2],
+//             //labelsAbove : true ,
+//             tooltips: labelsAboves,
+//             xaxisLabelsOffsety: 5,
+//             xaxisLabelsAngle: 45,
+//             marginBottom: 50,
+//             tickmarksStyle: 'circle',
+//             tickmarksSize: 3,
+//             marginLeft: 40,
+//             marginRight: 15,
+//             colors: ['red', 'black'],
+//             key: ['Per settimana', 'Cumulato'],
+//             keyColors: ['red', 'black'],
+//             keyBackground: 'white',
+//             keyPosition: 'margin',
+//             //keyPositionMarginBoxed: false,
+//             keyPositionX: ((document.getElementById('cvs').width - marginLeft - marginRight) / 2) + marginLeft - 115,
+//             // yaxisLabelsCount: 3,
+//             yaxisScaleUnitsPost: ' h',
+//             //yaxisScaleUnitsPost: '%',
+//             linewidth: 5,
+//             marginInner: 15,
+//             textColor: '#333',
+//             backgroundGridVlinesCount: 11,
+//             backgroundGridVlines: true,
+//             //backgroundGridBorder: false,
+//             backgroundGridColor: '#999',
 
-        }
-    }).draw();
-    xaxis = new RGraph.Drawing.XAxis({
-        id: 'cvs',
-        y: myLine.canvas.height - 10,
-        options: {
-            xaxisLabels: labelsAboves,
-            xaxisLabelsOffsety: 5,
-            /* xaxisLabelsAngle: 45,
-            marginBottom: 150,
-  */           marginLeft: 30,
-            marginRight: 15,
-            xaxisColor: '#ccc',
-            textColor: '#ccc',
-        }
-    }).draw();
+//             xaxis: false,
+//             yaxis: false,
+//             title: 'Giorni uomo',
+//             titleSize: 15,
+//             titleBold: true,
+//             axesColor: '#666',
+//             spline: true,
+//             trendline: true,
+//             trendlineMargin: 15,
+//             trendlineDashed: true,
+
+//         }
+//     }).draw();
+ 
+ 
+     xaxis = new RGraph.Drawing.XAxis({
+         id: 'cvs_1',
+         y: myLine.canvas.height - 10,
+         options: {
+             xaxisLabels: labelsAboves,
+             xaxisLabelsOffsety: 5,
+             /* xaxisLabelsAngle: 45,
+             marginBottom: 150,
+   */           marginLeft: 30,
+             marginRight: 15,
+             xaxisColor: '#ccc',
+             textColor: '#ccc',
+         }
+     }).draw();
     
-}
+ // }
