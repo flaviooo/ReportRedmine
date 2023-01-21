@@ -7,9 +7,12 @@ const config = require('../config/config')
 // conn.connect(config.config_CDLAN.connSettings);
 
 exports.importDump = (pathImport) => {
-  let pathImported = path.normalize(process.env.DUMP_CDLAN_REMOTE_PATH + path.sep + path.basename(pathImport));
+ // let pathImported = path.normalize(process.env.DUMP_CDLAN_REMOTE_PATH + path.sep + path.basename(pathImport));
+ console.log("path.basename(pathImport) :" + path.basename(pathImport));
+ console.log("path.basename(pathImport) -normalize :" + path.normalize(path.basename(pathImport)));
+ let pathImported = path.normalize(process.env.DUMP_CDLAN_REMOTE_PATH + path.sep + pathImport);
   
-  let execution = process.env.DUMP_EXEC + pathImport;
+  let execution = process.env.DUMP_EXEC + pathImported;
   console.log("Eseguo: "+execution);
   exec(execution, (err, stdout, stderr) => {
     if (err) { console.error(`exec error: ${err}`); return; }
