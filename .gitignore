@@ -12,6 +12,7 @@ etc/key/*flavio*
 etc/key/*rsa*
 test/*.js
 db/*.txt
+*.sql
 
 # Ignore Logs
 logs
