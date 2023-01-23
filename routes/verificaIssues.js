@@ -36,10 +36,11 @@ exports.getRichiesteInfoIssues = async (req, res, next) => {
       };
       obj.options.dato = dati[a];
       let subject = "Non dimenticarti di noi - " + new Date().toISOString().slice(0, 10);
-      let to = 'flaviooo@gmail.com';
+      let to = obj.options.dato.autore;
       let text = "";
       console.log("subject: " + subject); console.log("to: " + to); console.log("text: " + text);
-      console.log(obj);
+     // console.log(obj);
+      console.log(obj.options.dato.autore);
 
       try {
         //   await mail.send({ to, subject,text, img});
