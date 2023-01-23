@@ -37,6 +37,7 @@ exports.updataSource = (req, res, next) => {
     const importDumpSQL = async (dumpsql) => {
         try {
             let execution = process.env.DUMP_EXEC + dumpsql;
+            console.log("Da eseguire " + dumpsql);
             await exec(execution, (err, stdout, stderr) => {
                 if (err) {
                     console.error(`exec error: ${err}`); return;
