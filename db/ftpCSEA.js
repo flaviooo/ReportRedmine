@@ -20,7 +20,7 @@ module.exports = {
     },
 
     async disconnect() {
-        await this.client.end();
+        await client.end();
     },
 
     async listFiles(remoteDir, fileGlob) {

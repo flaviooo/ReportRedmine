@@ -95,27 +95,11 @@ exports.getNamelastDump = async () =>{
  }
 
 exports.migrateDump = () => {
-  let execution = process.env.DUMP_MIGRATE_DB;
-  console.log("Migrate Execution: " + execution);
-  exec(execution, (err, stdout, stderr) => {
-    if (err) { console.error(`exec error: ${err}`); return; }
-    console.log("Succesfully Migrate DB");
-  });
+  
 };
 
 exports.enabledPlugins = () => {
 
-  // TODO 
-  let execution = " -- 84 = dataEntry " +
-    " INSERT INTO `enabled_modules` (`project_id`, `name`) VALUES (84, 'custom_reports') " +
-    " INSERT INTO `enabled_modules` (`project_id`, `name`) VALUES (84, 'agile') " +
-    " INSERT INTO `enabled_modules` (`project_id`, `name`) VALUES (84, 'Issuevm') " +
-    " INSERT INTO `enabled_modules` (`project_id`, `name`) VALUES (84, 'monitoring_controlling_project') ";
-  console.log(" Execution: " + execution);
-  exec(execution, (err, stdout, stderr) => {
-    if (err) { console.error(`exec error: ${err}`); return; }
-    console.log("Succesfully Migrate DB");
-  });
 };
 
 exports.dowloadDump = (dump_toImport) => {
