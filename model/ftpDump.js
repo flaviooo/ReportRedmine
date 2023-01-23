@@ -8,9 +8,7 @@ module.exports = {
     // console.log(`Connecting to ${options.host}:${options.port}`);
     try {
         await ftp.connect(config.config_CDLAN.connSettings);
-     //   let filename = await ftp.getlastFiles();
-      //  console.log(filename)
-
+   
     } catch (err) {
         console.log('Failed to connect:', err);
     }
