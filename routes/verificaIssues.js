@@ -25,7 +25,7 @@ exports.getRichiesteInfoIssues = async (req, res, next) => {
       return res.send(422, 'Missing fields! Please be sure to fill out all form data.');
     let notificaInviati = [];
     var dati = JSON.parse(JSON.stringify(req.body.dati));
-    let img = "2022_01_26_18_02_48_RR_ReportRedMine.png";
+    let img = "2023_01_24_21_41_57_RR_ReportRedMine.png";
     const mail = new Mail();
     for (let a in dati) {
       //      console.log(a + ": "+ dati[a]);
