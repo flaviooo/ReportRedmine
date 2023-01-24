@@ -1,4 +1,4 @@
-const  ticketVerificaService = require('../model/ticketVerifica')
+const ticketVerificaService = require('../model/ticketVerifica')
 const Mail = require('./../nomalier/Mail');
 
 exports.getRichiesteInfoIssues = async (req, res, next) => {
@@ -19,7 +19,7 @@ exports.getRichiesteInfoIssues = async (req, res, next) => {
 
   },
   exports.invioMailVerificaCollaudo = (req, res, next) => {
-//    console.log(" req query " + req.query);
+    //    console.log(" req query " + req.query);
     // console.log(req.body);    //  console.log(req.route);    //  console.log("params1: " + req.param.params);
     if (!req.body.dati)
       return res.send(422, 'Missing fields! Please be sure to fill out all form data.');
@@ -34,15 +34,14 @@ exports.getRichiesteInfoIssues = async (req, res, next) => {
           dato: {}
         }
       };
-      obj.options.dato = dati[a];
-      let subject = "Non dimenticarti di noi - " + new Date().toISOString().slice(0, 10);
-      let to = obj.options.dato.autore;
-      let text = "";
-      console.log("subject: " + subject); console.log("to: " + to); console.log("text: " + text);
-     // console.log(obj);
-      console.log(obj.options.dato.autore);
-
       try {
+        obj.options.dato = dati[a];
+        let subject = "Non dimenticare - " + new Date().toISOString().slice(0, 10);
+        let to = obj.options.dato.autore;
+        let text = "";
+        //     console.log("subject: " + subject); console.log("to: " + to); console.log("text: " + text);
+         console.log(obj);
+        //   console.log(obj.options.dato.autore);
         //   await mail.send({ to, subject,text, img});
         let path_template = '/views/email/emailReportImg'
         mail.send({ to, subject, text, obj, img, path_template });
@@ -55,7 +54,7 @@ exports.getRichiesteInfoIssues = async (req, res, next) => {
     // res.setHeader('Content-Type', 'application/json');
     // var result = JSON.stringify(some_json);
     res.json(JSON.stringify(notificaInviati));
-   // res.send(notificaInviati);
+    // res.send(notificaInviati);
 
   };
 function parser4Occorrenze(arr) {
