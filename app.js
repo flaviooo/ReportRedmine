@@ -46,7 +46,6 @@ app.get('/getTimeProj', routes.getTimeProjJson);
 
 app.get('/ticketProrita', ticket.getPriorita);
 app.get('/ticketDormienti', ticket.getDormienti);
-//app.post('/ticketDormienti', ticket.getDormienti);
 app.post('/ticketDormienti', ticket.postDormienti);
 app.get('/ticketDormienti2', ticket.getDormienti_V2);
 
