@@ -59,7 +59,7 @@
         "start": "node app > log/app.log 2>&1",
         "nohup": "node_modules\\.bin\\nohup node app.js &",
         "Foreverstart": "forever start app",
-        "Foreverstart2": "forever start app > log/app.log 2>&1",
+        "Foreverstart2": "forever start app.js  --trace-warnings  > log/app.log 2>&1",
         "startLog": "node app --throw-deprecation --trace-uncaught  > log/app.log 2>&1",
         "startLog1": "node app --throw-deprecation --redirect-warnings=file.log",
         "forever": "node_modules\\retry\\test\\integration\\forever start app.js",
