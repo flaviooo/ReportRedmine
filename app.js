@@ -116,7 +116,7 @@ boot();// node app.js
 
 }
 
-const shutdown = () => {
+/* const shutdown = () => {
   console.log("Shutting down");
   server.close(() => {
     console.log("HTTP server closed.");
@@ -127,5 +127,11 @@ const shutdown = () => {
   });
 };
 
-process.on("SIGTERM", shutdown);
-
+process.on("SIGTERM", shutdown); */
+process.on('uncaughtException', err => {
+  console.log(`Uncaught Exception: ${err.message}`)
+ // process.exit(1)
+})
+process.on('uncaughtException', function (error) {
+  console.log(error.stack);
+});
