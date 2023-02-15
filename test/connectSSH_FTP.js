@@ -21,7 +21,8 @@ let config_CDLAN = {
 
 sftp.connect(config_CDLAN.connSettings)
 .then(() => {
-  return sftp.list('/tmp');
+  return sftp.list('/home/admincsea/dump/archivio/');
+  //return sftp.list('/tmp');
 }).then(data => {
   console.log(data, 'the data info');
 }).catch(err => {

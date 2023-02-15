@@ -29,7 +29,7 @@ module.exports = {
   }  ,
   async getNameLastFilesDumpZip() {
     try {
-    //  console.log(config.config_CDLAN.dump.remotePath)
+      console.log(config.config_CDLAN.dump.remotePath)
         const result = await ftp.getlastFiles(config.config_CDLAN.dump.remotePath);
       rows = result;
       console.log("getlastFiles "+ rows);
