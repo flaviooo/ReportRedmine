@@ -56,7 +56,7 @@
         "start2": "set NODE_ENV=development && node_modules\\.bin\\nodemon --inspect app",
         "nodemon": "node_modules\\.bin\\nodemon app.js",
         "debug": "node_modules\\.bin\\nodemon --inspect app",
-        "start": "node app > log/app.log 2>&1",
+        "start": "node app > log/ul 2>&1",
         "nohup": "node_modules\\.bin\\nohup node app.js &",
         "Foreverstart": "forever start app",
         "Foreverstart2": "forever start app.js  --trace-warnings  > log/app.log 2>&1",
