@@ -3,7 +3,7 @@ $(document).ready(function () {
    
     var $value =$("#stype").find('option:selected').val();  
     console.log($value);
-url =$value;
+    url =$value;
     callDati($value);
     function callDati(url) {
         $.ajax({
