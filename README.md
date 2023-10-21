@@ -12,6 +12,16 @@ _ Assuming you have already installed Node...
 - Open a command prompt, navigate to the folder, and enter: npm install
 - npm install nodemon --save-dev
 - Config .env variable (es. Sample.env)
+- Create DB : 
+    mysql -uredmine  -p
+    mysql -uredmine  -p$passwd
+    CREATE USER 'redmine'@'localhost' IDENTIFIED BY '$passwd';
+    GRANT ALL PRIVILEGES ON *.* TO 'redmine'@'localhost';
+    FLUSH PRIVILEGES;
+
+    drop schema bitnami_redmine;
+    create schema bitnami_redmine;
+    exit
 
 
 ```  
