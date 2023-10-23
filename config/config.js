@@ -1,6 +1,6 @@
-// require('dotenv').config({ path: './../.env' });
+require('dotenv').config({ path: '../.env' });
 //require('dotenv').config();
-require('dotenv').config({path:__dirname+'/./../.env'});
+//require('dotenv').config({path:__dirname+'../.env'});
 console.log("Test Reading Configuration: "+process.env.DB_HOST);
 
 const path = require('path');
@@ -37,8 +37,9 @@ const config_CDLAN = {
         host: process.env.CDLAN_HOST || "95.157.76.170",
         username: process.env.CDLAN_USERNAME || 'admincsea',
         password: process.env.CDLAN_PASS_PEM || 'admincsea',
+        pathPEM : process.env.CDLAN_PATH_PEM || './etc/key/id_rsa_csea',
         uploadOnSave: true,
-        privateKey: fs.readFileSync(process.env.CDLAN_PATH_PEM || './etc/key/id_rsa_csea')
+        privateKey: fs.readFileSync(process.env.CDLAN_PATH_PEM || './etc/key/id_flavio4_pem' )
     },
     connAPI: {
         method: 'get',
@@ -84,7 +85,7 @@ const config_mail = {
 module.exports = {
     config_app: config_app,
     config_CDLAN: config_CDLAN,
-    config_AWS: config_AWS,
+  //  config_AWS: config_AWS,
     config_db: config_db,
     config_mail: config_mail
 };
