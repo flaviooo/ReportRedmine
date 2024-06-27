@@ -5,7 +5,7 @@
 //   npm install ssh2-sftp-client@^8.0.0
 // 3) Run the script
 //   node sftp.js
-const config = require('dotenv').config({ path: './../.env' });
+const config = require('dotenv').config({ path: '../../.env' });
 const fs = require('fs');
 let Client = require('ssh2-sftp-client');
 
