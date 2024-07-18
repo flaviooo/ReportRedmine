@@ -153,19 +153,19 @@ function drawGraphLines(dati, dataLogarit) {
 //     }).draw();
  
  
-     xaxis = new RGraph.Drawing.XAxis({
-         id: 'cvs_1',
-         y: myLine.canvas.height - 10,
-         options: {
-             xaxisLabels: labelsAboves,
-             xaxisLabelsOffsety: 5,
-             /* xaxisLabelsAngle: 45,
-             marginBottom: 150,
-   */           marginLeft: 30,
-             marginRight: 15,
-             xaxisColor: '#ccc',
-             textColor: '#ccc',
-         }
-     }).draw();
+//      xaxis = new RGraph.Drawing.XAxis({
+//          id: 'cvs_1',
+//          y: myLine.canvas.height - 10,
+//          options: {
+//              xaxisLabels: labelsAboves,
+//              xaxisLabelsOffsety: 5,
+//              /* xaxisLabelsAngle: 45,
+//              marginBottom: 150,
+//    */           marginLeft: 30,
+//              marginRight: 15,
+//              xaxisColor: '#ccc',
+//              textColor: '#ccc',
+//          }
+//      }).draw();
     
  // }

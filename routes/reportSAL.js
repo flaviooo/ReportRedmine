@@ -28,6 +28,8 @@ exports.getSalDataJson = async (req, res, next) => {
 };
 
 function parserSAL(results) {
+    if(results!==null)
+
     var array = [];
     var obOre = [];
     var obSum = [];
