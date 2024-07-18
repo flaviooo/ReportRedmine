@@ -2,6 +2,7 @@ const expect = require('chai').expect
 const {config_db} = require('../config/config');
 let mysql = require('mysql');
 
+console.log({config_db})
 //describe("Connessione DB", () => {
 //  it("Connesione Al db", (done) => {
 

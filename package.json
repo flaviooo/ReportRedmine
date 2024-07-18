@@ -48,7 +48,7 @@
         "chai-http": "^2.0.1",
         "eslint": "^8.7.0",
         "mocha": "^2.5.3",
-        "nodemon": "^2.0.15"
+        "nodemon": "^2.0.22"
     },
     "scripts": {
         "test": "mocha test/startStopServer.test -R nyan",
@@ -66,5 +66,4 @@
         "foreverL": "node_modules/retry/test/integration/forever start app.js --trace-warnings  > log/app.log 2>&1",
         "foreverW": "C:\\Users\\fl\\AppData\\Roaming\\npm\\forever start app.js"
     }
-
 }

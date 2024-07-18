@@ -1,5 +1,6 @@
 const mariadb = require("mariadb");
 const config = require('../config/config');
+//const config = require('dotenv').config({ path: '../../.env' })
 
 const pool = mariadb.createPool(config.config_db.connDBsettings);
 

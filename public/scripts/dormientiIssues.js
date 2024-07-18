@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     //  console.log(sorted);
-   // initTable();
+ initTable();
    // gestioneOccorenze();
     
     $("#stype").on('change', function (event) {
@@ -177,8 +177,7 @@ function gestioneOccorenze(){
     });
 
 }
-
-/* function initTable() {
+function initTable() {
     console.log("INIT");
    // $("#flash").hide();
     $("#deCheckAll").hide();
@@ -199,13 +198,14 @@ function gestioneOccorenze(){
 
     var campoSearch = $('#idTabella thead tr').children('th').eq(1);
     var title = $('#example thead th').eq($(campoSearch).index()).text();
-    $(campoSearch).html('<input type="text" placeholder="Assegnatario ' + title + '" />');
+    $(campoSearch).html('<input type="text" placeholder="Search ' + title + '" />');
 
     var table = $('#idTabella').DataTable({
+
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Italian.json"
         },
-        "lengthMenu": [ 100, 150, 200, 300],
+        "lengthMenu": [50, 100, 150, 200, 300],
     });
 
     table.columns(1).every(function () {
@@ -217,5 +217,3 @@ function gestioneOccorenze(){
     //  table.columns(2).search(  ).draw();
 
 }
-
- */

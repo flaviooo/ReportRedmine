@@ -1,4 +1,4 @@
-const Mail = require('./../nomalier/Mail');
+const Mail = require('../nomalier/Mail');
 const jadeCompiler = require('./../nomalier/lib/jadeCompiler');
 const path = require('path');
 let pathRoot = path.resolve(__dirname, '../');

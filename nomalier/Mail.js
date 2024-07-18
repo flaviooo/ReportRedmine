@@ -41,8 +41,9 @@ class Mail {
         const transporter = nodemailer.createTransport({ service: 'Gmail', auth: config.config_mail.googleSetting.auth});
          if(transporter !== null) {
             return new Promise((resolve, reject) => {
-           // console.log(path.dirname(__dirname) + config.config_mail.templateCSEA.path_template);
-           jadeCompiler.compile(path.dirname(__dirname) + path_template, self.options, function(err, html){
+            console.log(path.dirname(__dirname) + config.config_mail.templateCSEA.path_template);
+            console.log(__dirname + config.config_mail.templateCSEA.path_template);
+           jadeCompiler.compile(path.dirname(__dirname) + config.config_mail.templateCSEA.path_template, self.options, function(err, html){
 
             if(err){
                   throw new Error('Problem compiling template(double check relative path): ' + RELATIVE_TEMPLATE_PATH);

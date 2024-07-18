@@ -21,6 +21,7 @@ console.log("subject: " + consulaRapid.view); console.log("to: " + to); //consol
 
 /**Compilo Jade  */
 //console.log("F "+ path.join(pathRoot  ,'/views/email/emailReportImg'));
+console.log(path.join(pathRoot, '/views/consultaRapid'))
 jadeCompiler.compile(path.join(pathRoot, '/views/consultaRapid'), objTable, function (err, text) {
    if (err) {
       throw new Error('Problem compiling template(double check relative path): ' + RELATIVE_TEMPLATE_PATH);

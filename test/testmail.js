@@ -1,6 +1,7 @@
 const expect = require('chai').expect
-const Mail_Config = require('./../nomalier/configMail');
-const Mail = require('./../nomalier/Mail');
+//const Mail_Config = require('../nomalier/configMail');
+const Mail_Config = require('../config/config');
+const Mail = require('../nomalier/Mail');
 
 let img = "2022_01_26_18_02_48_RR_ReportRedMine.png";
 let subject = "Soggetto della mail"; 
@@ -8,8 +9,8 @@ let to = 'flaviooo@gmail.com';
 let text = '<h1>Testo text {#dato.autore} della mail</h1> e logo <img src=\"cid:imgBody_0\"/> e h1 <h2>Desc Corpo della mail</h2> e testo p <p>testo fine Testo</p>';
 
 console.log("subject: " + subject);  //console.log("text: "+text);
-describe("Invia mail test a: "+ to, () => {
-   it("Invia mail - Template Verifica Issues", (done) => {
+//describe("Invia mail test a: "+ to, () => {
+ //  it("Invia mail - Template Verifica Issues", (done) => {
 
       //const sendMail = async ({ to, subject,text, img}) => {
       // const sendMail =  ({ to, subject, text }) => {
@@ -32,12 +33,12 @@ describe("Invia mail test a: "+ to, () => {
                }
             }
          };
-         let path_template = Mail_Config.templateCSEA.path_template;
+         let path_template = Mail_Config.config_mail.templateCSEA.path_template;
          mail.send({ to, subject, text, obj, img , path_template});
       } catch (err) {
          console.log(err);
       }
       //};
-      done()
-   })
-})
+   //   done()
+ //  })
+//})

@@ -11,6 +11,8 @@ _ Assuming you have already installed Node...
 - insert keyfile './etc/key/id_rsa_csea'
 - Open a command prompt, navigate to the folder, and enter: npm install
 - npm install nodemon --save-dev
+- npm install mocha --save-dev
+- npm install chai --save-dev
 - Config .env variable (es. Sample.env)
 - Create DB : 
     mysql -uredmine  -p

@@ -1,4 +1,4 @@
-require('dotenv').config({ path: '../../.env' });
+require('dotenv').config({ path: '../.env' });
 //require('dotenv').config();
 //require('dotenv').config({path:__dirname+'../.env'});
 console.log("Test Reading Configuration: "+process.env.DB_HOST);
@@ -35,8 +35,8 @@ const config_CDLAN = {
         password: process.env.CDLAN_PASS_PEM || 'admincsea',
         pathPEM : process.env.CDLAN_PATH_PEM || './etc/key/id_rsa_csea',
         uploadOnSave: true,
-        //privateKey: fs.readFileSync( process.env.CDLAN_PATH_PEM ||  '.././etc/key/id_flavio4_pem')
-        privateKey: fs.readFileSync( '.././etc/key/id_flavio4_pem'|| process.env.CDLAN_PATH_PEM )
+        privateKey: fs.readFileSync( process.env.CDLAN_PATH_PEM ||  '.././etc/key/id_flavio4_pem')
+       // privateKey: fs.readFileSync( '.././etc/key/id_flavio4_pem'|| process.env.CDLAN_PATH_PEM )
     },
     connAPI: {
         method: 'get',
