@@ -28,7 +28,8 @@ _ Assuming you have already installed Node...
     create schema bitnami_redmine;
     exit
  
- - Import Dump DB : 
+ - Import Dump DB : set command .env (es. .env.sample)
+
 ```  
 ```
 - Next, run the app by entering: node app
