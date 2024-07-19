@@ -1,6 +1,5 @@
-require('dotenv').config({ path: '../.env' });
-//require('dotenv').config();
-//require('dotenv').config({path:__dirname+'../.env'});
+//require('dotenv').config({ path: '../.env' });
+require('dotenv').config();
 console.log("Test Reading Configuration: "+process.env.DB_HOST);
 const path = require('path');
 const fs = require('fs');
@@ -12,19 +11,6 @@ const config_app = {
     
 };
 
-/* const config_AWS = {
-    host: process.env.AWS_HOST || "127.0.0.1",
-    port: process.env.AWS_PORT || 22,  //port used for scp 
-    username: process.env.AWS_USERNAME || 'bitnami', //username to authenticate
-    privateKey: fs.readFileSync(process.env.AWS_PATH_PEM || './etc/key/NO.PEM'),
-    connSettings: {
-        port: process.env.AWS_PORT || 22,
-        host: process.env.AWS_HOST || "127.0.0.1",
-        username: process.env.AWS_USERNAME || 'bitnami',
-        privateKey: fs.readFileSync(process.env.AWS_PATH_PEM || './etc/key/NO.PEM')
-    }
-}; */
-
 const config_CDLAN = {
     
     port: process.env.CDLAN_PORT || 22,  //port used for scp 
@@ -35,7 +21,7 @@ const config_CDLAN = {
         password: process.env.CDLAN_PASS_PEM || 'admincsea',
         pathPEM : process.env.CDLAN_PATH_PEM || './etc/key/id_rsa_csea',
         uploadOnSave: true,
-        privateKey: fs.readFileSync( process.env.CDLAN_PATH_PEM ||  '.././etc/key/id_flavio4_pem')
+        privateKey: fs.readFileSync( process.env.CDLAN_PATH_PEM ||  './etc/key/id_flavio4_pem')
        // privateKey: fs.readFileSync( '.././etc/key/id_flavio4_pem'|| process.env.CDLAN_PATH_PEM )
     },
     connAPI: {
@@ -82,7 +68,6 @@ const config_mail = {
 module.exports = {
     config_app: config_app,
     config_CDLAN: config_CDLAN,
-  //  config_AWS: config_AWS,
     config_db: config_db,
     config_mail: config_mail
 };

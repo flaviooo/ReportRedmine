@@ -1,6 +1,6 @@
 //require('dotenv').config({ path: './../.env' });
 const axios = require('axios');
-const { config } = require('dotenv');
+//const { config } = require('dotenv');
 const https = require('https');
 //process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 configCsea = {
