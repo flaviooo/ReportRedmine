@@ -14,18 +14,21 @@ _ Assuming you have already installed Node...
 - npm install mocha --save-dev
 - npm install chai --save-dev
 - Config .env variable (es. Sample.env)
+- Install Bitmani redmine-4.2.3-1 (Win Vers) GIT CSEA
 - Create DB : 
-    mysql -uredmine  -p
-    mysql -uredmine  -p$passwd
+    mysql -uroot  -p
+   
     CREATE USER 'redmine'@'localhost' IDENTIFIED BY '$passwd';
     GRANT ALL PRIVILEGES ON *.* TO 'redmine'@'localhost';
     FLUSH PRIVILEGES;
+       exit
 
+ mysql -uredmine  -p$passwd
     drop schema bitnami_redmine;
     create schema bitnami_redmine;
     exit
-
-
+ 
+ - Import Dump DB : 
 ```  
 ```
 - Next, run the app by entering: node app
