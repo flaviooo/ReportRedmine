@@ -1,8 +1,13 @@
 //require('dotenv').config({ path: '../.env' });
 require('dotenv').config();
-console.log("Test Reading Configuration: "+process.env.DB_HOST);
-const path = require('path');
 const fs = require('fs');
+
+console.log("***************** Read Config Start *****************************************");
+console.log("Test Reading Configuration APP: "+process.env.HOST+":"+process.env.PORT);
+console.log("Test Reading Configuration BD: "+process.env.DB_HOST+":"+process.env.DB_PORT+ " "+process.env.DB_USERNAME);
+console.log("Test Reading Configuration CDLAN: "+process.env.CDLAN_HOST+":"+process.env.CDLAN_PORT+" "+process.env.CDLAN_USERNAME);
+console.log("Test Reading Configuration Mail: "+process.env.MAIL_GMAIL_USER);
+console.log("***************** Read Config END   *********************************************");
 
 const config_app = {
     host: process.env.HOST || "127.0.0.1",
@@ -66,6 +71,7 @@ const config_mail = {
 };
 
 module.exports = {
+    
     config_app: config_app,
     config_CDLAN: config_CDLAN,
     config_db: config_db,
