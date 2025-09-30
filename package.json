@@ -6,6 +6,7 @@
     "homepage": "https://github.com/flaviooo/ReportRedmine",
     "author": "Flavio <flaviooo@gmail.com> (https://it.linkedin.com/in/flavio-tuosto-597b9488)",
     "license": "MIT",
+    "type": "module",
     "repository": {
         "type": "git",
         "url": "https://github.com/flaviooo/ReportRedmine.git"
@@ -43,6 +44,7 @@
         "validator": "^13.7.0",
         "xml2js": "^0.4.23"
     },
+    
     "devDependencies": {
         "chai": "^3.5.0",
         "chai-http": "^2.0.1",
@@ -63,7 +65,7 @@
         "Foreverstart2": "forever start app.js  --trace-warnings  > log/app.log 2>&1",
         "startLog": "node app --throw-deprecation --trace-uncaught  > log/app.log 2>&1",
         "startLog1": "node app --throw-deprecation --redirect-warnings=file.log",
-        "foreverL": "node_modules/retry/test/integration/forever start app.js --trace-warnings  > log/app.log 2>&1",
-        "foreverW": "C:\\Users\\fl\\AppData\\Roaming\\npm\\forever start app.js"
+        "pm2Start": "pm2 start app.js --name ReportRedmine:4000 --time -o log/out.log -e log/err.log",
+        "pm2stop": "pm2 stop ReportRedmine"
     }
 }

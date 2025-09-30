@@ -47,7 +47,7 @@ app.get('/getTimeProj', routes.getTimeProjJson);
 app.get('/ticketProrita', ticket.getPriorita);
 app.get('/ticketDormienti', ticket.getDormienti);
 app.post('/ticketDormienti', ticket.postDormienti);
-app.get('/ticketDormienti2', ticket.getDormienti_V2);
+//app.get('/ticketDormienti2', ticket.getDormienti_V2);
 
 app.get('/tipologiaMese', reportMese.getAllMonth);
 app.get('/tipologiaMeseParam', reportMese.getMonthByParamJson);
