@@ -18,7 +18,8 @@ db/*.txt
 # Ignore Logs
 logs
 *.log
-
+log/*
+logs/*
 # Ignore the build directory
 /dist
 
