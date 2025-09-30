@@ -4,7 +4,7 @@ const ticketTimeService = require('../model/ticketTime')
     , validator = require('validator')
 
 exports.getAllMonth = async (req, res, next) => {
-    console.log("res query "+ req.query)
+    console.log("res query ", req.query)
   //  if (!validator.isNumeric(id) || id == 0) {
    //     res.send('Parameter error: invalid parameters');
    // } else {    
@@ -19,7 +19,7 @@ exports.getMonthByParamJson = async (req, res, next) => {
     let spent_start = "";
     let spent_end = "";
     let anno = "";
-    console.log("res query "+ req.query)
+    console.log("res query ", req.query)
 
     if(Object.keys(req.query).length === 0){
         spent_start = "2021-04-30";
@@ -53,7 +53,7 @@ function parser4Month(results) {
     let sum_hours = 0
     results.forEach((element, index) => {
         var ob = []
-       // console.log("++++++++++++++++++++++++++++++++++++++------ " + index);
+       // console.log("++++++++++++++++++++++++++++++++++++++------ " , index);
         var sommaMeseSelezionato = results.reduce(function (accumulator, current) {
             if (element.tmonth === current["tmonth"])
                 return accumulator + (current["sum_hour"] || 0)
