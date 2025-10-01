@@ -22,8 +22,9 @@ log/*
 logs/*
 # Ignore the build directory
 /dist
+.~lock.*
 
-# The file containing environment variables 
+## The file containing environment variables 
 .env
 .env.js
 .env.json
