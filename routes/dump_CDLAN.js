@@ -57,7 +57,7 @@ exports.updataSource = (req, res, next) => {
 
             console.log("3 - unzip dump " + dump_toImport);
             let pathZIP = path.dirname(dump_toImport);
-            let pathZIPExtracted = process.env.DUMP_CDLAN_REMOTE_PATH;
+            let pathZIPExtracted = process.env.DUMP_LOCAL_PATH_FILE_SQL;
 
             var unzipExtractor = unzip.Extract({ path: pathZIP });
             fs.createReadStream(dump_toImport).pipe(unzipExtractor);

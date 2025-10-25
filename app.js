@@ -18,7 +18,10 @@ var express = require('express')
   , logger = require('morgan')
   , methodOverride = require('method-override')
   , cors = require('cors');
-
+  const swaggerJSDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
+const host = process.env.HOST || 'http://localhost';
+const port = process.env.PORT || 3001;
 var app = express();
 
 app.set('port', process.env.PORT || 3001);
@@ -31,6 +34,31 @@ app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(require('stylus').middleware(__dirname + '/public'));
+
+const swaggerDefinition = {
+  openapi: '3.0.0',
+  info: {
+    title: 'API CSEA',
+    version: '1.0.0',
+    description: 'Documentazione automatica delle API Express',
+  },
+  servers: [
+    {
+     // url: `${host}:${port}`,
+       url: `${process.env.SWAGGER_HOST || 'http://localhost'}:${process.env.PORT || 3001}`
+    },
+  ],
+};
+
+const options = {
+  swaggerDefinition,
+  // Percorsi dove Swagger cerca le JSDoc
+ apis: ['./routes/**/*.js'], // o './routes/*.js' se usi routing separato
+};
+
+const swaggerSpec = swaggerJSDoc(options);
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use(bodyParser.urlencoded({
   extended: true

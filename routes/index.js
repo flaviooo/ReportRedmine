@@ -4,6 +4,47 @@ exports.renderIndex = function(req, res){
   res.render('index', { title: "Tempo Totale Impiegato/Progetti"})
   //res.render('index');
 };
+/**
+ * @openapi
+ * /getTimeProj:
+ *   get:
+ *     summary: Restituisce i dati dei progetti in un intervallo di tempo
+ *     description: Richiede i parametri `meseS`, `meseE` e `anno` come query string per calcolare l'intervallo di date.
+ *     parameters:
+ *       - in: query
+ *         name: meseS
+ *         required: true
+ *         schema:
+ *           type: string
+ *           example: "01"
+ *         description: Mese di inizio (formato MM)
+ *       - in: query
+ *         name: meseE
+ *         required: true
+ *         schema:
+ *           type: string
+ *           example: "03"
+ *         description: Mese di fine (formato MM)
+ *       - in: query
+ *         name: anno
+ *         required: true
+ *         schema:
+ *           type: string
+ *           example: "2025"
+ *         description: Anno per il range temporale
+ *     responses:
+ *       200:
+ *         description: Ritorna i dati del progetto nel range richiesto
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               example:
+ *                 success: true
+ *                 data: []
+ *       400:
+ *         description: Parametri mancanti o invalidi
+ */
 exports.getTimeProjJson = async (req, res) => {
   let meseS = req.query.meseS
   let meseE = req.query.meseE
