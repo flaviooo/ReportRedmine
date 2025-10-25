@@ -63,7 +63,7 @@
         "debug": "node_modules\\.bin\\nodemon --inspect app",
         "start": "node app > log/app.log 2>&1",
         "nohup": "node_modules\\.bin\\nohup node app.js &",
-        "pm2Start": "pm2 start app.js --name ReportRedmine --time -o log//out.log -e log//err.log",
+        "pm2Start": "pm2 start app.js --name ReportRedmine:3001 --time -o log//out.log -e log//err.log",
         "pm2stop": "pm2 stop ReportRedmine"
     }
 }
