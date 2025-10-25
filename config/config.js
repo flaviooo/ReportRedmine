@@ -37,7 +37,8 @@ const config_CDLAN = {
     },
     dump:{
         localPath : process.env.DUMP_LOCAL_PATH || '//',
-        remotePath: process.env.DUMP_CDLAN_REMOTE_PATH || '/home/admincsea/dump/archivio'
+        remotePath: process.env.DUMP_CDLAN_REMOTE_PATH || '/home/admincsea/dump/archivio',
+        localPathFileSql : process.env.DUMP_LOCAL_PATH || '//',
     }
 };
 
