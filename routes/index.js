@@ -1,9 +1,26 @@
 const indexService = require('../model/index');
-
+/**
+ * @openapi
+ * /:
+ *   get:
+ *     summary: Renderizza la pagina principale
+ *     description: Restituisce la pagina HTML iniziale con il titolo "Tempo Totale Impiegato/Progetti".
+ *     responses:
+ *       200:
+ *         description: Pagina HTML renderizzata correttamente
+ *         content:
+ *           text/html:
+ *             schema:
+ *               type: string
+ *               example: "<html><head><title>Tempo Totale Impiegato/Progetti</title></head><body>...</body></html>"
+ *       500:
+ *         description: Errore durante il rendering della pagina
+ */
 exports.renderIndex = function(req, res){
   res.render('index', { title: "Tempo Totale Impiegato/Progetti"})
   //res.render('index');
 };
+
 /**
  * @openapi
  * /getTimeProj:

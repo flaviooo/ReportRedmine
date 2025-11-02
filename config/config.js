@@ -7,17 +7,17 @@ console.log("Test Reading Configuration APP: "+process.env.HOST+":"+process.env.
 console.log("Test Reading Configuration BD: "+process.env.DB_HOST+":"+process.env.DB_PORT+ " "+process.env.DB_USERNAME);
 console.log("Test Reading Configuration CDLAN: "+process.env.CDLAN_HOST+":"+process.env.CDLAN_PORT+" "+process.env.CDLAN_USERNAME);
 console.log("Test Reading Configuration Mail: "+process.env.MAIL_GMAIL_USER);
+console.log("Test Reading Configuration SWAGGER: "+process.env.SWAGGER_HOST);
 console.log("***************** Read Config END   *********************************************");
 
 const config_app = {
     host: process.env.HOST || "127.0.0.1",
     port: process.env.PORT || 4000,
     timeEntries: process.env.TIME_ENTRIES    
-    
 };
 
 const config_CDLAN = {
-    
+
     port: process.env.CDLAN_PORT || 22,  //port used for scp 
     connSettings: {
         port: process.env.CDLAN_PORT || 22,
@@ -71,12 +71,49 @@ const config_mail = {
     }
 };
 
+//
+// SWAGGER CONFIG
+//
+const swaggerHost = process.env.SWAGGER_HOST || '/api-docs';
+const host = process.env.HOST || 'http://localhost';
+const port = process.env.PORT || 4000;
+
+const config_swagger = {
+  swaggerHost,
+  swaggerDefinition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'API CSEA',
+      version: '1.0.0',
+      description: 'Documentazione automatica delle API Express',
+    },
+    servers: [
+      {
+        url: `http://${host}:${port}${swaggerHost}`, // Es: http://localhost:4000/api-docs
+        description: 'Server locale di sviluppo',
+      },
+    ],
+  },
+  options: {
+    definition: {
+      openapi: '3.0.0',
+      info: {
+        title: 'API CSEA',
+        version: '1.0.0',
+        description: 'Documentazione automatica delle API Express',
+      }
+    },
+    apis: ['./routes/**/*.js', './controllers/**/*.js'], // dove ci sono i blocchi @openapi
+  }
+};
+
 module.exports = {
     
     config_app: config_app,
     config_CDLAN: config_CDLAN,
     config_db: config_db,
-    config_mail: config_mail
+    config_mail: config_mail,
+    config_swagger: config_swagger  
 };
 //module.exports = confg_AWS,config_mail,config_db ;
 //module.exports = config_mail;

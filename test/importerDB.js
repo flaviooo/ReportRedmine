@@ -1,10 +1,12 @@
-import dotenv from 'dotenv';
-import path from 'path';
-import { exec } from 'child_process';
-import { fileURLToPath } from 'url';
+//import dotenv from 'dotenv';
+//import path from 'path';
+//import { exec } from 'child_process';
+//import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const dotenv = require('dotenv');
+const path = require('path');
+const { exec } = require('child_process');
+
 
 // Carica .env dalla cartella padre
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
@@ -18,7 +20,7 @@ if (!process.env.DUMP_LOCAL_PATH || !process.env.DUMP_EXEC) {
 // Legge argomenti CLI
 const args = process.argv.slice(2);
 if (args.length < 1) {
-  console.error("Usage: node test/importerDB.js \\csea-nas.csea.local\CSEA-NAS\Exprivia\DumpGP\ backup_22-05-2025.zip");
+  console.error("Usage: node test/importerDB.js \\csea-nas.csea.local\CSEA-NAS\Exprivia\DumpGP\  home/admincsea/dump/archivio backup_22-05-2025.zip");
   process.exit(1);
 }
 

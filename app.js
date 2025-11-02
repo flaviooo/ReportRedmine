@@ -17,48 +17,26 @@ var express = require('express')
   , favicon = require('serve-favicon')
   , logger = require('morgan')
   , methodOverride = require('method-override')
-  , cors = require('cors');
-  const swaggerJSDoc = require('swagger-jsdoc');
-const swaggerUi = require('swagger-ui-express');
-const host = process.env.HOST || 'http://localhost';
-const port = process.env.PORT || 3001;
+  , cors = require('cors')
+  , swaggerJSDoc = require('swagger-jsdoc')
+  , swaggerUi = require('swagger-ui-express');
+  const config = require('./config/config')
+  
 var app = express();
 
-app.set('port', process.env.PORT || 3001);
+
+app.set('port', config.config_app.port || process.env.PORT || 3001);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 //app.use(cors({origin: '*'}));
 app.use(favicon(__dirname + '/public/images/favicon.png'));
+const swaggerSpec = swaggerJSDoc(config.config_swagger.options);
+app.use(config.config_swagger.swaggerHost, swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(logger('dev'));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use(require('stylus').middleware(__dirname + '/public'));
 
-const swaggerDefinition = {
-  openapi: '3.0.0',
-  info: {
-    title: 'API CSEA',
-    version: '1.0.0',
-    description: 'Documentazione automatica delle API Express',
-  },
-  servers: [
-    {
-     // url: `${host}:${port}`,
-       url: `${process.env.SWAGGER_HOST || 'http://localhost'}:${process.env.PORT || 3001}`
-    },
-  ],
-};
-
-const options = {
-  swaggerDefinition,
-  // Percorsi dove Swagger cerca le JSDoc
- apis: ['./routes/**/*.js'], // o './routes/*.js' se usi routing separato
-};
-
-const swaggerSpec = swaggerJSDoc(options);
-
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use(bodyParser.urlencoded({
   extended: true
@@ -71,12 +49,10 @@ if (app.get('env') == 'development') {
 
 app.get('/', routes.renderIndex);
 app.get('/getTimeProj', routes.getTimeProjJson);
-
 app.get('/ticketProrita', ticket.getPriorita);
 app.get('/ticketDormienti', ticket.getDormienti);
 app.post('/ticketDormienti', ticket.postDormienti);
 //app.get('/ticketDormienti2', ticket.getDormienti_V2);
-
 app.get('/tipologiaMese', reportMese.getAllMonth);
 app.get('/tipologiaMeseParam', reportMese.getMonthByParamJson);
 
@@ -108,7 +84,6 @@ app.post("/invioMail", verifica.invioMailVerificaCollaudo);
  app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
-
   //pass error to the next matching route.
   next(err);
 });
@@ -122,7 +97,6 @@ app.use(function(err, req, res, next) {
       error: err
   });
 });
-
 
 if (require.main === module) {
   const server = http.createServer(app);

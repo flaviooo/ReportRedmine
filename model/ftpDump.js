@@ -46,7 +46,7 @@ module.exports = {
       try {
       //  console.log(config.config_CDLAN.dump.remotePath)
       console.log(filedumpZIP)
-      let from = config.config_CDLAN.dump.remotePath + "/" + filedumpZIP;
+      let from = config.config_CDLAN.dump.remotePath  + filedumpZIP;
       let to =  config.config_CDLAN.dump.localPath  + filedumpZIP;
       console.log("Downloading ... From "+ from + " to "+to);
        const result = await ftp.downloadFile(from,to);
