@@ -1,6 +1,6 @@
 $(document).ready(function () {
     
-    let urlXML = "http://controllo1.csea.local:4000/time_entries.xml"
+    let urlXML = "http://controllo1.csea.local:3000/time_entries.xml"
     
     $.ajax({
         type: "GET",
