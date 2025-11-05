@@ -15,7 +15,7 @@ exports.time_entriesXML = function (req, res) {
       const config = {
         method: 'get',
         url: config_ENV.config_CDLAN.connAPI.url + '?&limit=100',
-        headers: { 'X-Redmine-API-Key': config_ENV.config_CDLAN.connAPI.password }
+        headers: config_ENV.config_CDLAN.connAPI.headers 
       }
       return await axios(config)
     } catch (error) {

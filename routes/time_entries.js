@@ -9,14 +9,12 @@ exports.time_entries = function(req, res){
 
 exports.time_entriesJSON = function(req, res){
 
-let url = config_ENV.config_CDLAN.connAPI.url;
-  
-var hostname = process.env.REDMINE_HOST || url;
+
 var config = {
   apiKey: process.env.REDMINE_APIKEY || 'dc68e7275b90ebcd609269b40eb65c9f1841376e'
 };
 
-var redmine = new Redmine(hostname, config);
+var redmine = new Redmine(config_ENV.config_CDLAN.connAPI.url, config);
 
 const dumpTimeEntry = fields => {
   for (const item in fields) {
