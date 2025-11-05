@@ -37,10 +37,7 @@ app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(require('stylus').middleware(__dirname + '/public'));
 
-
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+app.use(bodyParser.urlencoded({  extended: true}));
 app.use(bodyParser.json());
 
 if (app.get('env') == 'development') {
@@ -63,7 +60,7 @@ app.get('/dump', dump_aws.updataSource);
 
 app.get('/dumpCdLan', dump_CDLAN.updataSource);
 
-app.get('/time_entries', time_entries.time_entries);
+app.get('/time_entries',cors(), time_entries.time_entries);
 //app.get('/time_entriesJSON', time_entries.time_entriesJSON);
 app.get('/time_entriesXML', cors(), time_entriesAxios.time_entriesXML);
 
