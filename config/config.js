@@ -8,6 +8,7 @@ console.log("Test Reading Configuration BD: "+process.env.DB_HOST+":"+process.en
 console.log("Test Reading Configuration CDLAN: "+process.env.CDLAN_HOST+":"+process.env.CDLAN_PORT+" "+process.env.CDLAN_USERNAME);
 console.log("Test Reading Configuration Mail: "+process.env.MAIL_GMAIL_USER);
 console.log("Test Reading Configuration SWAGGER: "+process.env.SWAGGER_HOST);
+console.log("Test Reading Configuration SWAGGER: "+process.env.TIME_ENTRIES);
 console.log("***************** Read Config END   *********************************************");
 
 const config_app = {

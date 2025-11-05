@@ -3,8 +3,6 @@ const config = require('../config/config')
   , path = require('path')
   , Client = require('ssh2').Client
   , { exec } = require('child_process');
-//  var conn = new Client(config.config_CDLAN.connSettings);
-// conn.connect(config.config_CDLAN.connSettings);
 
 exports.importDump = (pathImport) => {
  // let pathImported = path.normalize(process.env.DUMP_CDLAN_REMOTE_PATH + path.sep + path.basename(pathImport));
