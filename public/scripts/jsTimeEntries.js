@@ -7,7 +7,7 @@ $(document).ready(function () {
         url: urlXML,
         dataType: "text",
         dataCharset: 'xml',
-        //crossDomain: true,
+        crossDomain: true,
         success: function (response) {
            //console.log(response);
         var xmlDoc = $.parseXML(response);
