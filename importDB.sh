@@ -15,7 +15,7 @@ if [ ! -f "$sqlfile" ]; then
 fi
 
 #sqlfile=backup_$(date +%d-%m-%Y).sql
-mysql --default-character-set='utf8' bitnami_redmine -uredmine -p"$password" < $sqlfile
+mysql --default-character-set='utf8' bitnami_redmine < $sqlfile
 echo $(date -u) " Import effettuato. "
 #cd $pathHome/archivio
 #zipfile=$pathHome/archivio/backup_$(date +%d-%m-%Y).zip
