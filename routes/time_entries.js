@@ -1,5 +1,7 @@
 //var Redmine = require('node-redmine');
 const Redmine = require('axios-redmine')
+const config_ENV = require('./../config/config');
+
 
 exports.time_entries = function(req, res){
   res.render('time_entries');
@@ -7,10 +9,7 @@ exports.time_entries = function(req, res){
 
 exports.time_entriesJSON = function(req, res){
 
-  let url = "http://192.168.40.30:3000/time_entries.xml"
-  url = "https://gestioneprogetti.csea.it/time_entries.xml";
-  url = "http://localhost:3000/time_entries.xml"
-  url = "http://192.168.40.30:3000"
+let url = config_ENV.config_CDLAN.connAPI.url;
   
 var hostname = process.env.REDMINE_HOST || url;
 var config = {

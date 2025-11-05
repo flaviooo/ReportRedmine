@@ -67,6 +67,7 @@ exports.updataSource = (req, res, next) => {
 
             unzipExtractor.on('close', () => {
                 console.log("Unzip terminato " + dump_toImport);
+                
                 let importFileName = path.basename(dump_toImport.substring(0, dump_toImport.length - 3)) + "sql";
                 let fileSQL = pathZIP+pathZIPExtracted+importFileName;
                 console.log("importFileName SQL: " + fileSQL);
