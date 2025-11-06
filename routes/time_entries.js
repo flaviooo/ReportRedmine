@@ -1,10 +1,26 @@
 //var Redmine = require('node-redmine');
 const Redmine = require('axios-redmine')
+const axios = require('axios');
 const config_ENV = require('./../config/config');
 
 
 exports.time_entries = function(req, res){
+
+      try {
+        const config = {
+          method: 'get',
+          url: config_ENV.config_CDLAN.connAPI.url + '?&limit=100',
+          headers: config_ENV.config_CDLAN.connAPI.headers 
+        }
+   const aa = axios(config)
+      } catch (error) {
+        console.error(error)
+      }
+  
+  console.log("Rendering time_entries page"+ aa);
+
   res.render('time_entries');
+
 };
 
 exports.time_entriesJSON = function(req, res){

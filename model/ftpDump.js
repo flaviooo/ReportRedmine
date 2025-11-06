@@ -1,66 +1,51 @@
-//const local_db = require('../db/dbMaria');
-const ftp = require('../db/ftpCSEA');
+// ftpService.js
+const ftp = require('../db/ftpCSEA');   // il tuo modulo che espone connect(), downloadFile(), ecc.
 const config = require('./../config/config');
 
 module.exports = {
 
-  async connect() {
-    // console.log(`Connecting to ${options.host}:${options.port}`);
-    try {
-        await ftp.connect(config.config_CDLAN.connSettings);
-   
-    } catch (err) {
-        console.log('Failed to connect:', err);
-    }
-},
-  async disconnect() {
-    try {
-      const result = await ftp.disconnect();
-      
-      rows = result;
-      if (rows.length != 0) {
-        return rows;
-      } else {
-        return false;
-      }
-    } catch (err) {
-      throw err;
-    }
-  }  ,
+  // Ottiene i nomi dei file ZIP remoti
   async getNameLastFilesDumpZip() {
     try {
-      console.log(config.config_CDLAN.dump.remotePath)
-        const result = await ftp.getlastFiles(config.config_CDLAN.dump.remotePath);
-      rows = result;
-      console.log("getlastFiles "+ rows);
-      if (rows.length != 0) {
-        return rows;
-      } else {
-        return false;
-      }
+      await ftp.connect(config.config_CDLAN.connSettings);
+      console.log("✅ Connessione FTP aperta");
+
+      const result = await ftp.getlastFiles(config.config_CDLAN.dump.remotePath);
+      console.log("📦 File trovati:", result);
+
+      await ftp.disconnect();
+      console.log("🔌 Connessione FTP chiusa");
+
+      return result && result.length ? result : false;
     } catch (err) {
+      console.error("❌ Errore in getNameLastFilesDumpZip:", err.message);
+      try { await ftp.disconnect(); } catch {}
       throw err;
     }
   },
-    async downloadFile (filedumpZIP) {
-      try {
-      //  console.log(config.config_CDLAN.dump.remotePath)
-      console.log(filedumpZIP)
-      let from = config.config_CDLAN.dump.remotePath  + filedumpZIP;
-      let to =  config.config_CDLAN.dump.localPath  + filedumpZIP;
-      console.log("Downloading ... From "+ from + " to "+to);
-       const result = await ftp.downloadFile(from,to);
-          
-        rows = result;
-        console.log("downloadFile "+ rows);
-        if (rows.length != 0) {
-          return rows;
-        } else {
-          return false;
-        }
-      } catch (err) {
-        throw err;
-      }
-    
+
+  // Scarica un file ZIP specifico
+  async downloadFile(filedumpZIP) {
+    try {
+      await ftp.connect(config.config_CDLAN.connSettings);
+      console.log("✅ Connessione FTP aperta");
+
+      const from = config.config_CDLAN.dump.remotePath + filedumpZIP;
+      const to = config.config_CDLAN.dump.localPath + filedumpZIP;
+
+      console.log(`⬇️  Downloading: ${from} → ${to}`);
+
+      const result = await ftp.downloadFile(from, to);
+      console.log("✅ Download completato:", result);
+
+      await ftp.disconnect();
+      console.log("🔌 Connessione FTP chiusa");
+
+      return result && result.length ? result : false;
+    } catch (err) {
+      console.error("❌ Errore in downloadFile:", err.message);
+      try { await ftp.disconnect(); } catch {}
+      throw err;
+    }
   }
-}; 
+};
