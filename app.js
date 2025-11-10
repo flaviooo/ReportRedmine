@@ -61,7 +61,7 @@ app.get('/dump', dump_aws.updataSource);
 app.get('/dumpCdLan', dump_CDLAN.updataSource);
 
 app.get('/time_entries',cors({
-    origin: ['http://controllo1.csea.local:3001', 'http://controllo1.csea.local:4000'], // il tuo frontend React
+    origin: ['http://controllo1.csea.local:3000', 'http://controllo1.csea.local:3001'], // il tuo frontend React
     methods: ['GET'],
   }), time_entries.time_entries);
 //app.get('/time_entriesJSON', time_entries.time_entriesJSON);

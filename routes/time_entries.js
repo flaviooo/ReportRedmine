@@ -1,36 +1,22 @@
 //var Redmine = require('node-redmine');
 const Redmine = require('axios-redmine')
-const axios = require('axios');
 const config_ENV = require('./../config/config');
 
 
 exports.time_entries = function(req, res){
-
-      try {
-        const config = {
-          method: 'get',
-          url: config_ENV.config_CDLAN.connAPI.url + '?&limit=100',
-          headers: config_ENV.config_CDLAN.connAPI.headers 
-        }
-   const aa = axios(config)
-      } catch (error) {
-        console.error(error)
-      }
-  
-  console.log("Rendering time_entries page"+ aa);
-
   res.render('time_entries');
-
 };
 
 exports.time_entriesJSON = function(req, res){
 
-
+let url = config_ENV.config_CDLAN.connAPI.url;
+  
+var hostname = process.env.REDMINE_HOST || url;
 var config = {
   apiKey: process.env.REDMINE_APIKEY || 'dc68e7275b90ebcd609269b40eb65c9f1841376e'
 };
 
-var redmine = new Redmine(config_ENV.config_CDLAN.connAPI.url, config);
+var redmine = new Redmine(hostname, config);
 
 const dumpTimeEntry = fields => {
   for (const item in fields) {

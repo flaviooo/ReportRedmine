@@ -94,14 +94,13 @@ exports.updataSource = (req, res, next) => {
     }
 
     const downloadDump = async () => {
-        try {
-          
+        try {         
                         let dump_toImport = await getNamelastDump();
                         console.log("1 - nomeUltimoDump " + dump_toImport);
           
           //  let dump_toImport = "\\\\192.168.0.130\\csea-nas\\Exprivia\\DumpGP\\backup_22-01-2023.zip";
             dump_toImported = unzipDump(dump_toImport);
-
+dumpFtp.disconnect();
         } catch (error) {
             console.error(error)
         }

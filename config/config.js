@@ -32,7 +32,7 @@ const config_CDLAN = {
     },
     connAPI: {
         method: 'get',
-        url: process.env.CDLAN_URL_API || 'http://192.168.40.30:3000/time_entries.xml',
+        url: process.env.CDLAN_URL_API || 'http://controllo1.csea.local:3000/time_entries.xml',
         headers: { 'X-Redmine-API-Key': process.env.CDLAN_PASS_API }
     },
     dump:{
