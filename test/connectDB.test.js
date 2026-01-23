@@ -1,5 +1,5 @@
 const expect = require('chai').expect
-const config = require('./configAssemblyTest');
+const config = require('../config/config');
 //const {config_db} = require('../config/config');
 let mysql = require('mysql');
 

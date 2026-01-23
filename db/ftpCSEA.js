@@ -1,35 +1,35 @@
-let Client = require('ssh2-sftp-client');
+const Client = require('ssh2-sftp-client');
 const config = require('../config/config');
-/* class SFTPClient {
+
+class SFTPClient {
     constructor() {
         this.client = new Client();
     }
-  }
- */
-  client = new Client();
-    
-module.exports = {
-    
-      async connect() {
+
+    async connect() {
         // console.log(`Connecting to ${options.host}:${options.port}`);
         try {
-            await client.connect(config.config_CDLAN.connSettings);
+            await this.client.connect(config.config_CDLAN.connSettings);
+            console.log('Connected successfully');
+            return true;
         } catch (err) {
-            console.log('Failed to connect:', err);
+            console.error('Failed to connect:', err);
+            return false;
         }
-    },
+    }
 
     async disconnect() {
-        await client.end();
-    },
+        await this.client.end();
+    }
 
     async listFiles(remoteDir, fileGlob) {
         console.log(`Listing ${remoteDir} ...`);
-        let fileObjects;
+        let fileObjects = [];
         try {
             fileObjects = await this.client.list(remoteDir, fileGlob);
         } catch (err) {
-            console.log('Listing failed:', err);
+            console.error('Listing failed:', err);
+            return [];
         }
 
         const fileNames = [];
@@ -43,15 +43,16 @@ module.exports = {
             fileNames.push(file.name);
         }
         return fileNames;
-    },
+    }
 
     async getlastFiles(remoteDir) {
         console.log(`Listing ${remoteDir} ...`);
-        let fileObjects;
+        let fileObjects = [];
         try {
-            fileObjects = await client.list(remoteDir);
+            fileObjects = await this.client.list(remoteDir);
         } catch (err) {
-            console.log('Listing failed:', err);
+            console.error('Listing failed:', err);
+            return "";
         }
 
         let filename = "";
@@ -71,32 +72,41 @@ module.exports = {
         }
        // console.log("Download SQL ZIP Effettuato! "+ filename);
         return filename;
-    },
+    }
 
     async uploadFile(localFile, remoteFile) {
         console.log(`Uploading ${localFile} to ${remoteFile} ...`);
         try {
             await this.client.put(localFile, remoteFile);
+            console.log('Upload completed successfully');
+            return true;
         } catch (err) {
             console.error('Uploading failed:', err);
+            return false;
         }
-    },
+    }
 
     async downloadFile(remoteFile, localFile) {
         console.log(`Downloading a ${remoteFile} to ${localFile} ...`);
         try {
-           return await client.get(remoteFile, localFile);
+           return await this.client.get(remoteFile, localFile);
         } catch (err) {
             console.error('Downloading failed:', err);
+            throw err;
         }
-    },
+    }
 
     async deleteFile(remoteFile) {
         console.log(`Deleting ${remoteFile}`);
         try {
             await this.client.delete(remoteFile);
+            console.log('Delete completed successfully');
+            return true;
         } catch (err) {
             console.error('Deleting failed:', err);
+            return false;
         }
     }
-};
+}
+
+module.exports = new SFTPClient();

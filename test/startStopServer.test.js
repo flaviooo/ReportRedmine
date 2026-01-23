@@ -1,8 +1,8 @@
 const expect = require('chai').expect
 const { json } = require('body-parser');
 // const boot = require('../app').boot
-let chai = require('chai');
-let chaiHttp = require('chai-http');
+const chai = require('chai');
+const chaiHttp = require('chai-http');
 //const shutdown = require('../app').shutdown
 const port = require('../app').port;
 const app = require('../app')
